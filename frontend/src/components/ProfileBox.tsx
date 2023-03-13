@@ -37,19 +37,25 @@ export default function ProfileBox({ profileImg, name, studentInfo, singleIntrod
 }
 
 const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   position: relative;
   border: 2px solid gray;
   background-color: lightgray;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.5);
-  width: 300px;
-  height: 200px;
+  min-width: 200px;
+  max-width: 50vw;
+  min-height: 200px;
 `;
 
 const InfoContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 0 10px;
+  margin-top: 10px;
 `;
 
 const ProfileImg = styled.img`
@@ -63,18 +69,28 @@ const StudentInfo = styled.div`
 `;
 
 const IntroduceBox = styled.div`
-  height: 30%;
+  padding: 20px 10px;
 `;
 
 const Footer = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 10px;
 `;
 
 const TagBox = styled.div`
   display: flex;
+  div {
+    background-color: darkgray;
+    padding: 0px 4px;
+    margin: 0 5px;
+  }
 `;
 
 const LinkBox = styled.div`
   display: flex;
+  div {
+    background-color: black;
+    margin: 0 5px;
+  }
 `;
