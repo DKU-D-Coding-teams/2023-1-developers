@@ -18,21 +18,31 @@ public class Profile extends BaseEntity {
     private String name;
     private String affiliation;
     private String studentId;
-    private String link;
-    private String singleIntroduce;
-    private String freeIntroduce;
+    private String gitHubLink;
+    private String blogLink;
+    private String introduce;
+    private String detailIntroduce;
 
     @Enumerated(EnumType.STRING)
     private TagEnum tag;
 
-    public static Profile createProfile(String name, String affiliation, String studentId, String link, String singleIntroduce, String freeIntroduce){
+    public static Profile createProfile(
+            String name,
+            String affiliation,
+            String studentId,
+            String gitHubLink,
+            String blogLink,
+            String introduce,
+            String detailIntroduce
+    ){
         Profile profile = new Profile();
         profile.name = name;
         profile.affiliation = affiliation;
         profile.studentId = studentId;
-        profile.link = link;
-        profile.singleIntroduce = singleIntroduce;
-        profile.freeIntroduce = freeIntroduce;
+        profile.gitHubLink = gitHubLink;
+        profile.blogLink = blogLink;
+        profile.introduce = introduce;
+        profile.detailIntroduce = detailIntroduce;
         return profile;
     }
 }
