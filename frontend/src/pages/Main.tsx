@@ -1,14 +1,13 @@
 import { Navbar, ProfileBox } from "components";
 import styled from "styled-components";
 
-export default function MainPage() {
+export default function Main() {
   return (
     <>
-      <Navbar />
       <Section>
         <ProfileBoxContainer>
           {[1, 2, 3, 4, 5].map((num) => (
-            <ProfileBoxObject>
+            <ProfileBoxObject key={num}>
               <ProfileBox
                 profileImg="/icons/person.png"
                 name="홍길동"
@@ -32,14 +31,19 @@ const ProfileBoxObject = styled.div`
 `;
 
 const ProfileBoxContainer = styled.div`
-  column-width: 30vw;
+  position: absolute;
+  top: 400px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 90%;
+  column-width: 300px;
   column-gap: 20px;
+  background-color: skyblue;
 `;
 
 const Section = styled.section`
-  display: block;
   position: relative;
-  width: 100%;
-  height: 100%;
+  display: block;
   margin-left: 80px;
 `;

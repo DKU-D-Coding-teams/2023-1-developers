@@ -22,13 +22,13 @@ export default function ProfileBox({ profileImg, name, studentInfo, singleIntrod
       </IntroduceBox>
       <Footer>
         <TagBox>
-          {tags.map((tag) => (
-            <div>{tag}</div>
+          {tags.map((tag, idx) => (
+            <div key={idx}>{tag}</div>
           ))}
         </TagBox>
         <LinkBox>
-          {links.map((link) => (
-            <div>{link}</div>
+          {links.map((link, idx) => (
+            <div key={idx}>{link}</div>
           ))}
         </LinkBox>
       </Footer>
@@ -46,7 +46,6 @@ const Wrapper = styled.div`
   background-color: lightgray;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.5);
   min-width: 200px;
-  max-width: 50vw;
   min-height: 200px;
 `;
 
