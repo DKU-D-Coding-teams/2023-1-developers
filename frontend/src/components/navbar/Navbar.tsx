@@ -1,7 +1,12 @@
+import { ReactNode } from "react";
 import styled from "styled-components";
 import Nav from "./Nav";
 
-export default function Navbar({ children }) {
+interface IProps {
+  children: ReactNode;
+}
+
+export default function Navbar({ children }: IProps) {
   return (
     <>
       <Wrapper>
@@ -18,7 +23,8 @@ export default function Navbar({ children }) {
           <div>Credits</div>
         </Nav>
       </Wrapper>
-      {children}
+
+      <Section>{children}</Section>
     </>
   );
 }
@@ -36,4 +42,10 @@ const Wrapper = styled.div`
 const Icon = styled.img`
   width: 40px;
   height: 40px;
+`;
+
+const Section = styled.section`
+  position: relative;
+  display: block;
+  margin-left: 80px;
 `;
