@@ -1,4 +1,4 @@
-import { Navbar, ProfileBox } from "@/components";
+import { Navbar, ProfileBox } from "components";
 import styled from "styled-components";
 
 export default function Main() {

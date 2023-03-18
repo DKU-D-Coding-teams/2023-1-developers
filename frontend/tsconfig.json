@@ -6,10 +6,8 @@
     "lib": ["ES2015", "DOM", "DOM.Iterable"],
     "jsx": "preserve",
     "esModuleInterop": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"]
-    }
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "src"
   },
   "include": ["./src/**/*"],
   "exclude": ["node_modules", "dist"]

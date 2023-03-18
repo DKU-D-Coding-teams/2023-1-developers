@@ -1,8 +1,8 @@
 import logo from "./logo.svg";
 import { Routes, Route } from "react-router-dom";
 import GlobalStyle from "./GlobalStyle";
-import { Main, ProfileEdit, Register } from "@/pages";
-import { paths } from "@/constants";
+import { Main, ProfileEdit, Register } from "pages";
+import { paths } from "consts";
 
 function App() {
   return (

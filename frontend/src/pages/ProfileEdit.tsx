@@ -1,4 +1,4 @@
-import { Navbar } from "@/components";
+import { Navbar } from "components";
 
 export default function ProfileEdit() {
   return (

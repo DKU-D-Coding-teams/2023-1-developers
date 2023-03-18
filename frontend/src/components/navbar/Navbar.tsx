@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
 import Nav from "./Nav";
-import { paths } from "@/constants";
+import { paths } from "consts";
 
 interface IProps {
   children: ReactNode;
