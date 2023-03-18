@@ -1,47 +1,41 @@
-import { Navbar } from "components";
+import { Navbar, ProfileBox } from "@/components";
 import styled from "styled-components";
 
-export default function MainPage() {
+export default function Main() {
   return (
-    <>
-      <Background>
-        <GrayBox />
-        <TitleBox>D.velopers</TitleBox>
-      </Background>
-      <Wrapper>
-        <Navbar />
-        <section>
-          <div>ㅇㅇ</div>
-        </section>
-      </Wrapper>
-    </>
+    <Navbar>
+      <ProfileBoxContainer>
+        {[1, 2, 3, 4, 5].map((num) => (
+          <ProfileBoxObject key={num}>
+            <ProfileBox
+              profileImg="/icons/person.png"
+              name="홍길동"
+              studentInfo="소프트웨어 20학번 재학"
+              singleIntroduce={"안녕하세요~ 안드로이드 개발자로 활동하고 있습니다!".repeat(num)}
+              tags={["Android", "Kotlin"]}
+              links={["asdf", "zxcv"]}
+            />
+          </ProfileBoxObject>
+        ))}
+      </ProfileBoxContainer>
+    </Navbar>
   );
 }
 
-const Wrapper = styled.div`
+const ProfileBoxObject = styled.div`
+  display: inline-block;
+  margin: 0 10px;
+  margin-bottom: 30px;
+`;
+
+const ProfileBoxContainer = styled.div`
   position: absolute;
-  display: flex;
-  width: 100%;
-  height: 100%;
-`;
+  top: 400px;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-const Background = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-`;
-
-const GrayBox = styled.div`
-  display: block;
-  position: static;
-  width: 100%;
-  height: 30%;
-  background-color: lightgray;
-`;
-
-const TitleBox = styled.div`
-  display: block;
-  position: static;
-  width: 100%;
-  height: 50px;
+  width: 90%;
+  column-width: 300px;
+  column-gap: 20px;
+  background-color: skyblue;
 `;

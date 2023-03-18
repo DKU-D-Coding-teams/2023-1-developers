@@ -1,7 +1,9 @@
+import { Navbar } from "@/components";
+
 export default function ProfileEdit() {
   return (
-    <>
-      <div> ㅁㄴㅇㄹ </div>
-    </>
+    <Navbar>
+      <div>Hello World!</div>
+    </Navbar>
   );
 }
