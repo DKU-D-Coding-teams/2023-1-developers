@@ -36,10 +36,12 @@ const TitleBox = styled.div`
   margin: 0;
   left: 50%;
   transform: translate(-50%, 0);
-  bottom: -25px;
+  bottom: -30px;
   font-size: 60px;
 
   white-space: nowrap;
+  font-family: "S-CoreDream-3Light";
+  font-weight: 100;
 `;
 
 const PinterestContainer = styled.div`
