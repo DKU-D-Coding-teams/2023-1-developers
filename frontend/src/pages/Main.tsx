@@ -4,6 +4,9 @@ import styled from "styled-components";
 export default function Main() {
   return (
     <Navbar>
+      <TopBackground>
+        <TitleBox>D-velopers</TitleBox>
+      </TopBackground>
       <ProfileBoxContainer>
         {[1, 2, 3, 4, 5].map((num) => (
           <ProfileBoxObject key={num}>
@@ -21,21 +24,34 @@ export default function Main() {
     </Navbar>
   );
 }
+const TopBackground = styled.div`
+  position: relative;
+  width: 100%;
+  height: 300px;
+  background-color: lightgray;
+`;
 
-const ProfileBoxObject = styled.div`
-  display: inline-block;
-  margin: 0 10px;
-  margin-bottom: 30px;
+const TitleBox = styled.div`
+  position: absolute;
+  margin: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  bottom: -25px;
+  font-size: 60px;
 `;
 
 const ProfileBoxContainer = styled.div`
-  position: absolute;
-  top: 400px;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: block;
 
-  width: 90%;
+  margin-top: 100px;
+
+  width: 100%;
+
   column-width: 300px;
-  column-gap: 20px;
-  background-color: skyblue;
+  background-color: #d1f3ff;
+`;
+
+const ProfileBoxObject = styled.div`
+  display: inline-block;
+  margin: 20px 20px;
 `;
