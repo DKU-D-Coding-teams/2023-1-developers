@@ -7,9 +7,9 @@ export default function Main() {
       <TopBackground>
         <TitleBox>D-velopers</TitleBox>
       </TopBackground>
-      <ProfileBoxContainer>
+      <PinterestContainer>
         {[1, 2, 3, 4, 5].map((num) => (
-          <ProfileBoxObject key={num}>
+          <PinterestObject key={num}>
             <ProfileBox
               profileImg="/icons/person.png"
               name="홍길동"
@@ -18,9 +18,9 @@ export default function Main() {
               tags={["Android", "Kotlin"]}
               links={["asdf", "zxcv"]}
             />
-          </ProfileBoxObject>
+          </PinterestObject>
         ))}
-      </ProfileBoxContainer>
+      </PinterestContainer>
     </Navbar>
   );
 }
@@ -38,20 +38,26 @@ const TitleBox = styled.div`
   transform: translate(-50%, 0);
   bottom: -25px;
   font-size: 60px;
+
+  white-space: nowrap;
 `;
 
-const ProfileBoxContainer = styled.div`
-  position: block;
-
+const PinterestContainer = styled.div`
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
   margin-top: 100px;
 
-  width: 100%;
-
+  max-width: 1100px;
   column-width: 300px;
-  background-color: #d1f3ff;
+  column-gap: 40px;
+  padding: 0 20px;
+
+  background-color: #def6ff;
 `;
 
-const ProfileBoxObject = styled.div`
+const PinterestObject = styled.div`
   display: inline-block;
-  margin: 20px 20px;
+  margin: 20px 0;
+  min-width: 300px;
 `;
