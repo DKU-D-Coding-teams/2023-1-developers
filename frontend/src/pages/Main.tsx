@@ -60,6 +60,10 @@ const PinterestContainer = styled.div`
 
 const PinterestObject = styled.div`
   display: inline-block;
+
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+
   margin: 20px 0;
-  min-width: 300px;
 `;

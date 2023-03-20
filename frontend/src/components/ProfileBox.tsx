@@ -45,6 +45,11 @@ const Wrapper = styled.div`
   border: 2px solid gray;
   background-color: lightgray;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.5);
+
+  min-width: 300px;
+  max-width: 400px;
+
+  min-height: 200px;
 `;
 
 const InfoContainer = styled.div`
