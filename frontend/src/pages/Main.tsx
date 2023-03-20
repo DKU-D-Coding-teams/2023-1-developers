@@ -27,7 +27,7 @@ export default function Main() {
 
 const dragDown = keyframes`
   from {
-    height: 0;
+    height: 1px;
   }
 `;
 
