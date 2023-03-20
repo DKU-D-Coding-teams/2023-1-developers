@@ -1,5 +1,5 @@
 import { Navbar, ProfileBox } from "components";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export default function Main() {
   return (
@@ -24,11 +24,19 @@ export default function Main() {
     </Navbar>
   );
 }
+
+const dragDown = keyframes`
+  from {
+    height: 0;
+  }
+`;
+
 const TopBackground = styled.div`
   position: relative;
   width: 100%;
   height: 300px;
   background-color: lightgray;
+  animation: ${dragDown} 1s ease;
 `;
 
 const TitleBox = styled.div`
@@ -55,7 +63,17 @@ const PinterestContainer = styled.div`
   column-gap: 40px;
   padding: 0 20px;
 
-  background-color: #def6ff;
+  background-color: #e8f9ff;
+`;
+
+const fadein = keyframes`
+  from {
+    opacity: 0;
+    margin-top: 100px;
+  }
+  to {
+    opacity: 1;
+  }
 `;
 
 const PinterestObject = styled.div`
@@ -66,4 +84,6 @@ const PinterestObject = styled.div`
   transform: translate(-50%, 0);
 
   margin: 20px 0;
+
+  animation: ${fadein} 1s ease-in-out;
 `;

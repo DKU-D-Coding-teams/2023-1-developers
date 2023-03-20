@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useEffect, useState } from "react";
+import wait from "waait";
 
 interface IProps {
   profileImg: string;
@@ -10,6 +12,20 @@ interface IProps {
 }
 
 export default function ProfileBox({ profileImg, name, studentInfo, singleIntroduce, tags, links }: IProps) {
+  const [introduceText, setIntroduceText] = useState("");
+
+  useEffect(() => {
+    runTypingAnimation(1000);
+  }, []);
+
+  const runTypingAnimation = async (duration: number) => {
+    for (let i = 1; i <= singleIntroduce.length; i++) {
+      setIntroduceText(singleIntroduce.slice(0, i));
+      await wait(duration / singleIntroduce.length);
+      console.log("ㅇㅇ");
+    }
+  };
+
   return (
     <Wrapper>
       <InfoContainer>
@@ -18,7 +34,7 @@ export default function ProfileBox({ profileImg, name, studentInfo, singleIntrod
         <StudentInfo>{studentInfo}</StudentInfo>
       </InfoContainer>
       <IntroduceBox>
-        <div>{singleIntroduce}</div>
+        <div>{introduceText}</div>
       </IntroduceBox>
       <Footer>
         <TagBox>
