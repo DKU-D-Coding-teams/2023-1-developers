@@ -45,4 +45,11 @@ const Wrapper = styled.div<{ highlight: boolean }>`
   font-size: 14px;
   ${({ highlight }) => highlight && "background-color: gray"};
   transition: 1s;
+
+  @media screen and (max-width: 750px) {
+    padding: 0;
+    ${({ highlight }) => highlight && "padding: 20px 0"}; // 하이라이트일 때 padding 애니메이션
+    margin-top: 0;
+    transition: 0.3s;
+  }
 `;

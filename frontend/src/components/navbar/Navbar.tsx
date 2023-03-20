@@ -38,6 +38,14 @@ const Wrapper = styled.div`
   width: 80px;
   height: 100%;
   background-color: #3c3c3c;
+  z-index: 1;
+
+  @media screen and (max-width: 750px) {
+    flex-direction: row;
+    width: 100%;
+    height: 80px;
+    bottom: 0;
+  }
 `;
 
 const Icon = styled.img`
@@ -49,4 +57,9 @@ const Section = styled.section`
   position: relative;
   display: block;
   margin-left: 80px;
+
+  @media screen and (max-width: 750px) {
+    margin-left: 0;
+    margin-bottom: 80px;
+  }
 `;
