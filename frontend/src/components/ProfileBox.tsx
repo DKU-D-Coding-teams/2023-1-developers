@@ -22,7 +22,6 @@ export default function ProfileBox({ profileImg, name, studentInfo, singleIntrod
     for (let i = 1; i <= singleIntroduce.length; i++) {
       setIntroduceText(singleIntroduce.slice(0, i));
       await wait(duration / singleIntroduce.length);
-      console.log("ㅇㅇ");
     }
   };
 
