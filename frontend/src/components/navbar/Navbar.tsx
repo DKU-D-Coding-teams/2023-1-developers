@@ -31,7 +31,7 @@ export default function Navbar({ children }: IProps) {
 }
 
 const Wrapper = styled.div`
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
