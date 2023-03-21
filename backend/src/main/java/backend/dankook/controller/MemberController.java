@@ -7,11 +7,12 @@ import backend.dankook.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/members")
@@ -20,7 +21,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/join")
-    public void join(@RequestBody MemberJoinDto memberJoinDto){
+    public ResponseEntity<String> join(@RequestBody @Valid MemberJoinDto memberJoinDto){
         memberService.join(
                 memberJoinDto.getName(),
                 memberJoinDto.getEmail(),
@@ -28,6 +29,7 @@ public class MemberController {
                 memberJoinDto.getMemberType(),
                 memberJoinDto.getGender()
         );
+        return new ResponseEntity<>("회원가입 성공", HttpStatus.OK);
     }
 
     @PostMapping("/login")

@@ -3,13 +3,12 @@ package backend.dankook.domain;
 import backend.dankook.enums.GenderEnum;
 import backend.dankook.enums.MemberTypeEnum;
 import backend.dankook.enums.RoleEnum;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -37,15 +36,20 @@ public class Member extends BaseEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     private RoleEnum role;
 
-    public static Member createMember(String name, String email, String password, MemberTypeEnum memberType, GenderEnum gender){
-        Member member = new Member();
-        member.name = name;
-        member.email = email;
-        member.password = password;
-        member.memberType = memberType;
-        member.gender = gender;
-        member.role = RoleEnum.USER;
-        return member;
+    @Builder
+    public Member(
+            @NotEmpty String name,
+            @NotEmpty String email,
+            @NotEmpty String password,
+            @NotEmpty MemberTypeEnum memberType,
+            @NotEmpty GenderEnum gender
+    ){
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.memberType = memberType;
+        this.gender = gender;
+        this.role = RoleEnum.USER;
     }
 
     public void updateProfile(Profile profile){
