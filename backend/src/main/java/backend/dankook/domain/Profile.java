@@ -2,10 +2,12 @@ package backend.dankook.domain;
 
 import backend.dankook.enums.TagEnum;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +31,9 @@ public class Profile extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private List<TagEnum> tags = new ArrayList<>();
 
-    public static Profile createProfile(
-            String name,
+    @Builder
+    public Profile(
+            @NotEmpty String name,
             String affiliation,
             String studentId,
             String gitHubLink,
@@ -38,19 +41,16 @@ public class Profile extends BaseEntity {
             String introduce,
             String detailIntroduce,
             List<TagEnum> tags
-    ){
-        Profile profile = new Profile();
-        profile.name = name;
-        profile.affiliation = affiliation;
-        profile.studentId = studentId;
-        profile.gitHubLink = gitHubLink;
-        profile.blogLink = blogLink;
-        profile.introduce = introduce;
-        profile.detailIntroduce = detailIntroduce;
-        profile.hits = 0;
-        profile.tags.addAll(tags);
-
-        return profile;
+    ) {
+        this.name = name;
+        this.affiliation = affiliation;
+        this.studentId = studentId;
+        this.gitHubLink = gitHubLink;
+        this.blogLink = blogLink;
+        this.introduce = introduce;
+        this.detailIntroduce = detailIntroduce;
+        this.hits = 0;
+        this.tags.addAll(tags);
     }
 
     public void updateProfile(

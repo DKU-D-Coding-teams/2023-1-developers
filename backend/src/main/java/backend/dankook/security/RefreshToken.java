@@ -1,4 +1,4 @@
-package backend.dankook.domain;
+package backend.dankook.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

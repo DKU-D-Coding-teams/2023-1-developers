@@ -1,6 +1,5 @@
 package backend.dankook.security;
 
-import backend.dankook.domain.RefreshToken;
 import backend.dankook.dtos.TokenInfo;
 import backend.dankook.exception.DankookException;
 import backend.dankook.repository.MemberRepository;
@@ -8,7 +7,6 @@ import backend.dankook.repository.RefreshTokenRepository;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
