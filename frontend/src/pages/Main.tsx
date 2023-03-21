@@ -3,12 +3,12 @@ import styled, { css, keyframes } from "styled-components";
 import { useEffect, useState } from "react";
 
 export default function Main() {
-  const [scrollPos, setScrollPosition] = useState(0);
+  const [scrollPos, setScrollPos] = useState(0);
 
   // TODO 나중에 Throttle 적용하기!!
   useEffect(() => {
     window.addEventListener("scroll", () => {
-      setScrollPosition(window.scrollY);
+      setScrollPos(window.scrollY);
     });
   }, []);
 

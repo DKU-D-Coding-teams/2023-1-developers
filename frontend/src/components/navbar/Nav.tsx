@@ -17,7 +17,7 @@ export default function Nav({ children, path }: PropsWithChildren<Props>) {
     }
   }, []);
 
-  const handleButton = () => {
+  const navigatePage = () => {
     if (!isEqualPath()) {
       navigate(path);
     }
@@ -31,7 +31,7 @@ export default function Nav({ children, path }: PropsWithChildren<Props>) {
 
   return (
     <Wrapper highlight={isHighlighting}>
-      <button onClick={handleButton}>{children}</button>
+      <button onClick={navigatePage}>{children}</button>
     </Wrapper>
   );
 }
