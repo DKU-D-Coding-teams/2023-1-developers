@@ -1,4 +1,4 @@
-import { Navbar, ProfileBox } from "components";
+import { NavbarSection, ProfileBox } from "components";
 import styled, { css, keyframes } from "styled-components";
 import { useEffect, useState } from "react";
 
@@ -13,7 +13,7 @@ export default function Main() {
   }, []);
 
   return (
-    <Navbar>
+    <NavbarSection>
       <TopBar scrollPos={scrollPos}>D-velopers</TopBar>
       <TopBackground scrollPos={scrollPos}>
         <TitleBox>D-velopers</TitleBox>
@@ -32,7 +32,7 @@ export default function Main() {
           </PinterestObject>
         ))}
       </PinterestContainer>
-    </Navbar>
+    </NavbarSection>
   );
 }
 

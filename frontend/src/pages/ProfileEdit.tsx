@@ -1,9 +1,9 @@
-import { Navbar } from "components";
+import { NavbarSection } from "components";
 
 export default function ProfileEdit() {
   return (
-    <Navbar>
+    <NavbarSection>
       <div>Hello World!</div>
-    </Navbar>
+    </NavbarSection>
   );
 }
