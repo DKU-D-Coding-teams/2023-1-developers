@@ -3,11 +3,11 @@ import styled from "styled-components";
 import Nav from "./Nav";
 import { paths } from "consts";
 
-interface IProps {
+interface Props {
   children: ReactNode;
 }
 
-export default function Navbar({ children }: IProps) {
+export default function Navbar({ children }: Props) {
   return (
     <>
       <Wrapper>

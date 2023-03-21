@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import wait from "waait";
 
-interface IProps {
+interface Props {
   profileImg: string;
   name: string;
   studentInfo: string;
@@ -11,7 +11,7 @@ interface IProps {
   links: string[];
 }
 
-export default function ProfileBox({ profileImg, name, studentInfo, singleIntroduce, tags, links }: IProps) {
+export default function ProfileBox({ profileImg, name, studentInfo, singleIntroduce, tags, links }: Props) {
   const [introduceText, setIntroduceText] = useState("");
 
   useEffect(() => {

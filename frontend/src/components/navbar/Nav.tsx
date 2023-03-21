@@ -2,11 +2,11 @@ import styled from "styled-components";
 import { PropsWithChildren, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-interface IProps {
+interface Props {
   path: string;
 }
 
-export default function Nav({ children, path }: PropsWithChildren<IProps>) {
+export default function Nav({ children, path }: PropsWithChildren<Props>) {
   const navigate = useNavigate();
 
   const [isHighlighting, setHighlighting] = useState(false);
