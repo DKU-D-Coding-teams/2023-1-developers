@@ -23,16 +23,16 @@ public class ProfileService {
 
     @Transactional
     public void createProfile(CreateProfileDto createProfileDto) {
-        Profile profile = Profile.createProfile(
-                createProfileDto.getName(),
-                createProfileDto.getAffiliation(),
-                createProfileDto.getStudentId(),
-                createProfileDto.getGithubLink(),
-                createProfileDto.getBlogLink(),
-                createProfileDto.getIntroduce(),
-                createProfileDto.getDetailIntroduce(),
-                createProfileDto.getTags()
-        );
+        Profile profile = Profile.builder()
+                .name(createProfileDto.getName())
+                .affiliation(createProfileDto.getAffiliation())
+                .studentId(createProfileDto.getStudentId())
+                .gitHubLink(createProfileDto.getGithubLink())
+                .blogLink(createProfileDto.getBlogLink())
+                .introduce(createProfileDto.getIntroduce())
+                .detailIntroduce(createProfileDto.getDetailIntroduce())
+                .tags(createProfileDto.getTags())
+                .build();
 
         profileRepository.save(profile);
     }

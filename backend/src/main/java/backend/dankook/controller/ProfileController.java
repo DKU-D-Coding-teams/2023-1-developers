@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,7 +18,7 @@ public class ProfileController {
     private final ProfileService profileService;
 
     @PostMapping("/new")
-    public ResponseEntity<String> createProfile(@RequestBody CreateProfileDto createProfileDto){
+    public ResponseEntity<String> createProfile(@RequestBody @Valid CreateProfileDto createProfileDto){
         profileService.createProfile(createProfileDto);
         return ResponseEntity.ok()
                 .body("프로필 등록 성공");

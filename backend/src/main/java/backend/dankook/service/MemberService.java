@@ -42,13 +42,13 @@ public class MemberService {
     }
 
     private Member createMemberAfterPasswordEncoding(String name, String email, String password, MemberTypeEnum memberType, GenderEnum gender) {
-        return Member.createMember(
-                name,
-                email,
-                passwordEncoder.encode(password),
-                memberType,
-                gender
-        );
+        return Member.builder()
+                .name(name)
+                .email(email)
+                .password(passwordEncoder.encode(password))
+                .memberType(memberType)
+                .gender(gender)
+                .build();
     }
 
     public TokenInfo login(String email, String password) {
