@@ -22,6 +22,7 @@ public class Comment {
     private Profile profile;
 
     private String content;
+    private boolean isSecret;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_comment_id")
@@ -32,11 +33,13 @@ public class Comment {
 
     public static void createComment(
             Profile profile,
-            String content
+            String content,
+            boolean isSecret
     ){
         Comment comment = new Comment();
         comment.content = content;
         comment.profile = profile;
+        comment.isSecret = isSecret;
     }
 
     public void addReply(Comment reply){

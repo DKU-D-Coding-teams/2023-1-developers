@@ -16,6 +16,7 @@ public class Post extends BaseEntity{
 
     private String title;
     private String content;
+    private int hits;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -30,6 +31,7 @@ public class Post extends BaseEntity{
         post.title = title;
         post.content = content;
         post.member = member;
+        post.hits = 0;
         return post;
     }
 }

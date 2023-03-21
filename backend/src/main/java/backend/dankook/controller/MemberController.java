@@ -20,7 +20,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/join")
-    public void join(@RequestBody MemberJoinDto memberJoinDto){
+    public ResponseEntity<String> join(@RequestBody MemberJoinDto memberJoinDto){
         memberService.join(
                 memberJoinDto.getName(),
                 memberJoinDto.getEmail(),
@@ -28,6 +28,7 @@ public class MemberController {
                 memberJoinDto.getMemberType(),
                 memberJoinDto.getGender()
         );
+        return new ResponseEntity<>("회원가입 성공", HttpStatus.OK);
     }
 
     @PostMapping("/login")

@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,9 +24,10 @@ public class Profile extends BaseEntity {
     private String blogLink;
     private String introduce;
     private String detailIntroduce;
+    private int hits;
 
     @Enumerated(EnumType.STRING)
-    private TagEnum tag;
+    private List<TagEnum> tags = new ArrayList<>();
 
     public static Profile createProfile(
             String name,
@@ -33,7 +36,8 @@ public class Profile extends BaseEntity {
             String gitHubLink,
             String blogLink,
             String introduce,
-            String detailIntroduce
+            String detailIntroduce,
+            List<TagEnum> tags
     ){
         Profile profile = new Profile();
         profile.name = name;
@@ -43,6 +47,28 @@ public class Profile extends BaseEntity {
         profile.blogLink = blogLink;
         profile.introduce = introduce;
         profile.detailIntroduce = detailIntroduce;
+        profile.hits = 0;
+        profile.tags.addAll(tags);
+
         return profile;
+    }
+
+    public void updateProfile(
+            String affiliation,
+            String studentId,
+            String gitHubLink,
+            String blogLink,
+            String introduce,
+            String detailIntroduce,
+            List<TagEnum> tags
+    ){
+        this.affiliation = affiliation;
+        this.studentId = studentId;
+        this.gitHubLink = gitHubLink;
+        this.blogLink = blogLink;
+        this.introduce = introduce;
+        this.detailIntroduce = detailIntroduce;
+        this.tags.clear();
+        this.tags.addAll(tags);
     }
 }
