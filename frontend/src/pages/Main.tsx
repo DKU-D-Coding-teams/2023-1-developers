@@ -1,6 +1,7 @@
 import { NavbarSection, ProfileBox } from "components";
 import styled, { css, keyframes } from "styled-components";
 import { useEffect, useState } from "react";
+import { profiles } from "mocks";
 
 export default function Main() {
   const [scrollPos, setScrollPos] = useState(0);
@@ -19,16 +20,9 @@ export default function Main() {
         <TitleBox>D-velopers</TitleBox>
       </TopBackground>
       <PinterestContainer>
-        {[1, 2, 3, 4, 5].map((num) => (
-          <PinterestObject key={num}>
-            <ProfileBox
-              profileImg="/icons/person.png"
-              name="홍길동"
-              studentInfo="소프트웨어 20학번 재학"
-              singleIntroduce={"안녕하세요~ 안드로이드 개발자로 활동하고 있습니다!".repeat(num)}
-              tags={["Android", "Kotlin"]}
-              links={["asdf", "zxcv"]}
-            />
+        {profiles.map((profile, idx) => (
+          <PinterestObject key={idx}>
+            <ProfileBox {...profile} />
           </PinterestObject>
         ))}
       </PinterestContainer>

@@ -43,7 +43,9 @@ export default function ProfileBox({ profileImg, name, studentInfo, singleIntrod
         </TagBox>
         <LinkBox>
           {links.map((link, idx) => (
-            <div key={idx}>{link}</div>
+            <a href={link} target="_blank" key={idx}>
+              <img src="/icons/board.png" />
+            </a>
           ))}
         </LinkBox>
       </Footer>
@@ -76,8 +78,9 @@ const InfoContainer = styled.div`
 `;
 
 const ProfileImg = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
+  border-radius: 70%;
 `;
 
 const StudentInfo = styled.div`
@@ -97,17 +100,23 @@ const Footer = styled.div`
 
 const TagBox = styled.div`
   display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  row-gap: 7px;
   div {
+    height: 20px;
+    line-height: 20px;
     background-color: darkgray;
-    padding: 0px 4px;
+    padding: 0 4px;
     margin: 0 5px;
   }
 `;
 
 const LinkBox = styled.div`
   display: flex;
-  div {
-    background-color: black;
-    margin: 0 5px;
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 70%;
   }
 `;
