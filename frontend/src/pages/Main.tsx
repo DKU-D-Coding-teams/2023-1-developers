@@ -1,38 +1,32 @@
-import { Navbar, ProfileBox } from "components";
+import { NavbarSection, ProfileBox } from "components";
 import styled, { css, keyframes } from "styled-components";
 import { useEffect, useState } from "react";
+import { profiles } from "mocks";
 
 export default function Main() {
-  const [scrollPos, setScrollPosition] = useState(0);
+  const [scrollPos, setScrollPos] = useState(0);
 
   // TODO 나중에 Throttle 적용하기!!
   useEffect(() => {
     window.addEventListener("scroll", () => {
-      setScrollPosition(window.scrollY);
+      setScrollPos(window.scrollY);
     });
   }, []);
 
   return (
-    <Navbar>
+    <NavbarSection>
       <TopBar scrollPos={scrollPos}>D-velopers</TopBar>
       <TopBackground scrollPos={scrollPos}>
         <TitleBox>D-velopers</TitleBox>
       </TopBackground>
       <PinterestContainer>
-        {[1, 2, 3, 4, 5].map((num) => (
-          <PinterestObject key={num}>
-            <ProfileBox
-              profileImg="/icons/person.png"
-              name="홍길동"
-              studentInfo="소프트웨어 20학번 재학"
-              singleIntroduce={"안녕하세요~ 안드로이드 개발자로 활동하고 있습니다!".repeat(num)}
-              tags={["Android", "Kotlin"]}
-              links={["asdf", "zxcv"]}
-            />
+        {profiles.map((profile, idx) => (
+          <PinterestObject key={idx}>
+            <ProfileBox {...profile} />
           </PinterestObject>
         ))}
       </PinterestContainer>
-    </Navbar>
+    </NavbarSection>
   );
 }
 
