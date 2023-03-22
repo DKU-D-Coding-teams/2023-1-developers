@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { PropsWithChildren, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface Props {
   path: string;
@@ -8,25 +8,19 @@ interface Props {
 
 export default function Nav({ children, path }: PropsWithChildren<Props>) {
   const navigate = useNavigate();
-
+  const location = useLocation();
   const [isHighlighting, setHighlighting] = useState(false);
 
   useEffect(() => {
-    if (isEqualPath()) {
+    if (location.pathname === path) {
       setHighlighting(true);
     }
   }, []);
 
   const navigatePage = () => {
-    if (!isEqualPath()) {
+    if (location.pathname !== path) {
       navigate(path);
     }
-  };
-
-  const isEqualPath = () => {
-    const currentLocation = window.location.pathname;
-
-    return currentLocation === path;
   };
 
   return (
