@@ -2,15 +2,18 @@ import { NavbarSection, ProfileBox } from "components";
 import styled, { css, keyframes } from "styled-components";
 import { useEffect, useState } from "react";
 import { profiles } from "mocks";
+import { throttle } from "lodash";
 
 export default function Main() {
   const [scrollPos, setScrollPos] = useState(0);
 
-  // TODO 나중에 Throttle 적용하기!!
   useEffect(() => {
-    window.addEventListener("scroll", () => {
-      setScrollPos(window.scrollY);
-    });
+    window.addEventListener(
+      "scroll",
+      throttle((e) => {
+        setScrollPos(window.scrollY);
+      }, 100)
+    );
   }, []);
 
   return (
@@ -44,6 +47,7 @@ const TopBackground = styled.div<{ scrollPos: number }>`
   animation: ${dragDown} 0.8s ease;
 
   opacity: ${({ scrollPos }) => 50 / (scrollPos + 1)};
+  transition: opacity 0.5s;
 `;
 
 const TitleBox = styled.div`
