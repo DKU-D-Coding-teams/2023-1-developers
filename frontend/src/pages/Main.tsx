@@ -1,17 +1,11 @@
 import { NavbarSection, ProfileBox } from "components";
 import styled, { css, keyframes } from "styled-components";
-import { useEffect, useState } from "react";
 import { profiles } from "mocks";
+import { useRecoilValue } from "recoil";
+import { scrollPosState } from "atoms";
 
 export default function Main() {
-  const [scrollPos, setScrollPos] = useState(0);
-
-  // TODO 나중에 Throttle 적용하기!!
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      setScrollPos(window.scrollY);
-    });
-  }, []);
+  const scrollPos = useRecoilValue(scrollPosState);
 
   return (
     <NavbarSection>
