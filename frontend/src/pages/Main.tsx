@@ -1,8 +1,6 @@
 import { NavbarSection, ProfileBox } from "components";
 import styled, { css, keyframes } from "styled-components";
 import { profiles } from "mocks";
-import { useRecoilValue } from "recoil";
-import { scrollPosState } from "atoms";
 
 export default function Main() {
   const scrollPos = useRecoilValue(scrollPosState);
@@ -38,6 +36,7 @@ const TopBackground = styled.div<{ scrollPos: number }>`
   animation: ${dragDown} 0.8s ease;
 
   opacity: ${({ scrollPos }) => 50 / (scrollPos + 1)};
+  transition: opacity 0.5s;
 `;
 
 const TitleBox = styled.div`
