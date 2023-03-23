@@ -1,20 +1,9 @@
 import { NavbarSection, ProfileBox } from "components";
 import styled, { css, keyframes } from "styled-components";
-import { useEffect, useState } from "react";
 import { profiles } from "mocks";
-import { throttle } from "lodash";
 
 export default function Main() {
-  const [scrollPos, setScrollPos] = useState(0);
-
-  useEffect(() => {
-    window.addEventListener(
-      "scroll",
-      throttle((e) => {
-        setScrollPos(window.scrollY);
-      }, 100)
-    );
-  }, []);
+  const scrollPos = useRecoilValue(scrollPosState);
 
   return (
     <NavbarSection>
