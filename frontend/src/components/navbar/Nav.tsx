@@ -40,8 +40,7 @@ const Wrapper = styled.div<{ highlight: boolean }>`
   ${({ highlight }) => highlight && "background-color: gray"};
   transition: 1s;
 
-  // TODO 모바일/데스크탑 규격 재사용 고민해보기. ThemeProvider라는 게 있음
-  @media screen and (max-width: 750px) {
+  ${({ theme }) => theme.media.mobile} {
     padding: 0;
     ${({ highlight }) => highlight && "padding: 20px 0"}; // 하이라이트일 때 padding 애니메이션
     margin-top: 0;

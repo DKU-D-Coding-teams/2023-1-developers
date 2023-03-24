@@ -33,7 +33,7 @@ const Wrapper = styled.div`
   background-color: #3c3c3c;
   z-index: 1;
 
-  @media screen and (max-width: 750px) {
+  ${({ theme }) => theme.media.mobile} {
     flex-direction: row;
     width: 100%;
     height: 80px;

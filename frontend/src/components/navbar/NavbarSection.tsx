@@ -21,7 +21,7 @@ const Section = styled.section`
   display: block;
   margin-left: 80px;
 
-  @media screen and (max-width: 750px) {
+  ${({ theme }) => theme.media.mobile} {
     margin-left: 0;
     margin-bottom: 80px;
   }
