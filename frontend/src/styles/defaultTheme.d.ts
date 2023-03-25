@@ -2,6 +2,11 @@ import "styled-components";
 
 declare module "styled-components" {
   export interface DefaultTheme {
+    colors: {
+      bg: string;
+      topBg: string;
+      pinterestContainer: string;
+    };
     media: {
       mobile: string;
       tablet: string;

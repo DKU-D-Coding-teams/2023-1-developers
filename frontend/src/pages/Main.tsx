@@ -34,7 +34,7 @@ const TopBackground = styled.div<{ scrollPos: number }>`
   position: relative;
   width: 100%;
   height: 300px;
-  background-color: lightgray;
+  background-color: ${({ theme }) => theme.colors.topBg};
   animation: ${dragDown} 0.8s ease;
 
   opacity: ${({ scrollPos }) => 50 / (scrollPos + 1)};
@@ -65,7 +65,7 @@ const PinterestContainer = styled.div`
   column-gap: 40px;
   padding: 0 20px;
 
-  background-color: #e8f9ff;
+  background-color: ${({ theme }) => theme.colors.pinterestContainer};
 `;
 
 const fadein = keyframes`
