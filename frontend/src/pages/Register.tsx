@@ -1,7 +1,9 @@
+import { NavbarSection } from "components";
+
 export default function Register() {
   return (
-    <>
-      <div> ㅁㄴㅇㄹ </div>
-    </>
+    <NavbarSection>
+      <div>ㅇㅇ</div>
+    </NavbarSection>
   );
 }
