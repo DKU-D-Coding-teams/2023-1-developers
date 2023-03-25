@@ -1,6 +1,7 @@
 import { RegisterPageTitle } from "components";
-import styled from "styled-components";
-import { waitAndDragUpFadeIn } from "styles";
+
+// TODO // pages/register에다가 계속 이렇게 할 건지, components/register로 옮길 건지
+// TODO // 일단 pages/register에서 하다가 틀 잡히면 확실히 정해서 옮겨버리자.
 
 export default function ProfileRegister() {
   return (
