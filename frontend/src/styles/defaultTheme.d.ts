@@ -6,6 +6,9 @@ declare module "styled-components" {
       bg: string;
       topBg: string;
       pinterestContainer: string;
+      titleFont: string;
+      themeBtn: string;
+      navbarHighlight: string;
     };
     media: {
       mobile: string;

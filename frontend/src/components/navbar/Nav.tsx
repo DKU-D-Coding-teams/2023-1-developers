@@ -37,7 +37,7 @@ const Wrapper = styled.div<{ highlight: boolean }>`
   color: lightgray;
   text-align: center;
   font-size: 14px;
-  ${({ highlight }) => highlight && "background-color: gray"};
+  ${({ highlight, theme }) => highlight && "background-color:" + theme.colors.navbarHighlight};
   transition: 1s;
 
   ${({ theme }) => theme.media.mobile} {

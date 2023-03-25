@@ -1,15 +1,16 @@
 import { Routes, Route } from "react-router-dom";
-import { GlobalStyle, lightTheme } from "styles";
+import { GlobalStyle, lightTheme, darkTheme } from "styles";
 import { Credits, Main, ProfileEdit, Register } from "pages";
 import { paths } from "consts";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import { scrollPosState } from "atoms";
 import { throttle } from "lodash";
-import { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 
-function App() {
+export default function App() {
   const setScrollPos = useSetRecoilState(scrollPosState);
+  const [isDarkTheme, setDarkTheme] = useState(false);
 
   useEffect(() => {
     window.addEventListener(
@@ -20,9 +21,13 @@ function App() {
     );
   }, []);
 
+  const changeTheme = () => {
+    setDarkTheme(!isDarkTheme);
+  };
+
   return (
     <>
-      <ThemeProvider theme={lightTheme}>
+      <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
         <Routes>
           <Route path="*" element={<div> Not Found </div>} />
           <Route path={paths.MAINPAGE} element={<Main />} />
@@ -30,10 +35,41 @@ function App() {
           <Route path={paths.PROFILE_EDIT} element={<ProfileEdit />} />
           <Route path={paths.CREDITS} element={<Credits />} />
         </Routes>
+
+        <ThemeButton onClick={changeTheme}>
+          <img src={isDarkTheme ? "/icons/sun.png" : "/icons/moon.png"} />
+        </ThemeButton>
         <GlobalStyle />
       </ThemeProvider>
     </>
   );
 }
 
-export default App;
+const ThemeButton = styled.button`
+  position: fixed;
+  right: 20px;
+  bottom: 100px;
+
+  width: 50px;
+  height: 50px;
+
+  background-color: ${({ theme }) => theme.colors.themeBtn};
+  border-radius: 70%;
+
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.5);
+
+  opacity: 0.3;
+
+  transition: opacity 0.3s, background-color 1s;
+
+  img {
+    width: 40px;
+    height: 40px;
+    margin-left: 5px;
+    margin-top: 3px;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+`;

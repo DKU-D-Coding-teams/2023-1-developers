@@ -11,6 +11,9 @@ const lightTheme: DefaultTheme = {
     bg: "white",
     topBg: "lightgray",
     pinterestContainer: "#e8f9ff",
+    titleFont: "black",
+    themeBtn: "#393939",
+    navbarHighlight: "gray",
   },
   media,
 };

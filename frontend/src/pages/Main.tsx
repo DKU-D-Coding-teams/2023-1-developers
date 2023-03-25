@@ -38,7 +38,7 @@ const TopBackground = styled.div<{ scrollPos: number }>`
   animation: ${dragDown} 0.8s ease;
 
   opacity: ${({ scrollPos }) => 50 / (scrollPos + 1)};
-  transition: opacity 0.5s;
+  transition: opacity 0.5s, background-color 1s;
 `;
 
 const TitleBox = styled.div`
@@ -48,10 +48,13 @@ const TitleBox = styled.div`
   transform: translate(-50%, 0);
   bottom: -30px;
   font-size: 60px;
+  color: ${({ theme }) => theme.colors.titleFont};
 
   white-space: nowrap;
   font-family: "S-CoreDream-3Light";
   font-weight: 100;
+
+  transition: color 1s;
 `;
 
 const PinterestContainer = styled.div`
@@ -66,6 +69,7 @@ const PinterestContainer = styled.div`
   padding: 0 20px;
 
   background-color: ${({ theme }) => theme.colors.pinterestContainer};
+  transition: background-color 1s;
 `;
 
 const fadein = keyframes`
@@ -93,7 +97,8 @@ const PinterestObject = styled.div`
 const TopBar = styled.div<{ scrollPos: number }>`
   position: fixed;
   width: 100%;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.bg};
+  color: ${({ theme }) => theme.colors.titleFont};
   z-index: 1;
 
   text-align: center;
@@ -101,7 +106,7 @@ const TopBar = styled.div<{ scrollPos: number }>`
   line-height: 50px;
   font-size: 20px;
 
-  border-bottom: 1px solid lightgray;
+  box-shadow: 0px 5px 25px -5px rgba(0, 0, 0, 0.3);
 
   display: none;
   animation: ${dragDown} 0.3s ease-in-out;
