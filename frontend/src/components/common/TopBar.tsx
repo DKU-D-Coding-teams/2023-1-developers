@@ -1,18 +1,13 @@
 import styled, { keyframes, css } from "styled-components";
 import { useRecoilValue } from "recoil";
 import { scrollPosState } from "atoms";
+import { dragDown } from "styles";
 
 export default function TopBar() {
   const scrollPos = useRecoilValue(scrollPosState);
 
   return <Wrapper scrollPos={scrollPos}>D-velopers</Wrapper>;
 }
-
-const dragDown = keyframes`
-  from {
-    height: 1px;
-  }
-`;
 
 const Wrapper = styled.div<{ scrollPos: number }>`
   position: fixed;

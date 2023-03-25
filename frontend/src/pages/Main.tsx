@@ -1,6 +1,7 @@
 import { NavbarSection, ProfileBox, TopBackground, TopBar } from "components";
 import styled, { css, keyframes } from "styled-components";
 import { profiles } from "mocks";
+import { pinterestFadeIn } from "styles";
 
 export default function Main() {
   return (
@@ -51,16 +52,6 @@ const PinterestContainer = styled.div`
   transition: background-color 1s;
 `;
 
-const fadein = keyframes`
-  from {
-    opacity: 0;
-    margin-top: 100px;
-  }
-  to {
-    opacity: 1;
-  }
-`;
-
 const PinterestObject = styled.div`
   display: inline-block;
 
@@ -70,5 +61,5 @@ const PinterestObject = styled.div`
 
   margin: 20px 0;
 
-  animation: ${fadein} 1s ease-in-out;
+  animation: ${pinterestFadeIn} 1s ease-in-out;
 `;

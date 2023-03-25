@@ -1,18 +1,13 @@
 import styled, { keyframes } from "styled-components";
 import { useRecoilValue } from "recoil";
 import { scrollPosState } from "atoms";
+import { dragDown } from "styles";
 
 export default function TopBackground({ children }) {
   const scrollPos = useRecoilValue(scrollPosState);
 
   return <Wrapper scrollPos={scrollPos}>{children}</Wrapper>;
 }
-
-const dragDown = keyframes`
-  from {
-    height: 1px;
-  }
-`;
 
 const Wrapper = styled.div<{ scrollPos: number }>`
   position: relative;
