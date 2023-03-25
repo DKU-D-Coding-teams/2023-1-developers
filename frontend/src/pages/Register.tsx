@@ -1,9 +1,11 @@
-import { NavbarSection } from "components";
+import { NavbarSection, TopBackground } from "components";
+import { Outlet } from "react-router-dom";
 
 export default function Register() {
   return (
     <NavbarSection>
-      <div>ㅇㅇ</div>
+      <TopBackground />
+      <Outlet />
     </NavbarSection>
   );
 }

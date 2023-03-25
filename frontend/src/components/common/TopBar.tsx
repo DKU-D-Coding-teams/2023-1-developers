@@ -1,4 +1,4 @@
-import styled, { keyframes, css } from "styled-components";
+import styled, { css } from "styled-components";
 import { useRecoilValue } from "recoil";
 import { scrollPosState } from "atoms";
 import { dragDown } from "styles";

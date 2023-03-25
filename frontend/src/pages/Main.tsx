@@ -1,5 +1,5 @@
 import { NavbarSection, ProfileBox, TopBackground, TopBar } from "components";
-import styled, { css, keyframes } from "styled-components";
+import styled from "styled-components";
 import { profiles } from "mocks";
 import { pinterestFadeIn } from "styles";
 
