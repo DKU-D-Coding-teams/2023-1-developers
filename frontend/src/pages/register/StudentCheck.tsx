@@ -1,14 +1,15 @@
+import { RegisterPageTitle } from "components";
 import styled from "styled-components";
 import { waitAndDragUpFadeIn } from "styles";
 
 export default function StudentCheck() {
   return (
     <>
-      <Title>
+      <RegisterPageTitle>
         환영합니다!
         <br />
         단국대학교 학생이신가요?
-      </Title>
+      </RegisterPageTitle>
       <AnswerButton>
         <Triangle />
         　네　
@@ -20,15 +21,6 @@ export default function StudentCheck() {
     </>
   );
 }
-
-const Title = styled.div`
-  position: relative;
-  text-align: center;
-  font-size: 1.8rem;
-  margin-top: 50px;
-
-  animation: ${waitAndDragUpFadeIn} 1.5s;
-`;
 
 const AnswerButton = styled.button`
   display: block;
