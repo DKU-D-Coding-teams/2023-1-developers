@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { GlobalStyle, lightTheme, darkTheme } from "styles";
-import { Credits, Main, ProfileEdit, Register } from "pages";
+import { Credits, Main, ProfileEdit, Register, StudentCheck } from "pages";
 import { paths } from "consts";
 import { useState, useEffect } from "react";
 import { useSetRecoilState } from "recoil";
@@ -34,7 +34,7 @@ export default function App() {
           <Route path={paths.PROFILE_EDIT} element={<ProfileEdit />} />
           <Route path={paths.CREDITS} element={<Credits />} />
           <Route path={paths.REGISTER} element={<Register />}>
-            <Route path="student-check" element={<>안녕하세요! 단국대학교 학생이신가요?</>} />
+            <Route path="student-check" element={<StudentCheck />} />
           </Route>
         </Routes>
 

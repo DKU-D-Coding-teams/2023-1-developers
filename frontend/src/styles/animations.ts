@@ -15,3 +15,19 @@ export const pinterestFadeIn = keyframes`
     opacity: 1;
   }
 `;
+
+// 기다렸다가 올리면서 페이드 인
+export const waitAndDragUpFadeIn = keyframes`
+  0% {
+    top: 100px;
+    opacity: 0;
+  }
+  50% {
+    top: 100px;
+    opacity: 0;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+  }
+`;
