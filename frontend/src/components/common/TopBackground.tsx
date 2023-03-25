@@ -1,9 +1,14 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 import { scrollPosState } from "atoms";
 import { dragDown } from "styles";
+import { ReactNode } from "react";
 
-export default function TopBackground({ children }) {
+interface Props {
+  children?: ReactNode;
+}
+
+export default function TopBackground({ children }: Props) {
   const scrollPos = useRecoilValue(scrollPosState);
 
   return <Wrapper scrollPos={scrollPos}>{children}</Wrapper>;
