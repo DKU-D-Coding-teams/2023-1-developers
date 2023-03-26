@@ -1,8 +1,19 @@
 import { RegisterPageTitle } from "components";
 import styled from "styled-components";
 import { waitAndDragUpFadeIn } from "styles";
+import { useState } from "react";
 
 export default function IdPwRegister() {
+  const [inputState, setInputState] = useState({
+    id: "",
+    pw: "",
+    pwRe: "",
+  });
+
+  const handleInput = function (e) {
+    setInputState({ ...inputState, [e.target.name]: e.target.value });
+  };
+
   return (
     <>
       <RegisterPageTitle>사용할 아이디와 비밀번호를 입력해 주세요.</RegisterPageTitle>
@@ -11,20 +22,11 @@ export default function IdPwRegister() {
           e.preventDefault();
         }}
       >
-        <Label>
-          <p>아이디</p>
-          <input />
-        </Label>
+        <Input placeholder="아이디" name="id" onChange={handleInput} />
 
-        <Label>
-          <p>비밀번호</p>
-          <input />
-        </Label>
+        <Input type="password" placeholder="비밀번호" name="pw" onChange={handleInput} />
 
-        <Label>
-          <p>비밀번호 재입력</p>
-          <input />
-        </Label>
+        <Input type="password" marginTop="30px" placeholder="비밀번호 재입력" name="pwRe" onChange={handleInput} />
 
         <SubmitInput type="submit" value="제출" />
       </form>
@@ -32,34 +34,22 @@ export default function IdPwRegister() {
   );
 }
 
-const Label = styled.label`
+const Input = styled.input<{ marginTop?: string }>`
   position: relative;
   display: block;
   margin: 0 auto;
-  margin-top: 70px;
-  width: fit-content;
+  margin-top: ${({ marginTop }) => marginTop || "60px"};
+
+  height: 40px;
+  line-height: 40px;
+  padding: 10px;
+  font-size: 20px;
+
+  background-color: lightgray;
+  border: 1px solid gray;
+  border-radius: 40px;
 
   animation: ${waitAndDragUpFadeIn} 2s;
-
-  p {
-    display: inline;
-    margin-right: 50px;
-    font-size: 20px;
-    color: ${({ theme }) => theme.colors.defaultFont};
-    transition: color 1s;
-  }
-
-  input {
-    height: 40px;
-    line-height: 40px;
-
-    padding: 10px;
-    font-size: 20px;
-
-    background-color: lightgray;
-    border: 1px solid gray;
-    border-radius: 40px;
-  }
 `;
 
 const SubmitInput = styled.input`
