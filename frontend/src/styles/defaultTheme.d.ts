@@ -7,6 +7,7 @@ declare module "styled-components" {
       topBg: string;
       pinterestContainer: string;
       titleFont: string;
+      defaultFont: string;
       themeBtn: string;
       navbarHighlight: string;
     };

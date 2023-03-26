@@ -6,6 +6,8 @@ const RegisterPageTitle = styled.div`
   text-align: center;
   font-size: 1.8rem;
   margin-top: 50px;
+  color: ${({ theme }) => theme.colors.titleFont};
+  transition: color 1s;
 
   animation: ${waitAndDragUpFadeIn} 1.5s;
 `;
