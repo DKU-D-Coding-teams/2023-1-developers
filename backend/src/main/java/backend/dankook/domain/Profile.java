@@ -28,7 +28,11 @@ public class Profile extends BaseEntity {
     private String detailIntroduce;
     private int hits;
 
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "profile", cascade = CascadeType.REMOVE)
+    private ProfileImage profileImage;
+
     @Enumerated(EnumType.STRING)
+    @ElementCollection
     private List<TagEnum> tags = new ArrayList<>();
 
     @Builder
@@ -50,7 +54,9 @@ public class Profile extends BaseEntity {
         this.introduce = introduce;
         this.detailIntroduce = detailIntroduce;
         this.hits = 0;
-        this.tags.addAll(tags);
+        if(!tags.isEmpty()){
+            this.tags.addAll(tags);
+        }
     }
 
     public void updateProfile(
@@ -70,5 +76,13 @@ public class Profile extends BaseEntity {
         this.detailIntroduce = detailIntroduce;
         this.tags.clear();
         this.tags.addAll(tags);
+    }
+
+    public void addProfileImage(ProfileImage profileImage){
+        this.profileImage = profileImage;
+    }
+
+    public void increaseProfileHits(){
+        this.hits += 1;
     }
 }

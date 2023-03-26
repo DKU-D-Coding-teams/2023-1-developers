@@ -14,4 +14,10 @@ public class DankookException extends RuntimeException{
         this.httpStatus = httpStatus;
         this.message = message;
     }
+
+    public DankookException(Throwable cause, HttpStatus httpStatus, String message) {
+        super(cause);
+        this.httpStatus = httpStatus;
+        this.message = message;
+    }
 }

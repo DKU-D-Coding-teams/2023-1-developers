@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +23,7 @@ public class ProfileService {
 
 
     @Transactional
-    public void createProfile(CreateProfileDto createProfileDto) {
+    public Long createProfile(CreateProfileDto createProfileDto) {
         Profile profile = Profile.builder()
                 .name(createProfileDto.getName())
                 .affiliation(createProfileDto.getAffiliation())
@@ -34,7 +35,8 @@ public class ProfileService {
                 .tags(createProfileDto.getTags())
                 .build();
 
-        profileRepository.save(profile);
+        Profile savedProfile = profileRepository.save(profile);
+        return savedProfile.getId();
     }
 
     @Transactional
@@ -45,7 +47,7 @@ public class ProfileService {
     }
 
     @Transactional
-    public void updateProfile(Long profileId, UpdateProfileDto updateProfileDto) {
+    public void updateProfile(Long profileId, UpdateProfileDto updateProfileDto, MultipartFile multipartFile) {
         Profile profile = profileRepository.findById(profileId)
                 .orElseThrow(() -> new DankookException(HttpStatus.NOT_FOUND, "존재하지 않는 프로필 입니다."));
 
@@ -67,12 +69,14 @@ public class ProfileService {
                 .map((p) -> new ProfileDto(
                         p.getId(),
                         p.getName(),
+                        p.getProfileImage().getS3ImagePath(),
                         p.getAffiliation(),
                         p.getStudentId(),
                         p.getGitHubLink(),
                         p.getBlogLink(),
                         p.getIntroduce(),
                         p.getDetailIntroduce(),
+                        p.getHits(),
                         p.getTags()))
                 .collect(Collectors.toList());
     }
@@ -83,13 +87,35 @@ public class ProfileService {
         return new ProfileDto(
                 profile.getId(),
                 profile.getName(),
+                profile.getProfileImage().getS3ImagePath(),
                 profile.getAffiliation(),
                 profile.getStudentId(),
                 profile.getGitHubLink(),
                 profile.getBlogLink(),
                 profile.getIntroduce(),
                 profile.getDetailIntroduce(),
+                profile.getHits(),
                 profile.getTags()
+        );
+    }
+
+    @Transactional
+    public ProfileDto searchProfileDetails(Long profileId){
+        Profile searchProfile = profileRepository.findById(profileId)
+                .orElseThrow(() -> new DankookException("존재하지 않는 프로필 입니다."));
+        searchProfile.increaseProfileHits();
+        return new ProfileDto(
+                searchProfile.getId(),
+                searchProfile.getName(),
+                searchProfile.getProfileImage().getS3ImagePath(),
+                searchProfile.getAffiliation(),
+                searchProfile.getStudentId(),
+                searchProfile.getGitHubLink(),
+                searchProfile.getBlogLink(),
+                searchProfile.getIntroduce(),
+                searchProfile.getDetailIntroduce(),
+                searchProfile.getHits(),
+                searchProfile.getTags()
         );
     }
 }

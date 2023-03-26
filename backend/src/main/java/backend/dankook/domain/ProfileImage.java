@@ -14,7 +14,7 @@ public class ProfileImage extends BaseEntity{
     @Column(name = "profile_image_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "profile_id")
     private Profile profile;
 
@@ -26,6 +26,14 @@ public class ProfileImage extends BaseEntity{
         profileImage.s3ImagePath = s3ImagePath;
         profileImage.originalFileName = originalFileName;
         profileImage.profile = profile;
+        profile.addProfileImage(profileImage); // 연관관계 편의 메서드
         return profileImage;
+    }
+
+    public void updateProfileImage(String s3ImagePath, String originalFileName, Profile profile){
+        this.s3ImagePath = s3ImagePath;
+        this.originalFileName = originalFileName;
+        this.profile = profile;
+        profile.addProfileImage(this);
     }
 }

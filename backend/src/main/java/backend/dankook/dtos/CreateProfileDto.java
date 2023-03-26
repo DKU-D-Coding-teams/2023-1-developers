@@ -17,6 +17,6 @@ public class CreateProfileDto {
     private String githubLink;
     private String blogLink;
     private String introduce;
-    private String DetailIntroduce;
+    private String detailIntroduce;
     private List<TagEnum> tags;
 }
