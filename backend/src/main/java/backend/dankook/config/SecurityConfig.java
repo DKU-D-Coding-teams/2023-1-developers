@@ -20,6 +20,20 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    private static final String[] PERMIT_SWAGGER_URL_ARRAY = {
+            /* swagger v2 */
+            "/v2/api-docs",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**",
+            /* swagger v3 */
+            "/v3/api-docs/**",
+            "/swagger-ui/**"
+    };
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -29,7 +43,8 @@ public class SecurityConfig {
                 .and()
 
                 .authorizeRequests()
-                .antMatchers("/members/login", "/members/reissue", "/members/join").permitAll()
+                .antMatchers("/members/login", "/members/reissue", "/members/join", "/members/mailCheck").permitAll()
+                .antMatchers(PERMIT_SWAGGER_URL_ARRAY).permitAll()
                 .antMatchers("/members/user").hasRole("USER")
                 .antMatchers("/members/admin").hasRole("ADMIN")
                 .anyRequest().authenticated()
