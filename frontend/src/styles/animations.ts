@@ -31,3 +31,24 @@ export const waitAndDragUpFadeIn = keyframes`
     opacity: 1;
   }
 `;
+
+export const shakeHorizontal = keyframes`
+  0% {
+    transform: translate(-70px, 0);
+  }
+  20% {
+    transform: translate(70px, 0);
+  }
+  40% {
+    transform: translate(-50px, 0);
+  }
+  60% {
+    transform: translate(50px, 0);
+  }
+  80% {
+    transform: translate(-30px, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+`;
