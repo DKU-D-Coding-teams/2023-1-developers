@@ -1,4 +1,4 @@
-import { RegisterPageInput, RegisterPageTitle } from "components";
+import { RegisterInputLabel, RegisterPageTitle } from "components";
 import styled from "styled-components";
 
 // TODO // pages/register에다가 계속 이렇게 할 건지, components/register로 옮길 건지
@@ -19,10 +19,16 @@ export default function ProfileRegister() {
           <ProfileImgUploadButton>프로필 사진 등록</ProfileImgUploadButton>
         </ProfileImgUploadContainer>
         <div>
-          <RegisterPageInput />
-          <RegisterPageInput />
+          <RegisterInputLabel text="이름" />
+          <RegisterInputLabel text="소속/학번" marginTop="30px" />
         </div>
       </FlexBox>
+      <div>
+        <RegisterInputLabel text="깃허브 링크" width="500px" marginTop="120px" />
+      </div>
+      <div>
+        <RegisterInputLabel text="블로그 링크" width="500px" marginTop="40px" />
+      </div>
     </>
   );
 }
@@ -31,6 +37,7 @@ const FlexBox = styled.div`
   display: flex;
   margin: 0 auto;
   margin-top: 100px;
+  gap: 100px;
   width: fit-content;
 `;
 
@@ -51,4 +58,9 @@ const ProfileImgUploadButton = styled.button`
   text-align: center;
   border: 1px solid gray;
   border-radius: 30px;
+`;
+
+const P = styled.p`
+  margin: 0;
+  font-size: 1.1rem;
 `;

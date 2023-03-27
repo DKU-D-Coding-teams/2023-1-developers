@@ -1,4 +1,4 @@
-import { RegisterPageInput, RegisterPageTitle } from "components";
+import { RegisterInputLabel, RegisterPageTitle } from "components";
 import styled from "styled-components";
 import { shakeHorizontal, waitAndDragUpFadeIn } from "styles";
 import { useState } from "react";
@@ -44,14 +44,22 @@ export default function IdPwRegister() {
       <RegisterPageTitle>사용할 아이디와 비밀번호를 입력해 주세요.</RegisterPageTitle>
 
       <form onSubmit={handleSubmit}>
-        <RegisterPageInput placeholder="아이디" name="id" onChange={handleInput} />
-        <RegisterPageInput type="password" placeholder="비밀번호" name="pw" onChange={handleInput} />
-        <RegisterPageInput
+        <RegisterInputLabel placeholder="아이디" name="id" onChange={handleInput} marginTop="60px" text="" />
+        <RegisterInputLabel
           type="password"
-          marginTop="30px"
+          placeholder="비밀번호"
+          name="pw"
+          onChange={handleInput}
+          marginTop="60px"
+          text=""
+        />
+        <RegisterInputLabel
+          type="password"
           placeholder="비밀번호 재입력"
           name="pwRe"
           onChange={handleInput}
+          marginTop="30px"
+          text=""
         />
 
         {warning ? <WarningBox>{warning}</WarningBox> : <SubmitInput type="submit" value="제출" />}
