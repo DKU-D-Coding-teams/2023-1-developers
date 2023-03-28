@@ -1,6 +1,6 @@
-import { RegisterInputLabel, RegisterPageTitle } from "components";
+import { RegisterInputLabel, RegisterPageTitle, SubmitInput } from "components";
 import styled from "styled-components";
-import { shakeHorizontal, waitAndDragUpFadeIn } from "styles";
+import { shakeHorizontal } from "styles";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -59,23 +59,6 @@ export default function IdPwRegister() {
     </>
   );
 }
-
-const SubmitInput = styled.input`
-  position: relative;
-  display: block;
-  margin: 0 auto;
-  margin-top: 60px;
-
-  width: 130px;
-  height: 70px;
-  font-size: 22px;
-
-  color: white;
-  background-color: skyblue;
-  border-radius: 40px;
-
-  animation: ${waitAndDragUpFadeIn} 2.3s;
-`;
 
 const WarningBox = styled.div`
   margin: 0 auto;

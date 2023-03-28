@@ -16,6 +16,8 @@ export const pinterestFadeIn = keyframes`
   }
 `;
 
+// TODO : keyframes를 함수로 만들지 말라는 법은 없다.
+// TODO : 함수로 만들어서 좀 더 유동적으로 쓸 수 있게 해보자.
 // 기다렸다가 올리면서 페이드 인
 export const waitAndDragUpFadeIn = keyframes`
   0% {

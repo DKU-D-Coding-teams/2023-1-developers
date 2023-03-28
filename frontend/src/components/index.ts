@@ -5,3 +5,4 @@ export { default as TopBar } from "./common/TopBar";
 export { default as RegisterPageTitle } from "./register/RegisterPageTitle";
 export { default as ThemeButton } from "./ThemeButton";
 export { default as RegisterInputLabel } from "./register/RegisterInputLabel";
+export { default as SubmitInput } from "./register/SubmitInput";

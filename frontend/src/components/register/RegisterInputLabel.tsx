@@ -45,4 +45,5 @@ const Input = styled.input<{ width: number }>`
 const P = styled.p`
   margin: 0;
   font-size: 1.1rem;
+  color: ${({ theme }) => theme.colors.defaultFont};
 `;
