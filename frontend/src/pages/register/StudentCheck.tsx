@@ -1,15 +1,15 @@
-import { RegisterPageTitle } from "components";
+import { Title } from "components";
 import styled from "styled-components";
 import { waitAndDragUpFadeIn } from "styles";
 
 export default function StudentCheck() {
   return (
     <>
-      <RegisterPageTitle>
+      <Title>
         환영합니다!
         <br />
         단국대학교 학생이신가요?
-      </RegisterPageTitle>
+      </Title>
       <AnswerButton>
         <Triangle />
         　네　

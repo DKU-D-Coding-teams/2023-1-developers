@@ -1,4 +1,4 @@
-import { RegisterInputLabel, RegisterPageTitle, SubmitInput } from "components";
+import { InputLabel, Title, SubmitInput } from "components";
 import styled from "styled-components";
 
 // TODO // pages/register에다가 계속 이렇게 할 건지, components/register로 옮길 건지
@@ -7,11 +7,11 @@ import styled from "styled-components";
 export default function ProfileRegister() {
   return (
     <>
-      <RegisterPageTitle>
+      <Title>
         회원가입에 성공하였습니다.
         <br />
         당신은 어떤 사람인가요?
-      </RegisterPageTitle>
+      </Title>
 
       <FlexBox>
         <ProfileImgUploadContainer>
@@ -19,18 +19,18 @@ export default function ProfileRegister() {
           <ProfileImgUploadButton>프로필 사진 등록</ProfileImgUploadButton>
         </ProfileImgUploadContainer>
         <div>
-          <RegisterInputLabel text="이름" />
-          <RegisterInputLabel text="소속/학번" marginTop={30} />
+          <InputLabel text="이름" />
+          <InputLabel text="소속/학번" marginTop={30} />
         </div>
       </FlexBox>
 
-      <RegisterInputLabel text="깃허브 링크" width={500} marginTop={120} />
+      <InputLabel text="깃허브 링크" width={500} marginTop={120} />
 
-      <RegisterInputLabel text="블로그 링크" width={500} marginTop={40} />
+      <InputLabel text="블로그 링크" width={500} marginTop={40} />
 
-      <RegisterInputLabel text="한줄 소개" width={700} marginTop={120} />
+      <InputLabel text="한줄 소개" width={700} marginTop={120} />
 
-      <RegisterInputLabel text="나를 표현하는 태그" width={600} marginTop={120} />
+      <InputLabel text="나를 표현하는 태그" width={600} marginTop={120} />
 
       <SubmitInput type="submit" value="제출" />
     </>
