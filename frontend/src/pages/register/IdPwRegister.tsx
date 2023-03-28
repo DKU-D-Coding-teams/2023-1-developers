@@ -44,22 +44,14 @@ export default function IdPwRegister() {
       <RegisterPageTitle>사용할 아이디와 비밀번호를 입력해 주세요.</RegisterPageTitle>
 
       <form onSubmit={handleSubmit}>
-        <RegisterInputLabel placeholder="아이디" name="id" onChange={handleInput} marginTop="60px" text="" />
-        <RegisterInputLabel
-          type="password"
-          placeholder="비밀번호"
-          name="pw"
-          onChange={handleInput}
-          marginTop="60px"
-          text=""
-        />
+        <RegisterInputLabel placeholder="아이디" name="id" onChange={handleInput} marginTop={60} />
+        <RegisterInputLabel type="password" placeholder="비밀번호" name="pw" onChange={handleInput} marginTop={60} />
         <RegisterInputLabel
           type="password"
           placeholder="비밀번호 재입력"
           name="pwRe"
           onChange={handleInput}
-          marginTop="30px"
-          text=""
+          marginTop={30}
         />
 
         {warning ? <WarningBox>{warning}</WarningBox> : <SubmitInput type="submit" value="제출" />}

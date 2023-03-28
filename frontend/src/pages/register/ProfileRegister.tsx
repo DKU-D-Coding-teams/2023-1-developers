@@ -20,14 +20,14 @@ export default function ProfileRegister() {
         </ProfileImgUploadContainer>
         <div>
           <RegisterInputLabel text="이름" />
-          <RegisterInputLabel text="소속/학번" marginTop="30px" />
+          <RegisterInputLabel text="소속/학번" marginTop={30} />
         </div>
       </FlexBox>
       <div>
-        <RegisterInputLabel text="깃허브 링크" width="500px" marginTop="120px" />
+        <RegisterInputLabel text="깃허브 링크" width={500} marginTop={120} />
       </div>
       <div>
-        <RegisterInputLabel text="블로그 링크" width="500px" marginTop="40px" />
+        <RegisterInputLabel text="블로그 링크" width={500} marginTop={40} />
       </div>
     </>
   );
