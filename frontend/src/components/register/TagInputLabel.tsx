@@ -7,7 +7,6 @@ interface Props {
   setTags: (tags: string[]) => void;
 }
 
-//TODO 3월 30일 여기부터 작업 ㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱ
 export default function TagInputLabel({ tags, setTags }: Props) {
   const [buffer, setBuffer] = useState("");
 
