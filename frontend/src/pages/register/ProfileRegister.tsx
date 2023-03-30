@@ -1,5 +1,5 @@
 import { InputLabel, Title, SubmitInput, TagInputLabel } from "components";
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import styled from "styled-components";
 import { waitAndDragUpFadeIn } from "styles";
 
@@ -22,6 +22,11 @@ export default function ProfileRegister() {
     console.log(inputState);
   };
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(inputState);
+  };
+
   return (
     <>
       <Title>
@@ -30,27 +35,28 @@ export default function ProfileRegister() {
         당신은 어떤 사람인가요?
       </Title>
 
-      <FlexBox>
-        <ProfileImgUploadContainer>
-          <ProfileImg src="/icons/person.png" />
-          <ProfileImgUploadButton>프로필 사진 등록</ProfileImgUploadButton>
-        </ProfileImgUploadContainer>
-        <div>
-          <InputLabel name="name" text="이름" onChange={handleInput} />
-          <InputLabel name="affiliation" text="소속/학번" onChange={handleInput} marginTop={30} />
-        </div>
-      </FlexBox>
+      <form onSubmit={handleSubmit}>
+        <FlexBox>
+          <ProfileImgUploadContainer>
+            <ProfileImg src="/icons/person.png" />
+            <ProfileImgUploadButton>프로필 사진 등록</ProfileImgUploadButton>
+          </ProfileImgUploadContainer>
+          <div>
+            <InputLabel name="name" text="이름" onChange={handleInput} />
+            <InputLabel name="affiliation" text="소속/학번" onChange={handleInput} marginTop={30} />
+          </div>
+        </FlexBox>
 
-      <InputLabel name="githubLink" text="깃허브 링크" onChange={handleInput} width={500} marginTop={120} />
+        <InputLabel name="githubLink" text="깃허브 링크" onChange={handleInput} width={500} marginTop={120} />
 
-      <InputLabel name="otherLink" text="기타(블로그 등) 링크" onChange={handleInput} width={500} marginTop={40} />
+        <InputLabel name="otherLink" text="기타(블로그 등) 링크" onChange={handleInput} width={500} marginTop={40} />
 
-      <InputLabel name="singleIntroduce" text="한줄 소개" onChange={handleInput} width={700} marginTop={120} />
+        <InputLabel name="singleIntroduce" text="한줄 소개" onChange={handleInput} width={700} marginTop={120} />
 
-      <TagInputLabel tags={inputState.tags} setTags={(tags) => setInputState({ ...inputState, tags })} />
-      {/*// TODO : 태그 입력 Input 컴포넌트 구현하기 */}
+        <TagInputLabel tags={inputState.tags} setTags={(tags) => setInputState({ ...inputState, tags })} />
 
-      <SubmitInput type="submit" value="제출" />
+        <SubmitInput type="submit" value="제출" />
+      </form>
     </>
   );
 }

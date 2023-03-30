@@ -1,7 +1,7 @@
 import { InputLabel, Title, SubmitInput } from "components";
 import styled from "styled-components";
 import { shakeHorizontal } from "styles";
-import { useState } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function IdPwRegister() {
@@ -14,12 +14,12 @@ export default function IdPwRegister() {
 
   const [warning, setWarning] = useState("");
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     setInputState({ ...inputState, [e.target.name]: e.target.value });
     setWarning("");
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const idReg = /^[0-9a-z]{4,16}$/; // 숫자 또는 알파벳 6글자 이상 16글자 이하
     const pwReg = /^.{8,25}$/; // 모든 문자 6글자 이상 25글자 이하
