@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class DankookAdvice {
     @ExceptionHandler(DankookException.class)
     public ResponseEntity<ErrorResult> handleException(DankookException e){
-        ErrorResult errorResult = new ErrorResult(e.getHttpStatus(), e.getMessage());
+        ErrorResult errorResult = new ErrorResult(e.getHttpStatus(), e.getMessage(), e.getCode());
         return ResponseEntity.status(errorResult.getStatus())
                 .body(errorResult);
     }

@@ -1,5 +1,6 @@
 package backend.dankook.config;
 
+import backend.dankook.filter.ExceptionHandlingFilter;
 import backend.dankook.filter.JwtAuthenticationFilter;
 import backend.dankook.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final ExceptionHandlingFilter exceptionHandlingFilter;
 
     private static final String[] PERMIT_SWAGGER_URL_ARRAY = {
             /* swagger v2 */
@@ -34,6 +36,21 @@ public class SecurityConfig {
             "/swagger-ui/**"
     };
 
+    private static final String[] PUBLIC_URI = {
+            "/members/login",
+            "/members/reissue",
+            "/members/join",
+            "/members/mailCheck"
+    };
+    private static final String[] USER_URI = {
+        "/members/user"
+    };
+
+    private static final String[] ADMIN_URI = {
+        "/members/admin"
+    };
+
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -43,13 +60,14 @@ public class SecurityConfig {
                 .and()
 
                 .authorizeRequests()
-                .antMatchers("/members/login", "/members/reissue", "/members/join", "/members/mailCheck").permitAll()
+                .antMatchers(PUBLIC_URI).permitAll()
                 .antMatchers(PERMIT_SWAGGER_URL_ARRAY).permitAll()
-                .antMatchers("/members/user").hasRole("USER")
-                .antMatchers("/members/admin").hasRole("ADMIN")
+                .antMatchers(USER_URI).hasRole("USER")
+                .antMatchers(ADMIN_URI).hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(exceptionHandlingFilter, JwtAuthenticationFilter.class);
         return http.build();
     }
 

@@ -2,6 +2,7 @@ package backend.dankook.service;
 
 import backend.dankook.domain.Profile;
 import backend.dankook.domain.ProfileImage;
+import backend.dankook.exception.DankookErrorCode;
 import backend.dankook.exception.DankookException;
 import backend.dankook.repository.ProfileImageRepository;
 import backend.dankook.repository.ProfileRepository;
@@ -22,7 +23,7 @@ public class ProfileImageService {
     @Transactional
     public void save(Long profileId, String s3ImagePath, String originalFileName){
         Profile findProfile = profileRepository.findById(profileId)
-                .orElseThrow(() -> new DankookException(HttpStatus.NOT_FOUND, "존재하지 않는 프로필 입니다."));
+                .orElseThrow(() -> new DankookException(DankookErrorCode.PROFILE_NOT_FOUND));
 
         ProfileImage profileImage = ProfileImage.createProfileImage(s3ImagePath, originalFileName, findProfile);
         profileImageRepository.save(profileImage);
@@ -31,9 +32,9 @@ public class ProfileImageService {
     @Transactional
     public void update(Long profileId, String s3ImagePath, String originalFileName){
         ProfileImage updateProfileImage = profileImageRepository.findByProfileId(profileId)
-                .orElseThrow(() -> new DankookException(HttpStatus.NOT_FOUND, "프로필 이미지가 존재하지 않습니다."));
+                .orElseThrow(() -> new DankookException(DankookErrorCode.PROFILE_IMAGE_NOT_FOUND));
         Profile updateProfile = profileRepository.findById(profileId)
-                .orElseThrow(() -> new DankookException(HttpStatus.NOT_FOUND, "프로필이 존재하지 않습니다."));
+                .orElseThrow(() -> new DankookException(DankookErrorCode.PROFILE_NOT_FOUND));
         updateProfileImage.updateProfileImage(s3ImagePath, originalFileName, updateProfile);
     }
 }

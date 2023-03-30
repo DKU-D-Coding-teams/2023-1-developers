@@ -4,21 +4,20 @@ import lombok.Getter;
 import org.springframework.http.HttpStatus;
 @Getter
 public class DankookException extends RuntimeException{
-    private HttpStatus httpStatus;
+    private int httpStatus;
     private String message;
+    private String code;
 
-    public DankookException(String message) {
-        this.message = message;
+    public DankookException(DankookErrorCode dankookErrorCode){
+        this.httpStatus = dankookErrorCode.getStatus();
+        this.message = dankookErrorCode.getMessage();
+        this.code = dankookErrorCode.getCode();
     }
 
-    public DankookException(HttpStatus httpStatus, String message) {
-        this.httpStatus = httpStatus;
-        this.message = message;
-    }
-
-    public DankookException(Throwable cause, HttpStatus httpStatus, String message) {
+    public DankookException(Throwable cause, DankookErrorCode dankookErrorCode) {
         super(cause);
-        this.httpStatus = httpStatus;
-        this.message = message;
+        this.httpStatus = dankookErrorCode.getStatus();
+        this.message = dankookErrorCode.getMessage();
+        this.code = dankookErrorCode.getCode();
     }
 }
