@@ -14,7 +14,8 @@ const GlobalStyle = createGlobalStyle`
 	}
 
 	input, textarea {
-		border: 0;
+		border: none;
+		outline: none;
 		box-sizing: border-box;
 	}
 

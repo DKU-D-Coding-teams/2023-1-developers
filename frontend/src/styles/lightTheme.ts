@@ -12,6 +12,7 @@ const lightTheme: DefaultTheme = {
     topBg: "lightgray",
     pinterestContainer: "#e8f9ff",
     titleFont: "black",
+    defaultFont: "black",
     themeBtn: "#393939",
     navbarHighlight: "gray",
   },
