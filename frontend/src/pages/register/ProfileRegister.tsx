@@ -1,5 +1,5 @@
-import { InputLabel, Title, SubmitInput } from "components";
-import { useState } from "react";
+import { InputLabel, Title, SubmitInput, TagInputLabel } from "components";
+import { useState, ChangeEvent } from "react";
 import styled from "styled-components";
 import { waitAndDragUpFadeIn } from "styles";
 
@@ -17,7 +17,7 @@ export default function ProfileRegister() {
     tags: [],
   });
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     setInputState({ ...inputState, [e.target.name]: e.target.value });
     console.log(inputState);
   };
@@ -47,7 +47,7 @@ export default function ProfileRegister() {
 
       <InputLabel name="singleIntroduce" text="한줄 소개" onChange={handleInput} width={700} marginTop={120} />
 
-      <InputLabel text="나를 표현하는 태그" width={600} marginTop={120} />
+      <TagInputLabel tags={inputState.tags} setTags={(tags) => setInputState({ ...inputState, tags })} />
       {/*// TODO : 태그 입력 Input 컴포넌트 구현하기 */}
 
       <SubmitInput type="submit" value="제출" />

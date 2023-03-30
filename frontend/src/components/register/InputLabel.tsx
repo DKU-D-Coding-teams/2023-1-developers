@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes, PropsWithChildren, ReactNode } from "react";
 import styled from "styled-components";
 import { waitAndDragUpFadeIn } from "styles";
 
@@ -8,11 +8,14 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   text?: string;
 }
 
-export default function RegisterInputLabel({ marginTop, width, text, ...props }: Props) {
+export default function InputLabel({ marginTop, width, text, children, ...props }: PropsWithChildren<Props>) {
   return (
     <Label marginTop={marginTop || 0}>
       <P>{text}</P>
-      <Input width={width || 300} {...props} />
+      <InputBox width={width || 300}>
+        {children}
+        <Input {...props} />
+      </InputBox>
     </Label>
   );
 }
@@ -27,19 +30,29 @@ const Label = styled.label<{ marginTop: number }>`
   animation: ${waitAndDragUpFadeIn} 2s;
 `;
 
-const Input = styled.input<{ width: number }>`
+const InputBox = styled.div<{ width: number }>`
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  width: ${({ width }) => width + "px"};
+
+  background-color: lightgray;
+  border: 1px solid gray;
+  border-radius: 40px;
+`;
+
+const Input = styled.input`
   position: relative;
   display: block;
 
-  width: ${({ width }) => width + "px"};
+  width: 100%;
   height: 50px;
   line-height: 50px;
   padding: 10px;
   font-size: 20px;
 
-  background-color: lightgray;
-  border: 1px solid gray;
-  border-radius: 40px;
+  background-color: transparent;
 `;
 
 const P = styled.p`
