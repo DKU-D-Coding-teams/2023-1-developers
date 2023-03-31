@@ -7,4 +7,4 @@ export { default as ThemeButton } from "./common/ThemeButton";
 export { default as InputLabel } from "./register/InputLabel";
 export { default as SubmitInput } from "./register/SubmitInput";
 export { default as TagInputLabel } from "./register/TagInputLabel";
-export { default as ProfileImgModal } from "./register/ProfileImgModal";
+export { default as ProfileImgUploadModal } from "./register/ProfileImgUploadModal";

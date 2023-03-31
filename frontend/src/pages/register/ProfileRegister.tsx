@@ -1,4 +1,4 @@
-import { InputLabel, Title, SubmitInput, TagInputLabel, ProfileImgModal } from "components";
+import { InputLabel, Title, SubmitInput, TagInputLabel, ProfileImgUploadModal } from "components";
 import html2canvas from "html2canvas";
 import { useState, ChangeEvent, FormEvent, useRef } from "react";
 import styled from "styled-components";
@@ -10,7 +10,7 @@ import { waitAndDragUpFadeIn } from "styles";
 export default function ProfileRegister() {
   const [selectedImg, setSelectedImg] = useState("");
   const [inputState, setInputState] = useState({
-    imgUrl: "",
+    uploadedImg: "",
     name: "",
     affiliation: "",
     singleIntroduce: "",
@@ -28,7 +28,7 @@ export default function ProfileRegister() {
     console.log(inputState);
   };
 
-  const uploadImg = (e: ChangeEvent<HTMLInputElement>) => {
+  const runImgUploader = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files[0];
     if (!file) return;
     const reader = new FileReader();
@@ -36,13 +36,7 @@ export default function ProfileRegister() {
     reader.onloadend = () => {
       setSelectedImg(reader.result as string);
     };
-  };
-
-  const testFn = () => {
-    html2canvas(document.body).then((canvas) => {
-      const imgUrl = canvas.toDataURL("image/png");
-      setInputState({ ...inputState, imgUrl });
-    });
+    e.target.value = "";
   };
 
   return (
@@ -53,14 +47,18 @@ export default function ProfileRegister() {
         당신은 어떤 사람인가요?
       </Title>
 
-      <ProfileImgModal img={selectedImg} modalState={selectedImg !== ""} />
+      <ProfileImgUploadModal
+        selectedImg={selectedImg}
+        close={() => setSelectedImg("")}
+        uploadImg={(img: string) => setInputState({ ...inputState, uploadedImg: img })}
+      />
 
       <form onSubmit={handleSubmit}>
         <FlexBox>
           <ProfileImgLabel>
-            <ProfileImg src={inputState.imgUrl || "/icons/person.png"} />
+            <ProfileImg src={inputState.uploadedImg || "/icons/person.png"} />
             <ProfileImgBtnBox>프로필 사진 등록</ProfileImgBtnBox>
-            <input type="file" accept="image/*" onChange={uploadImg} />
+            <input type="file" accept="image/*" onChange={runImgUploader} />
           </ProfileImgLabel>
           <div>
             <InputLabel name="name" text="이름" onChange={handleInput} />

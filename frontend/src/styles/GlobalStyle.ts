@@ -6,6 +6,7 @@ const GlobalStyle = createGlobalStyle`
 		font-family: 'SUIT-Regular';
 		background-color: ${({ theme }) => theme.colors.bg};
 		transition: background-color 1s;
+		user-select: none;
 	}
 
 	button {
