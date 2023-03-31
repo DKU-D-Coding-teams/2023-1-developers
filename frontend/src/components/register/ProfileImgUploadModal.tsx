@@ -1,10 +1,8 @@
-import { useRef, useState, MouseEvent } from "react";
+import { useRef, useState, MouseEvent, TouchEvent } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import html2canvas from "html2canvas";
-import { useRecoilValue } from "recoil";
-import { scrollPosState } from "atoms";
 
 interface Props {
   selectedImg: string;
@@ -17,14 +15,13 @@ export default function ProfileImgUploadModal({ selectedImg, close, uploadImg }:
   const $screenshotArea = useRef<HTMLDivElement>();
   const $img = useRef<HTMLImageElement>();
 
-  const scrollPos = useRecoilValue(scrollPosState);
-
   const AREA_LENGTH = 200;
   const [areaPosX, setAreaPosX] = useState(0);
   const [areaPosY, setAreaPosY] = useState(0);
   let [isDraggingArea, setIsDraggingArea] = useState(false);
 
-  const dragScreenshotArea = (e: MouseEvent<HTMLDivElement>) => {
+  // TODO 나중에 여유되면 핸드폰 터치 이벤트도 추가하자.
+  const dragScreenshotArea = (e: MouseEvent<HTMLDivElement> & TouchEvent<HTMLDivElement>) => {
     if (isDraggingArea) {
       const rect = $img.current.getBoundingClientRect();
       setAreaPosX(e.clientX);
@@ -41,16 +38,14 @@ export default function ProfileImgUploadModal({ selectedImg, close, uploadImg }:
       if (e.clientY < rect.top + AREA_LENGTH / 2) {
         setAreaPosY(rect.top + AREA_LENGTH / 2);
       }
-      // console.log($img.current);
     }
   };
 
   const captureArea = () => {
     $screenshotArea.current.style.opacity = "0";
-    // $screenshotArea.current.appendChild($img.current);
     html2canvas(document.body, {
       x: areaPosX - AREA_LENGTH / 2,
-      y: areaPosY + scrollPos - AREA_LENGTH / 2,
+      y: areaPosY + window.scrollY - AREA_LENGTH / 2,
       width: AREA_LENGTH,
       height: AREA_LENGTH,
     }).then((canvas) => {
@@ -112,8 +107,8 @@ const SelectedImg = styled.img`
 const ScreenshotArea = styled.div<{ posX: number; posY: number; length: number }>`
   position: fixed;
   z-index: 1;
-  top: ${({ posY }) => posY + "px"};
-  left: ${({ posX }) => posX + "px"};
+  top: ${({ posY }) => (posY ? posY + "px" : "50%")};
+  left: ${({ posX }) => (posX ? posX + "px" : "50%")};
   transform: translate(-50%, -50%);
 
   width: ${({ length }) => length + "px"};
