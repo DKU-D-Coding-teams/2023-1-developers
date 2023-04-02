@@ -1,6 +1,11 @@
 const paths = {
   MAINPAGE: "/",
-  REGISTER: "/register",
+  register: {
+    REGISTER: "/register",
+    STUDENT_CHECK: "student-check",
+    PROFILE_REGISTER: "profile",
+    ID_PW_REGISTER: "id-pw",
+  },
   PROFILE_EDIT: "/profile-edit",
   CREDITS: "/credit",
 };

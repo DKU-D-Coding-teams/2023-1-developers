@@ -30,10 +30,10 @@ export default function App() {
           <Route path={paths.MAINPAGE} element={<Main />} />
           <Route path={paths.PROFILE_EDIT} element={<ProfileEdit />} />
           <Route path={paths.CREDITS} element={<Credits />} />
-          <Route path={paths.REGISTER} element={<Register />}>
-            <Route path="student-check" element={<StudentCheck />} />
-            <Route path="profile" element={<ProfileRegister />} />
-            <Route path="id-pw" element={<IdPwRegister />} />
+          <Route path={paths.register.REGISTER} element={<Register />}>
+            <Route path={paths.register.STUDENT_CHECK} element={<StudentCheck />} />
+            <Route path={paths.register.PROFILE_REGISTER} element={<ProfileRegister />} />
+            <Route path={paths.register.ID_PW_REGISTER} element={<IdPwRegister />} />
           </Route>
         </Routes>
         <ThemeButton />
