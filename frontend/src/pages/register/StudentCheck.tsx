@@ -1,3 +1,5 @@
+import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Title } from "components";
 import styled from "styled-components";
 import { waitAndDragUpFadeIn } from "styles";
@@ -11,11 +13,11 @@ export default function StudentCheck() {
         단국대학교 학생이신가요?
       </Title>
       <AnswerButton>
-        <Triangle />
+        <ArrowIcon icon={faCaretRight} />
         　네　
       </AnswerButton>
       <AnswerButton>
-        <Triangle />
+        <ArrowIcon icon={faCaretRight} />
         아니요, 게스트로 가입하고 싶어요!
       </AnswerButton>
     </>
@@ -45,15 +47,13 @@ const AnswerButton = styled.button`
   animation: ${waitAndDragUpFadeIn} 2s;
 `;
 
-const Triangle = styled.div`
+const ArrowIcon = styled(FontAwesomeIcon)`
   position: absolute;
   top: 50%;
   left: -30px;
   transform: translate(-50%, -50%);
-  width: 0;
-  height: 0;
-  border-bottom: 15px solid transparent;
-  border-top: 15px solid transparent;
-  border-left: 20px solid #c8d7d8;
-  border-right: 20px solid transparent;
+
+  width: 35px;
+  height: 35px;
+  color: gray;
 `;

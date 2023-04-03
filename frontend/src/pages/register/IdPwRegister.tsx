@@ -22,6 +22,16 @@ export default function IdPwRegister() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    handleInputExceptions();
+
+    const response = await postEmailCheck("bubbletea03@naver.com");
+    const authCode = response.data.data;
+
+    navigate("/register/profile");
+  };
+
+  const handleInputExceptions = () => {
     const idReg = /^[0-9a-z]{4,16}$/; // 숫자 또는 알파벳 6글자 이상 16글자 이하
     const pwReg = /^.{8,25}$/; // 모든 문자 6글자 이상 25글자 이하
     if (!idReg.test(inputState.id)) {
@@ -36,11 +46,6 @@ export default function IdPwRegister() {
       setWarning("※비밀번호 재입력이 일치하지 않습니다!");
       return;
     }
-
-    const response = await postEmailCheck("bubbletea03@naver.com");
-    const authCode = response.data.data;
-
-    navigate("/register/profile");
   };
 
   return (
