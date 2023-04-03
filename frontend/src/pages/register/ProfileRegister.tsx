@@ -61,16 +61,16 @@ export default function ProfileRegister() {
             <input type="file" accept="image/*" onChange={runImgUploader} />
           </ProfileImgLabel>
           <div>
-            <InputLabel name="name" text="이름" onChange={handleInput} />
-            <InputLabel name="affiliation" text="소속/학번" onChange={handleInput} marginTop={30} />
+            <InputLabel name="name" title="이름" onChange={handleInput} />
+            <InputLabel name="affiliation" title="소속/학번" onChange={handleInput} marginTop={30} />
           </div>
         </FlexBox>
 
-        <InputLabel name="githubLink" text="깃허브 링크" onChange={handleInput} width={500} marginTop={120} />
+        <InputLabel name="githubLink" title="깃허브 링크" onChange={handleInput} width={500} marginTop={120} />
 
-        <InputLabel name="otherLink" text="기타(블로그 등) 링크" onChange={handleInput} width={500} marginTop={40} />
+        <InputLabel name="otherLink" title="기타(블로그 등) 링크" onChange={handleInput} width={500} marginTop={40} />
 
-        <InputLabel name="singleIntroduce" text="한줄 소개" onChange={handleInput} width={700} marginTop={120} />
+        <InputLabel name="singleIntroduce" title="한줄 소개" onChange={handleInput} width={700} marginTop={120} />
 
         <TagInputLabel tags={inputState.tags} setTags={(tags) => setInputState({ ...inputState, tags })} />
 
