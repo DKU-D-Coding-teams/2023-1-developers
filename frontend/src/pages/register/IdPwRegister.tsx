@@ -57,22 +57,8 @@ export default function IdPwRegister() {
         <InputLabel type="password" placeholder="비밀번호" name="pw" onChange={handleInput} marginTop={60} />
         <InputLabel type="password" placeholder="비밀번호 재입력" name="pwRe" onChange={handleInput} marginTop={30} />
 
-        {warning ? <WarningBox>{warning}</WarningBox> : <SubmitInput type="submit" value="제출" />}
+        <SubmitInput type="submit" value="제출" warning={warning} />
       </form>
     </>
   );
 }
-
-const WarningBox = styled.div`
-  margin: 0 auto;
-  margin-top: 60px;
-
-  color: white;
-
-  width: fit-content;
-  padding: 20px;
-  border-radius: 20px;
-  background-color: lightcoral;
-
-  animation: ${shakeHorizontal} 0.4s;
-`;

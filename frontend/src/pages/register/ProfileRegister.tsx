@@ -74,7 +74,7 @@ export default function ProfileRegister() {
 
         <TagInputLabel tags={inputState.tags} setTags={(tags) => setInputState({ ...inputState, tags })} />
 
-        <SubmitInput type="submit" value="제출" />
+        <SubmitInput type="submit" value="제출" warning="" />
       </form>
     </>
   );

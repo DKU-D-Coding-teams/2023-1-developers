@@ -1,10 +1,22 @@
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { registerProcessState } from "atoms";
 import { Title } from "components";
+import { paths } from "consts";
+import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { waitAndDragUpFadeIn } from "styles";
 
 export default function StudentCheck() {
+  const navigate = useNavigate();
+  const setRegisterProcess = useSetRecoilState(registerProcessState);
+
+  const answer = (isDKU: boolean) => {
+    setRegisterProcess((prev) => ({ ...prev, isDKU }));
+    navigate(paths.REGISTER + "/" + paths.register.EMAIL_CHECK);
+  };
+
   return (
     <>
       <Title>
@@ -12,11 +24,11 @@ export default function StudentCheck() {
         <br />
         단국대학교 학생이신가요?
       </Title>
-      <AnswerButton>
+      <AnswerButton onClick={() => answer(true)}>
         <ArrowIcon icon={faCaretRight} />
         　네　
       </AnswerButton>
-      <AnswerButton>
+      <AnswerButton onClick={() => answer(false)}>
         <ArrowIcon icon={faCaretRight} />
         아니요, 게스트로 가입하고 싶어요!
       </AnswerButton>

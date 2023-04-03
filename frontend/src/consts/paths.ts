@@ -1,13 +1,14 @@
 const paths = {
   MAINPAGE: "/",
-  register: {
-    REGISTER: "/register",
-    STUDENT_CHECK: "student-check",
-    PROFILE_REGISTER: "profile",
-    ID_PW_REGISTER: "id-pw",
-  },
+  REGISTER: "/register",
   PROFILE_EDIT: "/profile-edit",
   CREDITS: "/credit",
+  register: {
+    STUDENT_CHECK: "student-check",
+    EMAIL_CHECK: "email-check",
+    ID_PW_REGISTER: "id-pw",
+    PROFILE_REGISTER: "profile-register",
+  },
 };
 
 export default paths;

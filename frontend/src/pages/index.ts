@@ -5,3 +5,4 @@ export { default as Credits } from "./Credits";
 export { default as StudentCheck } from "./register/StudentCheck";
 export { default as ProfileRegister } from "./register/ProfileRegister";
 export { default as IdPwRegister } from "./register/IdPwRegister";
+export { default as EmailCheck } from "./register/EmailCheck";
