@@ -1,4 +1,4 @@
-import { isDarkThemeState } from "atoms";
+import { isDarkThemeState } from "storage";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 

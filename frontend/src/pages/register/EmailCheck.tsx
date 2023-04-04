@@ -1,11 +1,10 @@
-import { registerProcessState } from "atoms";
 import { InputLabel, SubmitInput, Title } from "components";
-import { useRecoilState } from "recoil";
-import styled from "styled-components";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { postEmailCheck } from "api";
 import { useNavigate } from "react-router-dom";
 import { paths } from "consts";
+import { useLocalStorage } from "usehooks-ts";
+import { registerInfoStorage } from "storage";
 
 export default function EmailCheck() {
   const navigate = useNavigate();
@@ -13,7 +12,7 @@ export default function EmailCheck() {
   const [authCode, setAuthCode] = useState("");
   const [emailWarning, setEmailWarning] = useState("");
   const [authCodeWarning, setAuthCodeWarning] = useState("");
-  const [registerProcess, setRegisterProcess] = useRecoilState(registerProcessState);
+  const [registerInfo, setRegisterInfo] = useLocalStorage(registerInfoStorage.key, registerInfoStorage.init);
 
   const checkEmailInput = (e: ChangeEvent<HTMLInputElement>) => {
     const emailReg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -23,12 +22,12 @@ export default function EmailCheck() {
       setEmailWarning("※이메일 형식이 일치하지 않습니다!");
       return;
     }
-    if (registerProcess.isDKU && !dkuEmailReg.test(e.target.value)) {
+    if (registerInfo.isDKU && !dkuEmailReg.test(e.target.value)) {
       setEmailWarning("※단국대학교 이메일이 아닙니다!");
       return;
     }
 
-    setRegisterProcess((prev) => ({ ...prev, email: e.target.value }));
+    setRegisterInfo((prev) => ({ ...prev, email: e.target.value }));
     setEmailWarning("");
   };
 
@@ -43,7 +42,7 @@ export default function EmailCheck() {
 
   const sendEmailAuthCode = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const response = await postEmailCheck(registerProcess.email);
+    const response = await postEmailCheck(registerInfo.email);
     console.log(response);
     setAuthCode(response.data.data);
   };

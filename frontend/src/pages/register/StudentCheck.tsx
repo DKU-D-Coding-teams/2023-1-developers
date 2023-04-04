@@ -1,19 +1,19 @@
 import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { registerProcessState } from "atoms";
+import { registerInfoStorage } from "storage";
 import { Title } from "components";
 import { paths } from "consts";
 import { useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { waitAndDragUpFadeIn } from "styles";
+import { useLocalStorage } from "usehooks-ts";
 
 export default function StudentCheck() {
   const navigate = useNavigate();
-  const setRegisterProcess = useSetRecoilState(registerProcessState);
+  const [_, setRegisterInfo] = useLocalStorage(registerInfoStorage.key, registerInfoStorage.init);
 
   const answer = (isDKU: boolean) => {
-    setRegisterProcess((prev) => ({ ...prev, isDKU }));
+    setRegisterInfo((prev) => ({ ...prev, isDKU }));
     navigate(paths.register.EMAIL_CHECK);
   };
 

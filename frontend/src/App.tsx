@@ -4,7 +4,7 @@ import { Credits, Main, ProfileEdit, Register, StudentCheck, ProfileRegister, Id
 import { paths } from "consts";
 import { useEffect } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { isDarkThemeState, scrollPosState } from "atoms";
+import { isDarkThemeState, scrollPosState } from "storage";
 import { throttle } from "lodash";
 import { ThemeProvider } from "styled-components";
 import { ThemeButton } from "components";

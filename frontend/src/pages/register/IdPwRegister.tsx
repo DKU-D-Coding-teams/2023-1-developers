@@ -23,12 +23,7 @@ export default function IdPwRegister() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     handleInputExceptions();
-
-    const response = await postEmailCheck("bubbletea03@naver.com");
-    const authCode = response.data.data;
-
     navigate(paths.register.PROFILE_REGISTER);
   };
 
