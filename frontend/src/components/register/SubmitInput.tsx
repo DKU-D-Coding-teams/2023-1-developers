@@ -24,6 +24,8 @@ const Input = styled.input`
   background-color: skyblue;
   border-radius: 40px;
 
+  cursor: pointer;
+
   animation: ${waitAndDragUpFadeIn} 2.3s;
 `;
 

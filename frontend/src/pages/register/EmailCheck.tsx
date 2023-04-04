@@ -15,10 +15,16 @@ export default function EmailCheck() {
   const [authCodeWarning, setAuthCodeWarning] = useState("");
   const [registerProcess, setRegisterProcess] = useRecoilState(registerProcessState);
 
-  const handleEmailInput = (e: ChangeEvent<HTMLInputElement>) => {
+  const checkEmailInput = (e: ChangeEvent<HTMLInputElement>) => {
     const emailReg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const dkuEmailReg = /^[a-zA-Z0-9._%+-]+@dankook\.ac\.kr$/;
+
     if (!emailReg.test(e.target.value)) {
       setEmailWarning("※이메일 형식이 일치하지 않습니다!");
+      return;
+    }
+    if (registerProcess.isDKU && !dkuEmailReg.test(e.target.value)) {
+      setEmailWarning("※단국대학교 이메일이 아닙니다!");
       return;
     }
 
@@ -26,19 +32,23 @@ export default function EmailCheck() {
     setEmailWarning("");
   };
 
-  const handleAuthCodeInput = (e: ChangeEvent<HTMLInputElement>) => {
+  const checkAuthCodeInput = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value !== authCode) {
       setAuthCodeWarning("※인증 코드가 일치하지 않습니다!");
+      return;
     }
+
+    setAuthCodeWarning("");
   };
 
   const sendEmailAuthCode = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const response = await postEmailCheck(registerProcess.email);
+    console.log(response);
     setAuthCode(response.data.data);
   };
 
-  const verifyAuthCode = (e: FormEvent<HTMLFormElement>) => {
+  const submitAuthCode = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     navigate(paths.register.ID_PW_REGISTER);
   };
@@ -48,14 +58,14 @@ export default function EmailCheck() {
       <Title>이메일을 입력하고, 받은 번호로 인증하세요.</Title>
 
       <form onSubmit={sendEmailAuthCode}>
-        <InputLabel placeholder="이메일" onChange={handleEmailInput} marginTop={60} />
+        <InputLabel placeholder="이메일" onChange={checkEmailInput} marginTop={60} />
 
-        <SubmitInput type="submit" value="인증 코드 보내기" warning={emailWarning} />
+        {!authCode && <SubmitInput type="submit" value="인증 코드 보내기" warning={emailWarning} />}
       </form>
 
       {authCode && (
-        <form onSubmit={verifyAuthCode}>
-          <InputLabel placeholder="인증 코드" onChange={handleAuthCodeInput} marginTop={100} />
+        <form onSubmit={submitAuthCode}>
+          <InputLabel placeholder="인증 코드" onChange={checkAuthCodeInput} marginTop={100} />
           <SubmitInput type="submit" value="확인" warning={authCodeWarning} />
         </form>
       )}
