@@ -49,7 +49,7 @@ export default function EmailCheck() {
 
   const submitAuthCode = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate(paths.register.ID_PW_REGISTER);
+    navigate(paths.register.PW_REGISTER);
   };
 
   return (

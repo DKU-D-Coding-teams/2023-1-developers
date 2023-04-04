@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { GlobalStyle, lightTheme, darkTheme } from "styles";
-import { Credits, Main, ProfileEdit, Register, StudentCheck, ProfileRegister, IdPwRegister, EmailCheck } from "pages";
+import { Credits, Main, ProfileEdit, Register, StudentCheck, ProfileRegister, PwRegister, EmailCheck } from "pages";
 import { paths } from "consts";
 import { useEffect } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -33,7 +33,7 @@ export default function App() {
           <Route path={paths.REGISTER} element={<Register />}>
             <Route path={paths.register.STUDENT_CHECK} element={<StudentCheck />} />
             <Route path={paths.register.EMAIL_CHECK} element={<EmailCheck />} />
-            <Route path={paths.register.ID_PW_REGISTER} element={<IdPwRegister />} />
+            <Route path={paths.register.PW_REGISTER} element={<PwRegister />} />
             <Route path={paths.register.PROFILE_REGISTER} element={<ProfileRegister />} />
           </Route>
         </Routes>
