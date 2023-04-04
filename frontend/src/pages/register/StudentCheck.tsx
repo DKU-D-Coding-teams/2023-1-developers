@@ -14,7 +14,7 @@ export default function StudentCheck() {
 
   const answer = (isDKU: boolean) => {
     setRegisterProcess((prev) => ({ ...prev, isDKU }));
-    navigate(paths.REGISTER + "/" + paths.register.EMAIL_CHECK);
+    navigate(paths.register.EMAIL_CHECK);
   };
 
   return (

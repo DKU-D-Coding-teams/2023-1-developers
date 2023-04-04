@@ -4,6 +4,7 @@ import { shakeHorizontal } from "styles";
 import { useState, ChangeEvent, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { postEmailCheck } from "api";
+import { paths } from "consts";
 
 export default function IdPwRegister() {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ export default function IdPwRegister() {
     const response = await postEmailCheck("bubbletea03@naver.com");
     const authCode = response.data.data;
 
-    navigate("/register/profile");
+    navigate(paths.register.PROFILE_REGISTER);
   };
 
   const handleInputExceptions = () => {

@@ -4,10 +4,10 @@ const paths = {
   PROFILE_EDIT: "/profile-edit",
   CREDITS: "/credit",
   register: {
-    STUDENT_CHECK: "student-check",
-    EMAIL_CHECK: "email-check",
-    ID_PW_REGISTER: "id-pw",
-    PROFILE_REGISTER: "profile-register",
+    STUDENT_CHECK: "/register/student-check",
+    EMAIL_CHECK: "/register/email-check",
+    ID_PW_REGISTER: "/register/id-pw",
+    PROFILE_REGISTER: "/register/profile-register",
   },
 };
 
