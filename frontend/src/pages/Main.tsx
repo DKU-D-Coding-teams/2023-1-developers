@@ -1,6 +1,6 @@
 import { NavbarSection, ProfileBox, TopBackground, TopBar } from "components";
 import styled from "styled-components";
-import { profiles } from "mocks";
+import { profilesMockData } from "mocks";
 import { pinterestFadeIn } from "styles";
 
 export default function Main() {
@@ -11,7 +11,7 @@ export default function Main() {
         <TitleBox>D-velopers</TitleBox>
       </TopBackground>
       <PinterestContainer>
-        {profiles.map((profile, idx) => (
+        {profilesMockData.map((profile, idx) => (
           <PinterestObject key={idx}>
             <ProfileBox {...profile} />
           </PinterestObject>

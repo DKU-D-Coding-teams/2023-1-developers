@@ -98,7 +98,7 @@ const Footer = styled.div`
   margin-bottom: 10px;
 `;
 
-const TagBox = styled.div`
+export const TagBox = styled.div`
   display: flex;
   align-items: flex-end;
   flex-wrap: wrap;
@@ -107,12 +107,12 @@ const TagBox = styled.div`
     height: 20px;
     line-height: 20px;
     background-color: darkgray;
-    padding: 0 4px;
+    padding: 1px 4px;
     margin: 0 5px;
   }
 `;
 
-const LinkBox = styled.div`
+export const LinkBox = styled.div`
   display: flex;
   img {
     width: 40px;

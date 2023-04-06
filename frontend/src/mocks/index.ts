@@ -1,1 +1,2 @@
-export { default as profiles } from "./profiles";
+export { default as profilesMockData } from "./profiles";
+export * from "./profiles";
