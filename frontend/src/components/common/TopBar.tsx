@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { useRecoilValue } from "recoil";
-import { scrollPosState } from "atoms";
+import { scrollPosState } from "storage";
 import { dragDown } from "styles";
 
 export default function TopBar() {

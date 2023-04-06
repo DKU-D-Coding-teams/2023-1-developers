@@ -7,7 +7,6 @@ interface Props {
   setTags: (tags: string[]) => void;
 }
 
-//TODO 3월 30일 여기부터 작업 ㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱ
 export default function TagInputLabel({ tags, setTags }: Props) {
   const [buffer, setBuffer] = useState("");
 
@@ -27,7 +26,7 @@ export default function TagInputLabel({ tags, setTags }: Props) {
   return (
     <>
       <InputLabel
-        text="나를 표현하는 태그"
+        title="나를 표현하는 태그"
         width={600}
         marginTop={120}
         onChange={(e) => setBuffer(e.target.value.trim())}

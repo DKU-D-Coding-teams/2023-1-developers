@@ -1,17 +1,17 @@
-import { InputHTMLAttributes, PropsWithChildren, ReactNode } from "react";
+import { InputHTMLAttributes, PropsWithChildren } from "react";
 import styled from "styled-components";
 import { waitAndDragUpFadeIn } from "styles";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   marginTop?: number;
   width?: number;
-  text?: string;
+  title?: string;
 }
 
-export default function InputLabel({ marginTop, width, text, children, ...props }: PropsWithChildren<Props>) {
+export default function InputLabel({ marginTop, width, title, children, ...props }: PropsWithChildren<Props>) {
   return (
     <Label marginTop={marginTop || 0}>
-      <P>{text}</P>
+      <Title>{title}</Title>
       <InputBox width={width || 300}>
         {children}
         <Input {...props} />
@@ -55,7 +55,7 @@ const Input = styled.input`
   background-color: transparent;
 `;
 
-const P = styled.p`
+const Title = styled.p`
   margin: 0;
   font-size: 1.1rem;
   color: ${({ theme }) => theme.colors.defaultFont};

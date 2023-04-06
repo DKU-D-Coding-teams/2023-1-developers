@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
-import { scrollPosState } from "atoms";
+import { scrollPosState } from "storage";
 import { dragDown } from "styles";
 import { ReactNode } from "react";
 
