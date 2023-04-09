@@ -1,6 +1,6 @@
 import { ChangeEvent, KeyboardEvent, useState } from "react";
 import styled from "styled-components";
-import InputLabel from "./InputLabel";
+import InputLabel from "../common/InputLabel";
 
 interface Props {
   tags: string[];
