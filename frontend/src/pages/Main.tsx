@@ -1,9 +1,14 @@
 import { NavbarSection, ProfileBox, TopBackground, TopBar } from "components";
 import styled from "styled-components";
+import { MouseEvent } from "react";
 import { profilesMockData } from "mocks";
 import { pinterestFadeIn } from "styles";
+import { useNavigate } from "react-router-dom";
+import { paths } from "consts";
 
 export default function Main() {
+  const navigate = useNavigate();
+
   return (
     <NavbarSection>
       <TopBar />
@@ -11,8 +16,8 @@ export default function Main() {
         <TitleBox>D-velopers</TitleBox>
       </TopBackground>
       <PinterestContainer>
-        {profilesMockData.map((profile, idx) => (
-          <PinterestObject key={idx}>
+        {profilesMockData.map((profile) => (
+          <PinterestObject key={profile.id} onClick={() => navigate(`${paths.PROFILE_DETAIL}/${profile.id}`)}>
             <ProfileBox {...profile} />
           </PinterestObject>
         ))}
@@ -60,6 +65,7 @@ const PinterestObject = styled.div`
   transform: translate(-50%, 0);
 
   margin: 20px 0;
+  cursor: pointer;
 
   animation: ${pinterestFadeIn} 1s ease-in-out;
 `;
