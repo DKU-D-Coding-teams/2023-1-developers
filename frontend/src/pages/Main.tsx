@@ -52,7 +52,7 @@ const PinterestContainer = styled.div`
   column-gap: 40px;
   padding: 0 20px;
 
-  background-color: ${({ theme }) => theme.colors.pinterestContainer};
+  background-color: ${({ theme }) => theme.colors.mainPinterestContainer};
   transition: background-color 1s;
 `;
 

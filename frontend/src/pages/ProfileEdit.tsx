@@ -1,9 +1,11 @@
-import { NavbarSection } from "components";
+import { NavbarSection, ProfileForm, TopBackground, TopBar } from "components";
 
 export default function ProfileEdit() {
   return (
     <NavbarSection>
-      <div>Hello World!</div>
+      <TopBar />
+      <TopBackground />
+      <ProfileForm />
     </NavbarSection>
   );
 }

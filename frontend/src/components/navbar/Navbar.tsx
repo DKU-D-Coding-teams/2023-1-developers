@@ -14,9 +14,9 @@ export default function Navbar() {
           <Icon src="/icons/person.png" alt="사람 아이콘" />
           <div>My Profile</div>
         </Nav>
-        <Nav path={paths.CREDITS}>
+        <Nav path={paths.FREEBOARD}>
           <Icon src="/icons/board.png" alt="게시판 아이콘" />
-          <div>Credits</div>
+          <div>FreeBoard</div>
         </Nav>
       </Wrapper>
     </>

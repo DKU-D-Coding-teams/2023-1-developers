@@ -1,0 +1,48 @@
+import { NavbarSection, TopBackground, TopBar } from "components";
+import { postsMockData } from "mocks";
+import styled from "styled-components";
+import { pinterestFadeIn } from "styles";
+
+export default function FreeBoard() {
+  return (
+    <NavbarSection>
+      <TopBar />
+      <TopBackground />
+      <PinterestContainer>
+        {postsMockData.map((post) => (
+          <PinterestObject key={post.id}>
+            <div>ㅇㅇ</div>
+          </PinterestObject>
+        ))}
+      </PinterestContainer>
+    </NavbarSection>
+  );
+}
+
+const PinterestContainer = styled.div`
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+  margin-top: 100px;
+
+  max-width: 1100px;
+  column-width: 300px;
+  column-gap: 40px;
+  padding: 0 20px;
+
+  background-color: ${({ theme }) => theme.colors.boardPinterestContainer};
+  transition: background-color 1s;
+`;
+
+const PinterestObject = styled.div`
+  display: inline-block;
+
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+
+  margin: 20px 0;
+  cursor: pointer;
+
+  animation: ${pinterestFadeIn} 1s ease-in-out;
+`;

@@ -10,7 +10,8 @@ const lightTheme: DefaultTheme = {
   colors: {
     bg: "white",
     topBg: "lightgray",
-    pinterestContainer: "#e8f9ff",
+    mainPinterestContainer: "#e8f9ff",
+    boardPinterestContainer: "#f2efae",
     titleFont: "black",
     defaultFont: "black",
     themeBtn: "#393939",

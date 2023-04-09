@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { GlobalStyle, lightTheme, darkTheme } from "styles";
 import {
-  Credits,
+  FreeBoard,
   Main,
   ProfileEdit,
   Register,
@@ -40,7 +40,7 @@ export default function App() {
           <Route path={paths.MAINPAGE} element={<Main />} />
           <Route path={paths.PROFILE_DETAIL + "/:userId"} element={<ProfileDetail />} />
           <Route path={paths.PROFILE_EDIT} element={<ProfileEdit />} />
-          <Route path={paths.CREDITS} element={<Credits />} />
+          <Route path={paths.FREEBOARD} element={<FreeBoard />} />
           <Route path={paths.REGISTER} element={<Register />}>
             <Route path={paths.register.STUDENT_CHECK} element={<StudentCheck />} />
             <Route path={paths.register.EMAIL_CHECK} element={<EmailCheck />} />
