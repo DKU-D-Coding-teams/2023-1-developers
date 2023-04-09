@@ -2,13 +2,15 @@ import { waitAndDragUpFadeIn } from "styles";
 import ProfileImgUploadModal from "./ProfileImgUploadModal";
 import styled from "styled-components";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { InputLabel, SubmitInput, TagInputLabel } from "components";
+import { InputLabel, MarkdownTextarea, SubmitInput, TagInputLabel } from "components";
+import TextareaAutosize from "react-textarea-autosize";
+import { debounce } from "lodash";
 
 interface Props {
-  exceptDetailedIntroduce?: boolean;
+  exceptsDetailedIntroduce?: boolean;
 }
 
-export default function ProfileForm({ exceptDetailedIntroduce }: Props) {
+export default function ProfileForm({ exceptsDetailedIntroduce: exceptDetailedIntroduce }: Props) {
   const [selectedImg, setSelectedImg] = useState("");
   const [inputState, setInputState] = useState({
     uploadedImg: "",
@@ -67,6 +69,11 @@ export default function ProfileForm({ exceptDetailedIntroduce }: Props) {
       <InputLabel name="singleIntroduce" title="한줄 소개" onChange={handleInput} width={700} marginTop={120} />
 
       <TagInputLabel tags={inputState.tags} setTags={(tags) => setInputState({ ...inputState, tags })} />
+
+      <MarkdownTextarea
+        value={inputState.detailedIntroduce}
+        set={(detailedIntroduce: string) => setInputState({ ...inputState, detailedIntroduce })}
+      />
 
       <SubmitInput type="submit" value="제출" warning="" />
 

@@ -9,7 +9,7 @@ export default function ProfileRegister() {
         당신은 어떤 사람인가요?
       </Title>
 
-      <ProfileForm exceptDetailedIntroduce />
+      <ProfileForm exceptsDetailedIntroduce />
     </>
   );
 }

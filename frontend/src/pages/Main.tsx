@@ -1,6 +1,5 @@
 import { NavbarSection, ProfileBox, TopBackground, TopBar } from "components";
 import styled from "styled-components";
-import { MouseEvent } from "react";
 import { profilesMockData } from "mocks";
 import { pinterestFadeIn } from "styles";
 import { useNavigate } from "react-router-dom";

@@ -8,4 +8,5 @@ export { default as InputLabel } from "./common/InputLabel";
 export { default as SubmitInput } from "./common/SubmitInput";
 export { default as TagInputLabel } from "./profile/TagInputLabel";
 export { default as ProfileForm } from "./profile/ProfileForm";
+export { default as MarkdownTextarea } from "./profile/MarkdownTextarea";
 export * from "./main/ProfileBox";
