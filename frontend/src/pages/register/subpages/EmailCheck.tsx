@@ -1,10 +1,11 @@
-import { InputLabel, SubmitInput, Title } from "components";
-import { ChangeEvent, FormEvent, useRef, useState } from "react";
+import { InputLabel, SubmitInput } from "components";
+import React, { ChangeEvent, FormEvent, useRef, useState } from "react";
 import { postEmailCheck } from "api";
 import { useNavigate } from "react-router-dom";
 import { paths } from "consts";
 import { useLocalStorage } from "usehooks-ts";
 import { registerInfoStorage } from "storage";
+import Title from "../parts/Title";
 
 export default function EmailCheck() {
   const navigate = useNavigate();

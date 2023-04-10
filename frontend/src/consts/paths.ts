@@ -2,7 +2,7 @@ const paths = {
   MAINPAGE: "/",
   REGISTER: "/register",
   PROFILE_EDIT: "/profile-edit",
-  CREDITS: "/credit",
+  FREEBOARD: "/freeboard",
   PROFILE_DETAIL: "/profile-detail",
   register: {
     STUDENT_CHECK: "/register/student-check",

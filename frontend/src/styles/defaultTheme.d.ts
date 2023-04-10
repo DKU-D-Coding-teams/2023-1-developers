@@ -5,7 +5,8 @@ declare module "styled-components" {
     colors: {
       bg: string;
       topBg: string;
-      pinterestContainer: string;
+      mainPinterestContainer: string;
+      boardPinterestContainer: string;
       titleFont: string;
       defaultFont: string;
       themeBtn: string;

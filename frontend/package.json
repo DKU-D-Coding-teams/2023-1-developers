@@ -16,7 +16,9 @@
     "react-markdown": "^8.0.6",
     "react-router-dom": "^6.8.1",
     "react-scripts": "5.0.1",
+    "react-textarea-autosize": "^8.4.1",
     "recoil": "^0.7.7",
+    "remark-gfm": "^3.0.1",
     "styled-components": "^5.3.6",
     "typescript": "^4.9.5",
     "usehooks-ts": "^2.9.1",
@@ -50,6 +52,7 @@
   "proxy": "http://3.39.41.33:8080",
   "devDependencies": {
     "@types/lodash": "^4.14.191",
-    "@types/styled-components": "^5.1.26"
+    "@types/styled-components": "^5.1.26",
+    "prettier": "2.8.7"
   }
 }

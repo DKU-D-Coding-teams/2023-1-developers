@@ -5,7 +5,8 @@ const darkTheme: DefaultTheme = {
   colors: {
     bg: "#6e6e6e",
     topBg: "#444444",
-    pinterestContainer: "#7e888f",
+    mainPinterestContainer: "#7e888f",
+    boardPinterestContainer: "#cfcd97",
     titleFont: "white",
     defaultFont: "#f2f2f2",
     themeBtn: "white",

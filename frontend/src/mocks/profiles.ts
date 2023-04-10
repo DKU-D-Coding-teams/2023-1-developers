@@ -22,20 +22,7 @@ const profiles: Profile[] = [
     email: "asdf@dankook.ac.kr",
     tags: ["Android", "Kotlin"],
     links: ["asdf", "zxcv"],
-    detailedIntroduce: `### Navbar 설계
-
-    - 원하는 Nav 요소를 추가할 수 있도록 만들 수 있을 듯 함.
-    
-    라우터처럼 
-    
-    \`\`\`tsx
-    <NavRouter>
-      <Nav>MainPage</Nav> 
-      <Nav>Profile</Nav>
-    </NavRouter>
-    \`\`\`
-    
-    이런 식은 어떨까? 물론 단순 예시임 이건`,
+    detailedIntroduce: "이건 왜 안되지\n- ㅁㄴㅇㄹ\n- ㅋㅌㅊㅍ",
   },
   {
     id: 2,

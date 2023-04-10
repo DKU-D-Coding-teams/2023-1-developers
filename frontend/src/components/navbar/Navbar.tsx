@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import Nav from "./Nav";
-import { paths } from "consts";
+import styled from 'styled-components';
+import Nav from './Nav';
+import { paths } from 'consts';
 
 export default function Navbar() {
   return (
@@ -14,9 +14,9 @@ export default function Navbar() {
           <Icon src="/icons/person.png" alt="사람 아이콘" />
           <div>My Profile</div>
         </Nav>
-        <Nav path={paths.CREDITS}>
+        <Nav path={paths.FREEBOARD}>
           <Icon src="/icons/board.png" alt="게시판 아이콘" />
-          <div>Credits</div>
+          <div>FreeBoard</div>
         </Nav>
       </Wrapper>
     </>
@@ -25,13 +25,13 @@ export default function Navbar() {
 
 const Wrapper = styled.div`
   position: fixed;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 80px;
   height: 100%;
   background-color: #3c3c3c;
-  z-index: 1;
 
   ${({ theme }) => theme.media.mobile} {
     flex-direction: row;
