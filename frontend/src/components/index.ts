@@ -1,12 +1,9 @@
 export { default as NavbarSection } from "./navbar/NavbarSection";
-export { default as ProfileBox } from "./main/ProfileBox";
 export { default as TopBackground } from "./common/TopBackground";
 export { default as TopBar } from "./common/TopBar";
-export { default as Title } from "./register/Title";
 export { default as ThemeButton } from "./common/ThemeButton";
 export { default as InputLabel } from "./common/InputLabel";
 export { default as SubmitInput } from "./common/SubmitInput";
-export { default as TagInputLabel } from "./profile/TagInputLabel";
-export { default as ProfileForm } from "./profile/ProfileForm";
-export { default as MarkdownTextarea } from "./profile/MarkdownTextarea";
-export * from "./main/ProfileBox";
+export { default as ProfileForm } from "./profile-form/ProfileForm";
+export { default as LinkBox } from "./common/LinkBox";
+export { default as TagBox } from "./common/TagBox";

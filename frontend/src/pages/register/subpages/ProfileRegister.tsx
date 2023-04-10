@@ -1,4 +1,5 @@
-import { ProfileForm, Title } from "components";
+import { ProfileForm } from "components";
+import Title from "../parts/Title";
 
 export default function ProfileRegister() {
   return (

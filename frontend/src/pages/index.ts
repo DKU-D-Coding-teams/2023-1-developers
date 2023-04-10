@@ -1,9 +1,9 @@
-export { default as Main } from "./Main";
-export { default as ProfileEdit } from "./ProfileEdit";
+export { default as Main } from "./main/Main";
+export { default as ProfileEdit } from "./profile-edit/ProfileEdit";
 export { default as Register } from "./register/Register";
-export { default as FreeBoard } from "./FreeBoard";
-export { default as StudentCheck } from "./register/StudentCheck";
-export { default as ProfileRegister } from "./register/ProfileRegister";
-export { default as PwRegister } from "./register/PwRegister";
-export { default as EmailCheck } from "./register/EmailCheck";
-export { default as ProfileDetail } from "./ProfileDetail";
+export { default as FreeBoard } from "./free-board/FreeBoard";
+export { default as StudentCheck } from "./register/subpages/StudentCheck";
+export { default as ProfileRegister } from "./register/subpages/ProfileRegister";
+export { default as PwRegister } from "./register/subpages/PwRegister";
+export { default as EmailCheck } from "./register/subpages/EmailCheck";
+export { default as ProfileDetail } from "./profile-detail/ProfileDetail";

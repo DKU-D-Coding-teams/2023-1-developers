@@ -1,10 +1,11 @@
-import { InputLabel, Title, SubmitInput } from "components";
+import { InputLabel, SubmitInput } from "components";
 import { useState, ChangeEvent, FormEvent, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { RegisterParams, postMemberRegister } from "api";
 import { paths } from "consts";
 import { useLocalStorage } from "usehooks-ts";
 import { registerInfoStorage } from "storage";
+import Title from "../parts/Title";
 
 export default function PwRegister() {
   const navigate = useNavigate();

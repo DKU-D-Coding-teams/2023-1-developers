@@ -1,9 +1,10 @@
-import { NavbarSection, ProfileBox, TopBackground, TopBar } from "components";
+import { NavbarSection, TopBackground, TopBar } from "components";
 import styled from "styled-components";
 import { profilesMockData } from "mocks";
 import { pinterestFadeIn } from "styles";
 import { useNavigate } from "react-router-dom";
 import { paths } from "consts";
+import ProfileBox from "./parts/ProfileBox";
 
 export default function Main() {
   const navigate = useNavigate();

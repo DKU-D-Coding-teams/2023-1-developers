@@ -1,26 +1,24 @@
-import { waitAndDragUpFadeIn } from "styles";
-import ProfileImgUploadModal from "./ProfileImgUploadModal";
-import styled from "styled-components";
-import { ChangeEvent, FormEvent, useState } from "react";
-import { InputLabel, MarkdownTextarea, SubmitInput, TagInputLabel } from "components";
-import TextareaAutosize from "react-textarea-autosize";
-import { debounce } from "lodash";
+import { waitAndDragUpFadeIn } from 'styles';
+import styled from 'styled-components';
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { InputLabel, SubmitInput } from 'components';
+import { MarkdownTextarea, ProfileImgUploadModal, TagInputLabel } from './parts';
 
 interface Props {
   exceptsDetailedIntroduce?: boolean;
 }
 
 export default function ProfileForm({ exceptsDetailedIntroduce: exceptDetailedIntroduce }: Props) {
-  const [selectedImg, setSelectedImg] = useState("");
+  const [selectedImg, setSelectedImg] = useState('');
   const [inputState, setInputState] = useState({
-    uploadedImg: "",
-    name: "",
-    affiliation: "",
-    singleIntroduce: "",
-    githubLink: "",
-    otherLink: "",
+    uploadedImg: '',
+    name: '',
+    affiliation: '',
+    singleIntroduce: '',
+    githubLink: '',
+    otherLink: '',
     tags: [],
-    detailedIntroduce: "",
+    detailedIntroduce: '',
   });
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -40,19 +38,19 @@ export default function ProfileForm({ exceptsDetailedIntroduce: exceptDetailedIn
     reader.onloadend = () => {
       setSelectedImg(reader.result as string);
     };
-    e.target.value = "";
+    e.target.value = '';
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <ProfileImgUploadModal
         selectedImg={selectedImg}
-        close={() => setSelectedImg("")}
+        close={() => setSelectedImg('')}
         uploadImg={(img: string) => setInputState({ ...inputState, uploadedImg: img })}
       />
       <FlexBox>
         <ProfileImgLabel>
-          <ProfileImg src={inputState.uploadedImg || "/icons/person.png"} />
+          <ProfileImg src={inputState.uploadedImg || '/icons/person.png'} />
           <ProfileImgBtnBox>프로필 사진 등록</ProfileImgBtnBox>
           <input type="file" accept="image/*" onChange={runImgUploader} />
         </ProfileImgLabel>
@@ -76,8 +74,6 @@ export default function ProfileForm({ exceptsDetailedIntroduce: exceptDetailedIn
       />
 
       <SubmitInput type="submit" value="제출" warning="" />
-
-      <div>{exceptDetailedIntroduce ? <>ㅇㅇ</> : <>ㅁㄴㅇㄹ</>}</div>
     </form>
   );
 }

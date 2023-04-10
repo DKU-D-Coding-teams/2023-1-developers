@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import wait from "waait";
+import { TagBox, LinkBox } from "components";
 
 interface Props {
   profileImg: string;
@@ -96,27 +97,4 @@ const Footer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
-`;
-
-export const TagBox = styled.div`
-  display: flex;
-  align-items: flex-end;
-  flex-wrap: wrap;
-  row-gap: 7px;
-  div {
-    height: 20px;
-    line-height: 20px;
-    background-color: darkgray;
-    padding: 1px 4px;
-    margin: 0 5px;
-  }
-`;
-
-export const LinkBox = styled.div`
-  display: flex;
-  img {
-    width: 40px;
-    height: 40px;
-    border-radius: 70%;
-  }
 `;

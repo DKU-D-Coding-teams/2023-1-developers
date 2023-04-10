@@ -1,10 +1,11 @@
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { LinkBox, NavbarSection, TagBox, TopBackground, TopBar } from "components";
+import {LinkBox, NavbarSection, TagBox, TopBackground, TopBar} from "components";
 import { Profile, profilesMockData } from "mocks";
 import { useEffect, useState } from "react";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import { useParams } from "react-router-dom";
+import remarkGfm from "remark-gfm";
 import styled from "styled-components";
 
 export default function ProfileDetail() {
@@ -61,7 +62,7 @@ export default function ProfileDetail() {
         </CircleBoundary>
 
         <DetailedIntroduce>
-          <ReactMarkdown children={profileData.detailedIntroduce} />
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{profileData.detailedIntroduce}</ReactMarkdown>
         </DetailedIntroduce>
 
         <Hr width="80%" />
@@ -146,4 +147,5 @@ const DetailedIntroduce = styled.div`
   margin: 0 auto;
   margin-top: 50px;
   width: 90%;
+  font-size: 1.1rem;
 `;

@@ -1,4 +1,5 @@
-interface Post {
+// TODO 다 임시임
+export interface Post {
   id: number;
   images: string[];
   title: string;

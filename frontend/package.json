@@ -52,6 +52,7 @@
   "proxy": "http://3.39.41.33:8080",
   "devDependencies": {
     "@types/lodash": "^4.14.191",
-    "@types/styled-components": "^5.1.26"
+    "@types/styled-components": "^5.1.26",
+    "prettier": "2.8.7"
   }
 }
