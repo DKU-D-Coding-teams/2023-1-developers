@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import TextareaAutosize from "react-textarea-autosize";
-import { ChangeEvent, useState } from "react";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
-import remarkGfm from "remark-gfm";
+import styled from 'styled-components';
+import TextareaAutosize from 'react-textarea-autosize';
+import { ChangeEvent, useState } from 'react';
+import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
+import remarkGfm from 'remark-gfm';
 
 interface Props {
   value: string;
@@ -42,7 +42,7 @@ const PreviewButton = styled.button<{ isPreviewMode: boolean }>`
   height: 45px;
   line-height: 20px;
   padding-bottom: 40px;
-  background-color: ${({ isPreviewMode }) => (isPreviewMode ? "gray" : "white")};
+  background-color: ${({ isPreviewMode }) => (isPreviewMode ? 'gray' : 'white')};
   transition: background-color 0.5s;
   text-align: center;
   border-radius: 30px;
@@ -70,7 +70,7 @@ const Textarea = styled(TextareaAutosize)`
   border-radius: 20px;
   padding: 20px;
   font-size: 1.1rem;
-  font-family: "SUIT-Regular";
+  font-family: 'SUIT-Regular';
   width: 80vw;
   min-height: 300px;
 `;

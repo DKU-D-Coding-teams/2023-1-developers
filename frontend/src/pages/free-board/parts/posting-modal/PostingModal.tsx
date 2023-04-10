@@ -1,11 +1,28 @@
-import { InputLabel, Modal } from 'components';
+import { Modal } from 'components';
 import styled from 'styled-components';
+import { useState } from 'react';
+import { ChangeEvent } from 'react';
+import ImgUploadBox from './ImgUploadBox';
 
 export default function PostingModal() {
+  const [inputState, setInputState] = useState({
+    title: '',
+    content: '',
+    images: [],
+  });
+
+  const handleInput = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setInputState({ ...inputState, [e.target.name]: e.target.value });
+  };
+
   return (
     <Modal width="350px" height="550px">
-      <TitleInput placeholder="제목" />
-      <ContentTextarea placeholder="내용" />
+      <TitleInput placeholder="제목" onChange={handleInput} />
+      <ContentTextarea placeholder="내용" onChange={handleInput} />
+      <ImgUploadBox
+        images={inputState.images}
+        setImages={(images: string[]) => setInputState({ ...inputState, images })}
+      />
       <UploadButton>올리기</UploadButton>
     </Modal>
   );
@@ -33,7 +50,7 @@ const ContentTextarea = styled.textarea`
 const UploadButton = styled.button`
   display: block;
   margin: 0 auto;
-  margin-top: 30px;
+  margin-top: 15px;
 
   border: 2px solid lightgray;
   width: 100px;

@@ -1,13 +1,13 @@
-import { Post } from "mocks";
-import styled from "styled-components";
+import { Post } from 'mocks';
+import styled from 'styled-components';
 
 export default function PostBox({ post }: { post: Post }) {
   return (
     <Wrapper>
       {/* //TODO 그냥 캐러셀 넣어도 될듯? */}
       <ImgContainer>
-        {post.images.map((img) => (
-          <Img src={img} />
+        {post.images.map((img, i) => (
+          <Img src={img} key={i} />
         ))}
       </ImgContainer>
       <PostTitle>{post.title}</PostTitle>

@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
-import styled from "styled-components";
-import Navbar from "./Navbar";
+import { ReactNode } from 'react';
+import styled from 'styled-components';
+import Navbar from './Navbar';
 
 interface Props {
   children: ReactNode;

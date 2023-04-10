@@ -1,9 +1,9 @@
 import { NavbarSection, TopBackground, TopBar } from 'components';
-import PostBox from 'pages/free-board/parts/PostBox';
+import PostBox from './parts/PostBox';
 import { postsMockData } from 'mocks';
 import styled from 'styled-components';
 import { pinterestFadeIn } from 'styles';
-import PostingModal from './parts/PostingModal';
+import PostingModal from './parts/posting-modal/PostingModal';
 import { useSetRecoilState } from 'recoil';
 import { isModalActiveState } from 'storage';
 

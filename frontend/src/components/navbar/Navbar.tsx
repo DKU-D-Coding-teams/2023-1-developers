@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import Nav from "./Nav";
-import { paths } from "consts";
+import styled from 'styled-components';
+import Nav from './Nav';
+import { paths } from 'consts';
 
 export default function Navbar() {
   return (
@@ -25,13 +25,13 @@ export default function Navbar() {
 
 const Wrapper = styled.div`
   position: fixed;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 80px;
   height: 100%;
   background-color: #3c3c3c;
-  z-index: 1;
 
   ${({ theme }) => theme.media.mobile} {
     flex-direction: row;
