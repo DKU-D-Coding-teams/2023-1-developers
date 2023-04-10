@@ -95,7 +95,7 @@ const SelectedImg = styled.img`
 
 const ScreenshotArea = styled.div<{ posX: number; posY: number; length: number }>`
   position: fixed;
-  z-index: 1;
+  z-index: 99;
   top: ${({ posY }) => (posY ? posY + 'px' : '50%')};
   left: ${({ posX }) => (posX ? posX + 'px' : '50%')};
   transform: translate(-50%, -50%);

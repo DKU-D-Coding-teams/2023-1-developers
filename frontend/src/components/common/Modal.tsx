@@ -28,7 +28,7 @@ export default function Modal({ width, height, sibling, children }: PropsWithChi
 
 const Background = styled.div`
   position: fixed;
-  z-index: 1;
+  z-index: 33;
   top: 0;
   bottom: 0;
   right: 0;
@@ -46,7 +46,7 @@ const dragup = keyframes`
 
 const Wrapper = styled.div<{ width: string; height: string }>`
   position: fixed;
-  z-index: 1;
+  z-index: 33;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -58,5 +58,5 @@ const Wrapper = styled.div<{ width: string; height: string }>`
   background-color: white;
   border: 1px solid gray;
 
-  animation: ${fadein} 0.6s, ${dragup} 0.5s;
+  animation: ${dragup} 0.4s ease;
 `;
