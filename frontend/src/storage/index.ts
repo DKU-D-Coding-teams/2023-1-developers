@@ -1,19 +1,24 @@
-import { atom } from "recoil";
+import { atom } from 'recoil';
 
 export const scrollPosState = atom({
-  key: "scrollPos",
+  key: 'scrollPos',
   default: 0,
 });
 
 export const isDarkThemeState = atom({
-  key: "isDarkTheme",
+  key: 'isDarkTheme',
+  default: false,
+});
+
+export const isModalActiveState = atom({
+  key: 'isModalActive',
   default: false,
 });
 
 export const registerInfoStorage = {
-  key: "registerInfo",
+  key: 'registerInfo',
   init: {
     isDKU: false,
-    email: "",
+    email: '',
   },
 };
