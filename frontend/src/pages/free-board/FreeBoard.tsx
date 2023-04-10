@@ -1,22 +1,28 @@
-import { NavbarSection, TopBackground, TopBar } from "components";
-import PostBox from "pages/free-board/parts/PostBox";
-import { postsMockData } from "mocks";
-import styled from "styled-components";
-import { pinterestFadeIn } from "styles";
+import { NavbarSection, TopBackground, TopBar } from 'components';
+import PostBox from 'pages/free-board/parts/PostBox';
+import { postsMockData } from 'mocks';
+import styled from 'styled-components';
+import { pinterestFadeIn } from 'styles';
+import PostingModal from './parts/PostingModal';
+import { useSetRecoilState } from 'recoil';
+import { isModalActiveState } from 'storage';
 
 export default function FreeBoard() {
+  const setModalActive = useSetRecoilState(isModalActiveState);
+
   return (
     <NavbarSection>
       <TopBar />
       <TopBackground />
       <PinterestContainer>
-        <PostingButton>글쓰기 +</PostingButton>
+        <PostingButton onClick={() => setModalActive(true)}>글쓰기 +</PostingButton>
         {postsMockData.map((post) => (
           <PinterestObject key={post.id}>
             <PostBox post={post} />
           </PinterestObject>
         ))}
       </PinterestContainer>
+      <PostingModal />
     </NavbarSection>
   );
 }
