@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { InputLabel, SubmitInput } from 'components';
 import { MarkdownTextarea, ProfileImgUploadModal, TagInputLabel } from './parts';
+import { useSetRecoilState } from 'recoil';
+import { isModalActiveState } from 'storage';
 
 interface Props {
   exceptsDetailedIntroduce?: boolean;
@@ -20,6 +22,7 @@ export default function ProfileForm({ exceptsDetailedIntroduce: exceptDetailedIn
     tags: [],
     detailedIntroduce: '',
   });
+  const setModalActive = useSetRecoilState(isModalActiveState);
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     setInputState({ ...inputState, [e.target.name]: e.target.value });
@@ -37,6 +40,7 @@ export default function ProfileForm({ exceptsDetailedIntroduce: exceptDetailedIn
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       setSelectedImg(reader.result as string);
+      setModalActive(true);
     };
     e.target.value = '';
   };
@@ -45,7 +49,6 @@ export default function ProfileForm({ exceptsDetailedIntroduce: exceptDetailedIn
     <form onSubmit={handleSubmit}>
       <ProfileImgUploadModal
         selectedImg={selectedImg}
-        close={() => setSelectedImg('')}
         uploadImg={(img: string) => setInputState({ ...inputState, uploadedImg: img })}
       />
       <FlexBox>

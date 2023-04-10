@@ -1,17 +1,19 @@
-import { useRef, useState, MouseEvent, TouchEvent } from "react";
-import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import html2canvas from "html2canvas";
+import { useRef, useState, MouseEvent, TouchEvent } from 'react';
+import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import html2canvas from 'html2canvas';
+import { Modal } from 'components';
+import { useSetRecoilState } from 'recoil';
+import { isModalActiveState } from 'storage';
 
 interface Props {
   selectedImg: string;
-  close: () => void;
   uploadImg: (img: string) => void;
 }
 
 //! State 남용때문에 많이 비효율적인 컴포넌트... 남이 알아볼 수도 없다.
-export default function ProfileImgUploadModal({ selectedImg, close, uploadImg }: Props) {
+export default function ProfileImgUploadModal({ selectedImg, uploadImg }: Props) {
   const $screenshotArea = useRef<HTMLDivElement>();
   const $img = useRef<HTMLImageElement>();
 
@@ -19,6 +21,7 @@ export default function ProfileImgUploadModal({ selectedImg, close, uploadImg }:
   const [areaPosX, setAreaPosX] = useState(0);
   const [areaPosY, setAreaPosY] = useState(0);
   let [isDraggingArea, setIsDraggingArea] = useState(false);
+  const setModalActive = useSetRecoilState(isModalActiveState);
 
   // TODO 나중에 여유되면 핸드폰 터치 이벤트도 추가하자.
   const dragScreenshotArea = (e: MouseEvent<HTMLDivElement> & TouchEvent<HTMLDivElement>) => {
@@ -42,29 +45,25 @@ export default function ProfileImgUploadModal({ selectedImg, close, uploadImg }:
   };
 
   const captureArea = () => {
-    $screenshotArea.current.style.opacity = "0";
+    $screenshotArea.current.style.opacity = '0';
     html2canvas(document.body, {
       x: areaPosX - AREA_LENGTH / 2,
       y: areaPosY + window.scrollY - AREA_LENGTH / 2,
       width: AREA_LENGTH,
       height: AREA_LENGTH,
     }).then((canvas) => {
-      const capturedImg = canvas.toDataURL("image/png");
+      const capturedImg = canvas.toDataURL('image/png');
       uploadImg(capturedImg);
-      close();
+      setModalActive(false);
     });
   };
 
   return (
     <>
-      {selectedImg && (
-        <>
-          <Wrapper>
-            <SelectedImg src={selectedImg} ref={$img} />
-            <OKButton onClick={captureArea}>
-              <FontAwesomeIcon icon={faCheck} style={{ color: "white" }} />
-            </OKButton>
-          </Wrapper>
+      <Modal
+        width="300px"
+        height="400px"
+        sibling={
           <ScreenshotArea
             length={AREA_LENGTH}
             posX={areaPosX}
@@ -74,26 +73,16 @@ export default function ProfileImgUploadModal({ selectedImg, close, uploadImg }:
             onMouseUp={(e) => setIsDraggingArea(false)}
             ref={$screenshotArea}
           />
-        </>
-      )}
+        }
+      >
+        <SelectedImg src={selectedImg} ref={$img} />
+        <OKButton onClick={captureArea}>
+          <FontAwesomeIcon icon={faCheck} style={{ color: 'white' }} />
+        </OKButton>
+      </Modal>
     </>
   );
 }
-
-const Wrapper = styled.div`
-  position: fixed;
-  z-index: 1;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  width: 300px;
-  height: 400px;
-
-  padding: 30px;
-  background-color: white;
-  border: 1px solid gray;
-`;
 
 const SelectedImg = styled.img`
   display: block;
@@ -107,12 +96,12 @@ const SelectedImg = styled.img`
 const ScreenshotArea = styled.div<{ posX: number; posY: number; length: number }>`
   position: fixed;
   z-index: 1;
-  top: ${({ posY }) => (posY ? posY + "px" : "50%")};
-  left: ${({ posX }) => (posX ? posX + "px" : "50%")};
+  top: ${({ posY }) => (posY ? posY + 'px' : '50%')};
+  left: ${({ posX }) => (posX ? posX + 'px' : '50%')};
   transform: translate(-50%, -50%);
 
-  width: ${({ length }) => length + "px"};
-  height: ${({ length }) => length + "px"};
+  width: ${({ length }) => length + 'px'};
+  height: ${({ length }) => length + 'px'};
   background-color: black;
   opacity: 0.4;
   border-radius: 40px;

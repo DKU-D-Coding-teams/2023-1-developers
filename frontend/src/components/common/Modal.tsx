@@ -1,12 +1,13 @@
 import { PropsWithChildren, ReactNode } from 'react';
 import { useRecoilState } from 'recoil';
 import { isModalActiveState } from 'storage';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+import { fadein } from 'styles';
 
 interface Props {
   width: string;
   height: string;
-  sibling: ReactNode;
+  sibling?: ReactNode;
 }
 
 export default function Modal({ width, height, sibling, children }: PropsWithChildren<Props>) {
@@ -34,11 +35,18 @@ const Background = styled.div`
   left: 0;
   background-color: black;
   opacity: 0.5;
-  transition: background-color 1s;
+  animation: ${fadein} 0.7s;
+`;
+
+const dragup = keyframes`
+    from {
+        top: 60%;
+    }
 `;
 
 const Wrapper = styled.div<{ width: string; height: string }>`
   position: fixed;
+  z-index: 1;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -49,4 +57,6 @@ const Wrapper = styled.div<{ width: string; height: string }>`
   padding: 30px;
   background-color: white;
   border: 1px solid gray;
+
+  animation: ${fadein} 0.6s, ${dragup} 0.5s;
 `;

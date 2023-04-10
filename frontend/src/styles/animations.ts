@@ -1,4 +1,4 @@
-import { keyframes } from "styled-components";
+import { keyframes } from 'styled-components';
 
 export const dragDown = keyframes`
   from {
@@ -52,5 +52,11 @@ export const shakeHorizontal = keyframes`
   }
   100% {
     transform: translate(0, 0);
+  }
+`;
+
+export const fadein = keyframes`
+  from {
+    opacity: 0;
   }
 `;
