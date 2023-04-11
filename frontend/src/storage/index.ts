@@ -22,3 +22,12 @@ export const registerInfoStorage = {
     email: '',
   },
 };
+
+export const loginTokensStorage = {
+  key: 'loginTokens',
+  init: {
+    accessToken: '',
+    grantType: '',
+    refreshToken: '',
+  },
+};

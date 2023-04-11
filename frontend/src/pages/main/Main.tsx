@@ -1,13 +1,21 @@
-import { NavbarSection, TopBackground, TopBar } from "components";
-import styled from "styled-components";
-import { profilesMockData } from "mocks";
-import { pinterestFadeIn } from "styles";
-import { useNavigate } from "react-router-dom";
-import { paths } from "consts";
-import ProfileBox from "./parts/ProfileBox";
+import { NavbarSection, TopBackground, TopBar } from 'components';
+import styled from 'styled-components';
+import { profilesMockData } from 'mocks';
+import { pinterestFadeIn } from 'styles';
+import { useNavigate } from 'react-router-dom';
+import { paths } from 'consts';
+import ProfileBox from './parts/ProfileBox';
+import { useEffect } from 'react';
+import { getAllProfiles } from 'api';
 
 export default function Main() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getAllProfiles().then((response) => {
+      console.log(response.data);
+    });
+  }, []);
 
   return (
     <NavbarSection>
@@ -36,7 +44,7 @@ const TitleBox = styled.div`
   color: ${({ theme }) => theme.colors.titleFont};
 
   white-space: nowrap;
-  font-family: "S-CoreDream-3Light";
+  font-family: 'S-CoreDream-3Light';
   font-weight: 100;
 
   transition: color 1s;
