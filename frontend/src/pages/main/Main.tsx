@@ -1,3 +1,4 @@
+
 import { NavbarSection, TopBackground, TopBar } from 'components';
 import styled from 'styled-components';
 import { profilesMockData } from 'mocks';
@@ -10,6 +11,7 @@ import { getAllProfiles } from 'api';
 
 export default function Main() {
   const navigate = useNavigate();
+
 
   useEffect(() => {
     getAllProfiles().then((response) => {
