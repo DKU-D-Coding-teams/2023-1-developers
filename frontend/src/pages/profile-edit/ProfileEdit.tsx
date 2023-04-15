@@ -4,6 +4,7 @@ import { loginTokenStorage } from 'storage';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router';
 import { paths } from 'consts';
+import { waitAndDragUpFadeIn } from 'styles';
 
 export default function ProfileEdit() {
   const navigate = useNavigate();
@@ -29,9 +30,11 @@ export default function ProfileEdit() {
 }
 
 const Title = styled.div`
+  position: relative;
   margin-top: 50px;
   font-size: 1.5rem;
   text-align: center;
+  animation: ${waitAndDragUpFadeIn} 1.5s;
 `;
 
 const ButtonContainer = styled.div`

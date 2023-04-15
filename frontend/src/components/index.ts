@@ -8,3 +8,4 @@ export { default as ProfileForm } from './profile-form/ProfileForm';
 export { default as LinkBox } from './common/LinkBox';
 export { default as TagBox } from './common/TagBox';
 export { default as Modal } from './common/Modal';
+export * from './pinterest';
