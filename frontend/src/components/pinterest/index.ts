@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { pinterestFadeIn } from 'styles';
 
-export const PinterestContainer = styled.div<{ onMain?: boolean }>`
+export const PinterestContainer = styled.div<{ isOnMain?: boolean }>`
   position: relative;
   left: 50%;
   transform: translate(-50%, 0);
@@ -12,7 +12,7 @@ export const PinterestContainer = styled.div<{ onMain?: boolean }>`
   column-gap: 40px;
   padding: 0 20px;
 
-  background-color: ${({ theme, onMain }) =>
+  background-color: ${({ theme, isOnMain: onMain }) =>
     onMain ? theme.colors.mainPinterestContainer : theme.colors.boardPinterestContainer};
   transition: background-color 1s;
 `;

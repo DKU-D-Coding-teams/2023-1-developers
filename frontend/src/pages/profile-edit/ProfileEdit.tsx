@@ -35,6 +35,7 @@ const Title = styled.div`
   font-size: 1.5rem;
   text-align: center;
   animation: ${waitAndDragUpFadeIn} 1.5s;
+  color: ${({ theme }) => theme.colors.defaultFont};
 `;
 
 const ButtonContainer = styled.div`

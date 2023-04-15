@@ -46,7 +46,7 @@ export default function ProfileForm({ exceptsDetailedIntroduce: exceptDetailedIn
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <ProfileImgUploadModal
         selectedImg={selectedImg}
         uploadImg={(img: string) => setInputState({ ...inputState, uploadedImg: img })}
@@ -77,9 +77,14 @@ export default function ProfileForm({ exceptsDetailedIntroduce: exceptDetailedIn
       />
 
       <SubmitInput type="submit" value="제출" warning="" />
-    </form>
+    </Form>
   );
 }
+
+const Form = styled.form`
+  position: relative;
+  animation: ${waitAndDragUpFadeIn} 2.3s;
+`;
 
 const FlexBox = styled.div`
   display: flex;
@@ -92,7 +97,6 @@ const FlexBox = styled.div`
 const ProfileImgLabel = styled.label`
   position: relative;
   width: 160px;
-  animation: ${waitAndDragUpFadeIn} 2.3s;
   cursor: pointer;
 
   input {

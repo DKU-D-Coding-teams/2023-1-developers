@@ -12,7 +12,7 @@ interface Props {
   uploadImg: (img: string) => void;
 }
 
-//! State 남용때문에 많이 비효율적인 컴포넌트... 남이 알아볼 수도 없다.
+//! State 남용때문에 많이 비효율적인 컴포넌트...
 export default function ProfileImgUploadModal({ selectedImg, uploadImg }: Props) {
   const $screenshotArea = useRef<HTMLDivElement>();
   const $img = useRef<HTMLImageElement>();

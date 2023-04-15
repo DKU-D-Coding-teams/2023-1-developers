@@ -22,7 +22,7 @@ export default function Main() {
       <TopBackground>
         <TitleBox>D-velopers</TitleBox>
       </TopBackground>
-      <PinterestContainer onMain>
+      <PinterestContainer isOnMain>
         {profilesMockData.map((profile) => (
           <PinterestObject key={profile.id} onClick={() => navigate(`${paths.PROFILE_DETAIL}/${profile.id}`)}>
             <ProfileBox {...profile} />

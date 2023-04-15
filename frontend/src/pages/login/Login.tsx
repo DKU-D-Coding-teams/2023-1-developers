@@ -15,7 +15,9 @@ export default function Login() {
 
   const login = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log('ㅇ1');
     const response = await postMemberLogin(inputState.email, inputState.password);
+    console.log('ㅇ2');
     console.log(response);
   };
 

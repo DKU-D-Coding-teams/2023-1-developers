@@ -1,12 +1,12 @@
-import { faCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {LinkBox, NavbarSection, TagBox, TopBackground, TopBar} from "components";
-import { Profile, profilesMockData } from "mocks";
-import { useEffect, useState } from "react";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
-import { useParams } from "react-router-dom";
-import remarkGfm from "remark-gfm";
-import styled from "styled-components";
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { LinkBox, NavbarSection, TagBox, TopBackground, TopBar } from 'components';
+import { Profile, profilesMockData } from 'mocks';
+import { useEffect, useState } from 'react';
+import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
+import { useParams } from 'react-router-dom';
+import remarkGfm from 'remark-gfm';
+import styled from 'styled-components';
 
 export default function ProfileDetail() {
   const { userId } = useParams();
@@ -45,7 +45,6 @@ export default function ProfileDetail() {
             <LinkBox>
               {profileData.links.map((link, i) => (
                 // TODO: 나중에 link 요소 이미지 그 링크에 알맞게 해주는 코드 짜기
-                // TODO: 애초에 링크 2개만 받으니까 배열로받지말고 따로 받아도될거같기도하고 (이미 지나간 물이라 못바꾸겠지만)
                 <a href={link} target="_blank" key={i}>
                   <img src="/icons/board.png" />
                 </a>

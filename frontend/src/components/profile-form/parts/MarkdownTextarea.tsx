@@ -53,6 +53,7 @@ const Title = styled.div`
   position: absolute;
   top: -25px;
   font-size: 1.1rem;
+  color: ${({ theme }) => theme.colors.defaultFont};
 `;
 
 const Wrapper = styled.div`
