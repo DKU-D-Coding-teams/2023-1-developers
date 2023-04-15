@@ -1,4 +1,4 @@
-package backend.dankook.dtos;
+package backend.dankook.dtos.profile;
 
 import backend.dankook.enums.TagEnum;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package backend.dankook.dtos;
+package backend.dankook.dtos.member;
 
 import backend.dankook.enums.GenderEnum;
 import backend.dankook.enums.MemberTypeEnum;

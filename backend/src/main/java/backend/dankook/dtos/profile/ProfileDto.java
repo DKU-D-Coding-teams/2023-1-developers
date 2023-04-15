@@ -1,22 +1,23 @@
-package backend.dankook.dtos;
+package backend.dankook.dtos.profile;
 
-import backend.dankook.enums.TagEnum;
+import backend.dankook.dtos.tag.TagDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Getter
 @AllArgsConstructor
-public class CreateProfileDto {
-    @NotEmpty(message = "이름은 필수 속성 입니다.")
+public class ProfileDto {
+    private Long id;
     private String name;
+    private String s3ImagePath;
     private String affiliation;
     private String studentId;
-    private String githubLink;
+    private String gitHubLink;
     private String blogLink;
     private String introduce;
     private String detailIntroduce;
-    private List<TagEnum> tags;
+    private int hits;
+    private List<TagDto> tags;
 }

@@ -24,6 +24,12 @@ public enum DankookErrorCode {
 
     // Profile Image
     PROFILE_IMAGE_NOT_FOUND(400, "프로필 이미지가 존재하지 않습니다.", "I001"),
+
+    // Comment
+    COMMENT_NOT_FOUND(400, "댓글이 존재하지 않습니다.", "E001"),
+
+    // Tag
+    TAG_NOT_FOUND(400, "태그가 존재하지 않습니다.", "T001")
     ;
 
     private final int status;

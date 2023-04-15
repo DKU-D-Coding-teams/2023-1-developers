@@ -1,9 +1,11 @@
 package backend.dankook.controller;
 
 import backend.dankook.domain.Member;
-import backend.dankook.dtos.CreateProfileDto;
-import backend.dankook.dtos.ProfileDto;
-import backend.dankook.dtos.UpdateProfileDto;
+import backend.dankook.dtos.profile.CreateProfileDto;
+import backend.dankook.dtos.profile.DetailsProfileDto;
+import backend.dankook.dtos.profile.ProfileDto;
+import backend.dankook.dtos.profile.UpdateProfileDto;
+import backend.dankook.repository.TagRepository;
 import backend.dankook.security.AuthenticationProvider;
 import backend.dankook.service.ProfileImageService;
 import backend.dankook.service.ProfileService;
@@ -21,11 +23,12 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/posts")
+@RequestMapping("/profiles")
 public class ProfileController {
     private final ProfileService profileService;
     private final S3Service s3Service;
     private final ProfileImageService profileImageService;
+
 
     @ApiOperation(value = "프로필 작성", notes = "프로필 이미지와, 프로필 내용을 입력받아 프로필을 작성한다.")
     @ApiResponses({
@@ -95,11 +98,9 @@ public class ProfileController {
             @ApiResponse(code = 200, message = "프로필 세부 검색 정상 작동"),
     })
     @GetMapping("/details/{profileId}")
-    public ResponseEntity<ProfileDto> searchById(@PathVariable Long profileId){
-        ProfileDto findProfile = profileService.searchProfileDetails(profileId);
+    public ResponseEntity<DetailsProfileDto> searchById(@PathVariable Long profileId){
+        DetailsProfileDto findProfile = profileService.searchProfileDetails(profileId);
         return ResponseEntity.ok()
                 .body(findProfile);
     }
-
-
 }

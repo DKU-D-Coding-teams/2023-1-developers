@@ -1,18 +1,26 @@
 package backend.dankook.service;
 
+import backend.dankook.domain.Comment;
 import backend.dankook.domain.Profile;
-import backend.dankook.dtos.CreateProfileDto;
-import backend.dankook.dtos.ProfileDto;
-import backend.dankook.dtos.UpdateProfileDto;
+import backend.dankook.domain.Tag;
+import backend.dankook.dtos.comment.ParentCommentDto;
+import backend.dankook.dtos.profile.CreateProfileDto;
+import backend.dankook.dtos.profile.DetailsProfileDto;
+import backend.dankook.dtos.profile.ProfileDto;
+import backend.dankook.dtos.comment.ReplyDto;
+import backend.dankook.dtos.profile.UpdateProfileDto;
+import backend.dankook.dtos.tag.TagDto;
 import backend.dankook.exception.DankookErrorCode;
 import backend.dankook.exception.DankookException;
+import backend.dankook.repository.CommentRepository;
 import backend.dankook.repository.ProfileRepository;
+import backend.dankook.repository.TagRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +29,8 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 public class ProfileService {
     private final ProfileRepository profileRepository;
+    private final TagRepository tagRepository;
+    private final CommentRepository commentRepository;
 
 
     @Transactional
@@ -33,10 +43,14 @@ public class ProfileService {
                 .blogLink(createProfileDto.getBlogLink())
                 .introduce(createProfileDto.getIntroduce())
                 .detailIntroduce(createProfileDto.getDetailIntroduce())
-                .tags(createProfileDto.getTags())
                 .build();
 
         Profile savedProfile = profileRepository.save(profile);
+        createProfileDto.getTags().forEach(t -> {
+            Tag tag = Tag.createTag(t, profile);
+            tagRepository.save(tag);
+        });
+
         return savedProfile.getId();
     }
 
@@ -64,6 +78,7 @@ public class ProfileService {
     }
 
     public List<ProfileDto> findAllProfiles() {
+        List<Tag> tags = new ArrayList<>();
         List<Profile> allProfiles = profileRepository.findAll();
 
         return allProfiles.stream()
@@ -78,7 +93,10 @@ public class ProfileService {
                         p.getIntroduce(),
                         p.getDetailIntroduce(),
                         p.getHits(),
-                        p.getTags()))
+                        tagRepository.findByProfileId(p.getId()).stream()
+                                .map(t -> new TagDto(t.getTagName()))
+                                .collect(Collectors.toList())
+                        ))
                 .collect(Collectors.toList());
     }
 
@@ -96,16 +114,21 @@ public class ProfileService {
                 profile.getIntroduce(),
                 profile.getDetailIntroduce(),
                 profile.getHits(),
-                profile.getTags()
+                tagRepository.findByProfileId(profile.getId()).stream()
+                        .map(t -> new TagDto(t.getTagName()))
+                        .collect(Collectors.toList())
         );
     }
 
     @Transactional
-    public ProfileDto searchProfileDetails(Long profileId){
+    public DetailsProfileDto searchProfileDetails(Long profileId){
         Profile searchProfile = profileRepository.findById(profileId)
                 .orElseThrow(() -> new DankookException(DankookErrorCode.PROFILE_NOT_FOUND));
         searchProfile.increaseProfileHits();
-        return new ProfileDto(
+
+        List<Comment> comments = commentRepository.findByProfileId(profileId);
+
+        return new DetailsProfileDto(
                 searchProfile.getId(),
                 searchProfile.getName(),
                 searchProfile.getProfileImage().getS3ImagePath(),
@@ -116,7 +139,22 @@ public class ProfileService {
                 searchProfile.getIntroduce(),
                 searchProfile.getDetailIntroduce(),
                 searchProfile.getHits(),
-                searchProfile.getTags()
+                tagRepository.findByProfileId(searchProfile.getId()).stream()
+                        .map(t -> new TagDto(t.getTagName()))
+                        .collect(Collectors.toList()),
+                comments.stream()
+                        .filter(c -> c.getParentComment() == null)
+                        .map(c -> new ParentCommentDto(
+                                c.getId(),
+                                c.getProfile().getName(),
+                                c.getContent(),
+                                c.isSecret(),
+                                c.getReplies().stream()
+                                        .map(r -> new ReplyDto(r.getId(), r.getProfile().getName(), r.getContent()))
+                                        .collect(Collectors.toList())
+
+                        ))
+                        .collect(Collectors.toList())
         );
     }
 }

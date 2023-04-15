@@ -1,4 +1,4 @@
-package backend.dankook.dtos;
+package backend.dankook.dtos.member;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

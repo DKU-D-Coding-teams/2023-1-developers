@@ -31,7 +31,7 @@ public class Comment {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "parentComment", cascade = CascadeType.REMOVE)
     List<Comment> replies = new ArrayList<>();
 
-    public static void createComment(
+    public static Comment createComment(
             Profile profile,
             String content,
             boolean isSecret
@@ -40,6 +40,12 @@ public class Comment {
         comment.content = content;
         comment.profile = profile;
         comment.isSecret = isSecret;
+        return comment;
+    }
+
+    public void updateComment(String content, boolean isSecret){
+        this.content = content;
+        this.isSecret = isSecret;
     }
 
     public void addReply(Comment reply){

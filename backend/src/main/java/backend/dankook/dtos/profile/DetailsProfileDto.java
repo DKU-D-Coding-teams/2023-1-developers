@@ -1,6 +1,7 @@
-package backend.dankook.dtos;
+package backend.dankook.dtos.profile;
 
-import backend.dankook.enums.TagEnum;
+import backend.dankook.dtos.comment.ParentCommentDto;
+import backend.dankook.dtos.tag.TagDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -8,7 +9,7 @@ import java.util.List;
 
 @Getter
 @AllArgsConstructor
-public class ProfileDto {
+public class DetailsProfileDto {
     private Long id;
     private String name;
     private String s3ImagePath;
@@ -19,5 +20,6 @@ public class ProfileDto {
     private String introduce;
     private String detailIntroduce;
     private int hits;
-    private List<TagEnum> tags;
+    private List<TagDto> tags;
+    private List<ParentCommentDto> comments;
 }

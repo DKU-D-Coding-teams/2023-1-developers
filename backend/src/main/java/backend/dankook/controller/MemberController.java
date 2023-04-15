@@ -1,7 +1,7 @@
 package backend.dankook.controller;
 
-import backend.dankook.dtos.MemberJoinDto;
-import backend.dankook.dtos.MemberLoginDto;
+import backend.dankook.dtos.member.MemberJoinDto;
+import backend.dankook.dtos.member.MemberLoginDto;
 import backend.dankook.dtos.TokenInfo;
 import backend.dankook.service.MemberService;
 import io.swagger.annotations.Api;
