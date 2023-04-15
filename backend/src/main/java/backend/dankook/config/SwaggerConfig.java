@@ -13,6 +13,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
+    private static final String API_URL = "http://http://13.209.229.205:8080/";
 
     @Bean
     public Docket api() {
@@ -25,6 +26,7 @@ public class SwaggerConfig {
 
     private ApiInfo ApiInfo() {
         return new ApiInfoBuilder()
+                .termsOfServiceUrl(API_URL)
                 .title("D-codingAPI")
                 .description("D-coding API")
                 .version("1.0")
