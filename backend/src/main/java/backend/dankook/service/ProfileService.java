@@ -4,6 +4,7 @@ import backend.dankook.domain.Profile;
 import backend.dankook.dtos.CreateProfileDto;
 import backend.dankook.dtos.ProfileDto;
 import backend.dankook.dtos.UpdateProfileDto;
+import backend.dankook.exception.DankookErrorCode;
 import backend.dankook.exception.DankookException;
 import backend.dankook.repository.ProfileRepository;
 import lombok.RequiredArgsConstructor;
@@ -42,14 +43,14 @@ public class ProfileService {
     @Transactional
     public void deleteProfile(Long profileId) {
         Profile deleteProfile = profileRepository.findById(profileId)
-                .orElseThrow(() -> new DankookException(HttpStatus.NOT_FOUND, "존재하지 않는 프로필 입니다."));
+                .orElseThrow(() -> new DankookException(DankookErrorCode.PROFILE_NOT_FOUND));
         profileRepository.delete(deleteProfile);
     }
 
     @Transactional
     public void updateProfile(Long profileId, UpdateProfileDto updateProfileDto, MultipartFile multipartFile) {
         Profile profile = profileRepository.findById(profileId)
-                .orElseThrow(() -> new DankookException(HttpStatus.NOT_FOUND, "존재하지 않는 프로필 입니다."));
+                .orElseThrow(() -> new DankookException(DankookErrorCode.PROFILE_NOT_FOUND));
 
         profile.updateProfile(
                 updateProfileDto.getAffiliation(),
@@ -83,7 +84,7 @@ public class ProfileService {
 
     public ProfileDto findById(Long profileId) {
         Profile profile = profileRepository.findById(profileId)
-                .orElseThrow(() -> new DankookException("존재하지 않는 프로필 입니다."));
+                .orElseThrow(() -> new DankookException(DankookErrorCode.PROFILE_NOT_FOUND));
         return new ProfileDto(
                 profile.getId(),
                 profile.getName(),
@@ -102,7 +103,7 @@ public class ProfileService {
     @Transactional
     public ProfileDto searchProfileDetails(Long profileId){
         Profile searchProfile = profileRepository.findById(profileId)
-                .orElseThrow(() -> new DankookException("존재하지 않는 프로필 입니다."));
+                .orElseThrow(() -> new DankookException(DankookErrorCode.PROFILE_NOT_FOUND));
         searchProfile.increaseProfileHits();
         return new ProfileDto(
                 searchProfile.getId(),

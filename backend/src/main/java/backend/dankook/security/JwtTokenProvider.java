@@ -2,6 +2,7 @@ package backend.dankook.security;
 
 import backend.dankook.domain.RefreshToken;
 import backend.dankook.dtos.TokenInfo;
+import backend.dankook.exception.DankookErrorCode;
 import backend.dankook.exception.DankookException;
 import backend.dankook.repository.MemberRepository;
 import backend.dankook.repository.RefreshTokenRepository;
@@ -31,20 +32,29 @@ public class JwtTokenProvider {
     private final MemberRepository memberRepository;
     private final RefreshTokenRepository refreshTokenRepository;
     private final SignatureAlgorithm SIGNATURE_ALG = SignatureAlgorithm.HS256;
-
-    private final int MINUTE = 60 * 1000;
-    private final int HOUR = MINUTE * 60;
-    private final int DAY = HOUR * 24;
-    private final long ACCESS_TOKEN_EXP_TIME = DAY;
-    private final long REFRESH_TOKEN_EXP_TIME = 30 * DAY;
+    private int MINUTE;
+    private int HOUR;
+    private int DAY;
+    private long ACCESS_TOKEN_EXP_TIME;
+    private long REFRESH_TOKEN_EXP_TIME;
 
     public JwtTokenProvider(
             @Value("${jwt.secretKey}") String secretKey,
+            @Value("${time.ms.minute}") int minute,
+            @Value("${time.ms.hour}") int hour,
+            @Value("${time.ms.day}") int day,
+            @Value("${time.token.accessExp}") long accessTokenExpTime,
+            @Value("${time.token.refreshExp}") long refreshTokenExpTime,
             RefreshTokenRepository refreshTokenRepository,
             MemberRepository memberRepository
     ){
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         this.key = Keys.hmacShaKeyFor(keyBytes);
+        this.MINUTE = minute;
+        this.HOUR = hour;
+        this.DAY = day;
+        this.ACCESS_TOKEN_EXP_TIME = accessTokenExpTime;
+        this.REFRESH_TOKEN_EXP_TIME = refreshTokenExpTime;
         this.refreshTokenRepository = refreshTokenRepository;
         this.memberRepository = memberRepository;
     }
@@ -85,7 +95,7 @@ public class JwtTokenProvider {
         Claims claims = parseClaims(accessToken);
 
         if (claims.get("auth") == null) {
-            throw new DankookException(HttpStatus.UNAUTHORIZED, "권한 정보가 없는 토큰입니다.");
+            throw new DankookException(DankookErrorCode.UNAUTHORIZED_TOKEN);
         }
 
         // 클레임에서 권한 정보 가져오기
@@ -108,16 +118,16 @@ public class JwtTokenProvider {
             return true;
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
             log.info("Invalid JWT Token", e);
-            throw new DankookException(HttpStatus.UNAUTHORIZED, "Invalid JWT Token");
+            throw new DankookException(DankookErrorCode.INVALID_TOKEN);
         } catch (UnsupportedJwtException e) {
             log.info("Unsupported JWT Token", e);
-            throw new DankookException(HttpStatus.UNAUTHORIZED, "Unsupported JWT Token");
+            throw new DankookException(DankookErrorCode.UNSUPPORTED_TOKEN);
         } catch (IllegalArgumentException e) {
             log.info("JWT claims string is empty.", e);
-            throw new DankookException(HttpStatus.NOT_FOUND, "JWT claims string is empty.");
+            throw new DankookException(DankookErrorCode.EMPTY_CLAIM_TOKEN);
         } catch (ExpiredJwtException e){
             log.error("Expired JWT Token", e);
-            throw new DankookException(HttpStatus.BAD_REQUEST, "JWT token is Expired.");
+            throw new DankookException(DankookErrorCode.EXPIRED_TOKEN);
         }
     }
 

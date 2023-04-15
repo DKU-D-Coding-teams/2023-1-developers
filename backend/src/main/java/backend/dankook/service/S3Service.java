@@ -1,5 +1,6 @@
 package backend.dankook.service;
 
+import backend.dankook.exception.DankookErrorCode;
 import backend.dankook.exception.DankookException;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
@@ -28,7 +29,7 @@ public class S3Service {
             objMeta.setContentLength(multipartFile.getInputStream().available());
             amazonS3Client.putObject(bucketName, key, multipartFile.getInputStream(), objMeta);
         } catch (IOException e) {
-            throw new DankookException(e, HttpStatus.CONFLICT, "AWS S3 접근 실패");
+            throw new DankookException(e, DankookErrorCode.S3_ACCESS_DENIED);
         }
 
         return amazonS3Client.getUrl(bucketName, key).toString();

@@ -5,6 +5,7 @@ import backend.dankook.domain.RefreshToken;
 import backend.dankook.dtos.TokenInfo;
 import backend.dankook.enums.GenderEnum;
 import backend.dankook.enums.MemberTypeEnum;
+import backend.dankook.exception.DankookErrorCode;
 import backend.dankook.exception.DankookException;
 import backend.dankook.repository.MemberRepository;
 import backend.dankook.repository.RefreshTokenRepository;
@@ -33,7 +34,7 @@ public class MemberService {
     public void join(String name, String email, String password, MemberTypeEnum memberType, GenderEnum gender) {
 
         if(memberRepository.findByEmail(email).isPresent()){
-            throw new DankookException(HttpStatus.CONFLICT, "This email is already exists.");
+            throw new DankookException(DankookErrorCode.MEMBER_EMAIL_DUPLICATE);
         }
 
         Member member = createMemberAfterPasswordEncoding(name, email, password, memberType, gender);
@@ -63,7 +64,7 @@ public class MemberService {
         String logoutEmail = logoutMember.getEmail();
 
         RefreshToken logoutRefreshToken = refreshTokenRepository.findById(logoutEmail)
-                .orElseThrow(() -> new DankookException(HttpStatus.NOT_FOUND, "해당 회원의 refreshToken이 존재하지 않습니다."));
+                .orElseThrow(() -> new DankookException(DankookErrorCode.REFRESH_TOKEN_NOT_FOUND));
 
         refreshTokenRepository.delete(logoutRefreshToken);
 
