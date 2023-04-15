@@ -4,16 +4,17 @@ import { profilesMockData } from 'mocks';
 import { useNavigate } from 'react-router-dom';
 import { paths } from 'consts';
 import ProfileBox from './parts/ProfileBox';
-import { useEffect } from 'react';
-import { getAllProfiles } from 'api';
+import { useEffect, useState } from 'react';
+import { Profile, getAllProfiles } from 'api';
 
 export default function Main() {
   const navigate = useNavigate();
+  const [profilesData, setProfilesData] = useState<Profile[]>();
 
   useEffect(() => {
-    getAllProfiles().then((response) => {
-      console.log(response.data);
-    });
+    getAllProfiles()
+      .then((res) => setProfilesData(res.data))
+      .catch((res) => console.log(res)); // TODO 작동 안되면 mockData 넣자
   }, []);
 
   return (
