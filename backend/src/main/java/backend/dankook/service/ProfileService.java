@@ -85,7 +85,7 @@ public class ProfileService {
                 .map((p) -> new ProfileDto(
                         p.getId(),
                         p.getName(),
-                        p.getProfileImage().getS3ImagePath(),
+                        p.getProfileImage() != null ? p.getProfileImage().getS3ImagePath() : "",
                         p.getAffiliation(),
                         p.getStudentId(),
                         p.getGitHubLink(),
