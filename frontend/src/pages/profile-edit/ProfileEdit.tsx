@@ -1,14 +1,15 @@
 import { NavbarSection, ProfileForm, TopBackground, TopBar } from 'components';
-import { useLocalStorage } from 'usehooks-ts';
+import { useReadLocalStorage } from 'usehooks-ts';
 import { loginTokenStorage } from 'storage';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router';
 import { paths } from 'consts';
 import { waitAndDragUpFadeIn } from 'styles';
+import { LoginToken } from 'api';
 
 export default function ProfileEdit() {
   const navigate = useNavigate();
-  const [loginToken, setLoginToken] = useLocalStorage(loginTokenStorage.key, loginTokenStorage.init);
+  const loginToken = useReadLocalStorage<LoginToken>(loginTokenStorage.key);
 
   return (
     <NavbarSection>

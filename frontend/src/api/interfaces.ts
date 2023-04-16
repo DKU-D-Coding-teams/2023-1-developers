@@ -39,3 +39,9 @@ interface Comment extends CommentWithoutReplies {
 export interface DetailedProfile extends Profile {
   comments: Comment[];
 }
+
+export interface LoginToken {
+  accessToken: string;
+  grantType: string;
+  refreshToken: string;
+}

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { DetailedProfile, Profile, ProfileWithoutImg, RegisterInfo } from './interfaces';
+import { DetailedProfile, LoginToken, Profile, ProfileWithoutImg, RegisterInfo } from './interfaces';
 import { profilesMockData } from 'mocks';
 
 // axios.defaults.baseURL = "http://3.39.41.33:8080";
@@ -12,7 +12,7 @@ export const postMemberRegister = (data: RegisterInfo) => axios.post('/members/j
 
 export const postMemberLogin = (email: string, password: string) => axios.post('/members/login', { email, password });
 
-export const postNewProfile = (img: string, profile: ProfileWithoutImg) => {
+export const postNewProfile = (img: string, profile: ProfileWithoutImg, loginToken: LoginToken) => {
   const formData = new FormData();
   formData.append('images', img);
   formData.append('profile', JSON.stringify(profile));
@@ -20,6 +20,7 @@ export const postNewProfile = (img: string, profile: ProfileWithoutImg) => {
   return axios.post('/profiles/new', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
+      Authorization: `${loginToken.grantType} ${loginToken.accessToken}`,
     },
   });
 };

@@ -4,14 +4,16 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { InputLabel, SubmitInput } from 'components';
 import { MarkdownTextarea, ProfileImgUploadModal, TagInputLabel } from './parts';
 import { useSetRecoilState } from 'recoil';
-import { isModalActiveState } from 'storage';
-import { ProfileWithoutImg, postNewProfile } from 'api';
+import { isModalActiveState, loginTokenStorage } from 'storage';
+import { LoginToken, ProfileWithoutImg, postNewProfile } from 'api';
+import { useReadLocalStorage } from 'usehooks-ts';
 
 interface Props {
   exceptsDetailedIntroduce?: boolean;
 }
 
 export default function ProfileForm({ exceptsDetailedIntroduce: exceptDetailedIntroduce }: Props) {
+  const loginToken = useReadLocalStorage<LoginToken>(loginTokenStorage.key);
   const [selectedImg, setSelectedImg] = useState('');
   const [inputState, setInputState] = useState({
     uploadedImg: '',
@@ -44,7 +46,7 @@ export default function ProfileForm({ exceptsDetailedIntroduce: exceptDetailedIn
       tags: inputState.tags,
     };
 
-    postNewProfile(inputState.uploadedImg, profile)
+    postNewProfile(inputState.uploadedImg, profile, loginToken)
       .then((res) => console.log(res))
       .catch((res) => console.log(res));
   };
