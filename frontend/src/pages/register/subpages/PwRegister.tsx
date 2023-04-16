@@ -1,7 +1,7 @@
 import { InputLabel, SubmitInput } from 'components';
 import { useState, ChangeEvent, FormEvent, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { RegisterParam, postMemberRegister } from 'api';
+import { RegisterInfo, postMemberRegister } from 'api';
 import { paths } from 'consts';
 import { useLocalStorage } from 'usehooks-ts';
 import { registerInfoStorage } from 'storage';
@@ -24,7 +24,7 @@ export default function PwRegister() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     checkInputStateCorrect().then(() => {
-      const data: RegisterParam = {
+      const data: RegisterInfo = {
         email: registerInfo.email,
         gender: 'MALE',
         memberType: registerInfo.isDKU ? 'DKU' : 'GUEST',

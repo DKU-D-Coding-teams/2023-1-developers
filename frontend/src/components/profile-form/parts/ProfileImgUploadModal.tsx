@@ -76,7 +76,7 @@ export default function ProfileImgUploadModal({ selectedImg, uploadImg }: Props)
         }
       >
         <SelectedImg src={selectedImg} ref={$img} />
-        <OKButton onClick={captureArea}>
+        <OKButton type="button" onClick={captureArea}>
           <FontAwesomeIcon icon={faCheck} style={{ color: 'white' }} />
         </OKButton>
       </Modal>

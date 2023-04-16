@@ -5,6 +5,7 @@ import { InputLabel, SubmitInput } from 'components';
 import { MarkdownTextarea, ProfileImgUploadModal, TagInputLabel } from './parts';
 import { useSetRecoilState } from 'recoil';
 import { isModalActiveState } from 'storage';
+import { ProfileWithoutImg, postNewProfile } from 'api';
 
 interface Props {
   exceptsDetailedIntroduce?: boolean;
@@ -31,6 +32,21 @@ export default function ProfileForm({ exceptsDetailedIntroduce: exceptDetailedIn
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(inputState);
+
+    const profile: ProfileWithoutImg = {
+      name: inputState.name,
+      affiliation: inputState.affiliation,
+      studentId: '1', // TODO 이거 string 맞는거냐
+      githubLink: inputState.githubLink,
+      blogLink: inputState.otherLink,
+      introduce: inputState.singleIntroduce,
+      detailIntroduce: inputState.detailedIntroduce,
+      tags: inputState.tags,
+    };
+
+    postNewProfile(inputState.uploadedImg, profile)
+      .then((res) => console.log(res))
+      .catch((res) => console.log(res));
   };
 
   const runImgUploader = (e: ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +62,7 @@ export default function ProfileForm({ exceptsDetailedIntroduce: exceptDetailedIn
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <ProfileImgUploadModal
         selectedImg={selectedImg}
         uploadImg={(img: string) => setInputState({ ...inputState, uploadedImg: img })}
@@ -77,14 +93,9 @@ export default function ProfileForm({ exceptsDetailedIntroduce: exceptDetailedIn
       />
 
       <SubmitInput type="submit" value="제출" warning="" />
-    </Form>
+    </form>
   );
 }
-
-const Form = styled.form`
-  position: relative;
-  animation: ${waitAndDragUpFadeIn} 2.3s;
-`;
 
 const FlexBox = styled.div`
   display: flex;
@@ -98,6 +109,8 @@ const ProfileImgLabel = styled.label`
   position: relative;
   width: 160px;
   cursor: pointer;
+
+  animation: ${waitAndDragUpFadeIn} 2.2s;
 
   input {
     display: none;
