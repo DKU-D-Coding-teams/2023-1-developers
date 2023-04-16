@@ -131,7 +131,7 @@ public class ProfileService {
         return new DetailsProfileDto(
                 searchProfile.getId(),
                 searchProfile.getName(),
-                searchProfile.getProfileImage().getS3ImagePath(),
+                searchProfile.getProfileImage() != null ? searchProfile.getProfileImage().getS3ImagePath() : "",
                 searchProfile.getAffiliation(),
                 searchProfile.getStudentId(),
                 searchProfile.getGitHubLink(),

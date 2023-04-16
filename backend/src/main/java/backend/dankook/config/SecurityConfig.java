@@ -41,7 +41,8 @@ public class SecurityConfig {
             "/members/reissue",
             "/members/join",
             "/members/mailCheck",
-            "/profiles/search/all"
+            "/profiles/search/all",
+            "/profiles/details/**"
     };
     private static final String[] USER_URI = {
         "/members/user"
