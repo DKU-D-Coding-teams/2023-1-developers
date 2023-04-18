@@ -30,7 +30,7 @@ interface CommentWithoutReplies {
   id: number;
 }
 
-interface Comment extends CommentWithoutReplies {
+export interface Comment extends CommentWithoutReplies {
   replies: CommentWithoutReplies[];
   secret: boolean;
 }

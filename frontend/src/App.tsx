@@ -39,7 +39,7 @@ export default function App() {
         <Routes>
           <Route path="*" element={<div> Not Found </div>} />
           <Route path={paths.MAINPAGE} element={<Main />} />
-          <Route path={paths.PROFILE_DETAIL + '/:userId'} element={<ProfileDetail />} />
+          <Route path={paths.PROFILE_DETAIL + '/:profileId'} element={<ProfileDetail />} />
           <Route path={paths.PROFILE_EDIT} element={<ProfileEdit />} />
           <Route path={paths.FREEBOARD} element={<FreeBoard />} />
           <Route path={paths.LOGIN} element={<Login />} />

@@ -15,7 +15,7 @@ export default function ProfileEdit() {
     <NavbarSection>
       <TopBar />
       <TopBackground />
-      {loginToken.accessToken ? (
+      {loginToken ? (
         <ProfileForm />
       ) : (
         <Title>

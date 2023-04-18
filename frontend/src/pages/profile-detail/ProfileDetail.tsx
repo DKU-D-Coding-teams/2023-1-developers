@@ -1,22 +1,37 @@
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { DetailedProfile, LoginToken, getDetailedProfile } from 'api';
 import { LinkBox, NavbarSection, TagBox, TopBackground, TopBar } from 'components';
-import { Profile, profilesMockData } from 'mocks';
+import { profilesMockData } from 'mocks';
 import { useEffect, useState } from 'react';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import { useParams } from 'react-router-dom';
 import remarkGfm from 'remark-gfm';
+import { loginTokenStorage } from 'storage';
 import styled from 'styled-components';
+import { useReadLocalStorage } from 'usehooks-ts';
+import Comments from './parts/Comments';
 
 export default function ProfileDetail() {
-  const { userId } = useParams();
+  const { profileId } = useParams();
+  const loginToken = useReadLocalStorage<LoginToken>(loginTokenStorage.key);
 
-  // TODO: mock data 기반으로 만들어 둠. 나중에 interface랑 이것저것 다 갈아엎기!
-  const [profileData, setProfileData] = useState<Profile>();
+  const [profileData, setProfileData] = useState<DetailedProfile>();
 
   useEffect(() => {
-    const [targetProfile] = profilesMockData.filter((profile) => profile.id === Number(userId));
-    setProfileData(targetProfile);
+    getDetailedProfile(Number(profileId), loginToken)
+      .then((res) => {
+        let rawData = res.data;
+        rawData.tags = rawData.tags.map((tagObj) => tagObj.tagName);
+
+        const refinedData: DetailedProfile = rawData;
+        setProfileData(refinedData);
+      })
+      .catch((res) => {
+        console.log(res);
+        const [targetProfile] = profilesMockData.filter((profile) => profile.id === Number(profileId));
+        setProfileData(targetProfile);
+      });
   }, []);
 
   return (
@@ -25,17 +40,17 @@ export default function ProfileDetail() {
         <TopBar />
         <TopBackground>
           <ProfileImgInfoBox>
-            <ProfileImg src={profileData.profileImg} />
+            <ProfileImg src={profileData.s3ImagePath} />
             <div>
               <Name>{profileData.name}</Name>
-              <Affiliation>{profileData.studentInfo}</Affiliation>
-              <Email>{profileData.email}</Email>
+              <Affiliation>{profileData.affiliation}</Affiliation>
+              <Email>asdf1234@dankook.ac.kr</Email>
             </div>
           </ProfileImgInfoBox>
         </TopBackground>
 
         <IntroduceBox>
-          <SingleIntroduce>{profileData.singleIntroduce}</SingleIntroduce>
+          <SingleIntroduce>{profileData.introduce}</SingleIntroduce>
           <TagLinkBox>
             <TagBox>
               {profileData.tags.map((tag, i) => (
@@ -43,12 +58,9 @@ export default function ProfileDetail() {
               ))}
             </TagBox>
             <LinkBox>
-              {profileData.links.map((link, i) => (
-                // TODO: 나중에 link 요소 이미지 그 링크에 알맞게 해주는 코드 짜기
-                <a href={link} target="_blank" key={i}>
-                  <img src="/icons/board.png" />
-                </a>
-              ))}
+              <a href={profileData.githubLink} target="_blank">
+                <img src="/icons/board.png" />
+              </a>
             </LinkBox>
           </TagLinkBox>
         </IntroduceBox>
@@ -61,10 +73,12 @@ export default function ProfileDetail() {
         </CircleBoundary>
 
         <DetailedIntroduce>
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>{profileData.detailedIntroduce}</ReactMarkdown>
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{profileData.detailIntroduce}</ReactMarkdown>
         </DetailedIntroduce>
 
         <Hr width="80%" />
+
+        <Comments comments={profileData.comments} />
       </NavbarSection>
     )
   );

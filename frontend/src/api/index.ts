@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { DetailedProfile, LoginToken, Profile, ProfileWithoutImg, RegisterInfo } from './interfaces';
 import { profilesMockData } from 'mocks';
+import { useLocalStorage } from 'usehooks-ts';
+import { dataURLtoBlob } from 'utils';
 
 // axios.defaults.baseURL = "http://3.39.41.33:8080";
 
@@ -14,8 +16,12 @@ export const postMemberLogin = (email: string, password: string) => axios.post('
 
 export const postNewProfile = (img: string, profile: ProfileWithoutImg, loginToken: LoginToken) => {
   const formData = new FormData();
-  formData.append('images', img);
-  formData.append('profile', JSON.stringify(profile));
+
+  const imgBlob = new Blob([dataURLtoBlob(img)], { type: 'multipart/form-data' });
+  formData.append('images', imgBlob);
+
+  const profileBlob = new Blob([JSON.stringify(profile)], { type: 'application/json' });
+  formData.append('profile', profileBlob);
 
   return axios.post('/profiles/new', formData, {
     headers: {
@@ -46,11 +52,12 @@ export const postReplyComment = (commentId: number) => axios.post(`/comments/rep
 
 export const postUpdateComment = (commentId: number) => axios.post(`/comments/update/${commentId}`, { commentId });
 
-export const getAllProfiles = () => axios.get('/profiles/search/all');
+export const getAllProfiles = (loginToken: LoginToken) =>
+  axios.get('/profiles/search/all', {
+    timeout: 2000,
+  });
 
-export const getDetailedProfile = (profileId: number) =>
+export const getDetailedProfile = (profileId: number, loginToken: LoginToken) =>
   axios.get(`/profiles/details/${profileId}`, {
-    params: {
-      profileId,
-    },
+    timeout: 2000,
   });

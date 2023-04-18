@@ -1,6 +1,6 @@
-import { InputHTMLAttributes } from "react";
-import styled from "styled-components";
-import { waitAndDragUpFadeIn, shakeHorizontal } from "styles";
+import { InputHTMLAttributes } from 'react';
+import styled from 'styled-components';
+import { waitAndDragUpFadeIn, shakeHorizontal } from 'styles';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   warning: string;
@@ -16,6 +16,7 @@ const Input = styled.input`
   margin: 0 auto;
   margin-top: 60px;
 
+  max-width: 200px;
   min-width: 130px;
   height: 70px;
   font-size: 22px;
@@ -23,6 +24,8 @@ const Input = styled.input`
   color: white;
   background-color: skyblue;
   border-radius: 40px;
+
+  text-align: center;
 
   cursor: pointer;
 

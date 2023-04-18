@@ -7,12 +7,15 @@ import { useSetRecoilState } from 'recoil';
 import { isModalActiveState, loginTokenStorage } from 'storage';
 import { LoginToken, ProfileWithoutImg, postNewProfile } from 'api';
 import { useReadLocalStorage } from 'usehooks-ts';
+import { useNavigate } from 'react-router-dom';
+import { paths } from 'consts';
 
 interface Props {
   exceptsDetailedIntroduce?: boolean;
 }
 
-export default function ProfileForm({ exceptsDetailedIntroduce: exceptDetailedIntroduce }: Props) {
+export default function ProfileForm({ exceptsDetailedIntroduce }: Props) {
+  const navigate = useNavigate();
   const loginToken = useReadLocalStorage<LoginToken>(loginTokenStorage.key);
   const [selectedImg, setSelectedImg] = useState('');
   const [inputState, setInputState] = useState({
@@ -31,9 +34,8 @@ export default function ProfileForm({ exceptsDetailedIntroduce: exceptDetailedIn
     setInputState({ ...inputState, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLInputElement>) => {
     e.preventDefault();
-    console.log(inputState);
 
     const profile: ProfileWithoutImg = {
       name: inputState.name,
@@ -47,7 +49,10 @@ export default function ProfileForm({ exceptsDetailedIntroduce: exceptDetailedIn
     };
 
     postNewProfile(inputState.uploadedImg, profile, loginToken)
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res);
+        navigate(paths.MAINPAGE);
+      })
       .catch((res) => console.log(res));
   };
 
@@ -64,7 +69,7 @@ export default function ProfileForm({ exceptsDetailedIntroduce: exceptDetailedIn
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <ProfileImgUploadModal
         selectedImg={selectedImg}
         uploadImg={(img: string) => setInputState({ ...inputState, uploadedImg: img })}
@@ -94,7 +99,7 @@ export default function ProfileForm({ exceptsDetailedIntroduce: exceptDetailedIn
         set={(detailedIntroduce: string) => setInputState({ ...inputState, detailedIntroduce })}
       />
 
-      <SubmitInput type="submit" value="제출" warning="" />
+      <SubmitInput value="제출" warning="" onClick={handleSubmit} />
     </form>
   );
 }
