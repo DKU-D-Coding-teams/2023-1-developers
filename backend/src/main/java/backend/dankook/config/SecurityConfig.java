@@ -22,7 +22,6 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final ExceptionHandlingFilter exceptionHandlingFilter;
-    private final CorsFilter corsFilter;
 
     private static final String[] PERMIT_SWAGGER_URL_ARRAY = {
             /* swagger v2 */
@@ -60,7 +59,6 @@ public class SecurityConfig {
         http
                 .httpBasic().disable()
                 .csrf().disable()
-                .addFilter(corsFilter)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
 
