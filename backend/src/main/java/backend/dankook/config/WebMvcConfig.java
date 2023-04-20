@@ -12,9 +12,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedMethods("*")
-                .allowedOrigins("http://developers-frontend-deploy.s3-website.ap-northeast-2.amazonaws.com")
-                .allowCredentials(true)
-                .allowedHeaders("Origin", "Access-Control-Request-Method", "Content-Type", "Accept");
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowedOrigins("*")
+                .allowedHeaders("*");
     }
 }
