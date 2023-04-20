@@ -19,7 +19,7 @@ public class UpdateProfileDto {
     private String blogLink;
     private String introduce;
     private String detailIntroduce;
-    private List<TagEnum> tags;
+    private List<String> tags;
 
 
 }

@@ -19,6 +19,9 @@ public class Profile extends BaseEntity {
     @Column(name = "profile_id")
     private Long id;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
     private String name;
     private String affiliation;
     private String studentId;
@@ -33,16 +36,16 @@ public class Profile extends BaseEntity {
 
     @Builder
     public Profile(
-            @NotEmpty String name,
+            Member member,
             String affiliation,
             String studentId,
             String gitHubLink,
             String blogLink,
             String introduce,
             String detailIntroduce,
-            List<TagEnum> tags
+            List<String> tags
     ) {
-        this.name = name;
+        this.member = member;
         this.affiliation = affiliation;
         this.studentId = studentId;
         this.gitHubLink = gitHubLink;
@@ -58,8 +61,7 @@ public class Profile extends BaseEntity {
             String gitHubLink,
             String blogLink,
             String introduce,
-            String detailIntroduce,
-            List<TagEnum> tags
+            String detailIntroduce
     ){
         this.affiliation = affiliation;
         this.studentId = studentId;

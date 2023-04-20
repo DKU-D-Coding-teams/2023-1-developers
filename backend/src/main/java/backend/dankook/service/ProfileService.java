@@ -1,6 +1,7 @@
 package backend.dankook.service;
 
 import backend.dankook.domain.Comment;
+import backend.dankook.domain.Member;
 import backend.dankook.domain.Profile;
 import backend.dankook.domain.Tag;
 import backend.dankook.dtos.comment.ParentCommentDto;
@@ -13,8 +14,10 @@ import backend.dankook.dtos.tag.TagDto;
 import backend.dankook.exception.DankookErrorCode;
 import backend.dankook.exception.DankookException;
 import backend.dankook.repository.CommentRepository;
+import backend.dankook.repository.MemberRepository;
 import backend.dankook.repository.ProfileRepository;
 import backend.dankook.repository.TagRepository;
+import backend.dankook.security.AuthenticationProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,12 +34,17 @@ public class ProfileService {
     private final ProfileRepository profileRepository;
     private final TagRepository tagRepository;
     private final CommentRepository commentRepository;
+    private final MemberRepository memberRepository;
 
 
     @Transactional
     public Long createProfile(CreateProfileDto createProfileDto) {
+        Long currentMemberId = AuthenticationProvider.getCurrentMemberId();
+        Member member = memberRepository.findById(currentMemberId)
+                .orElseThrow(() -> new DankookException(DankookErrorCode.MEMBER_NOT_FOUND));
+
         Profile profile = Profile.builder()
-                .name(createProfileDto.getName())
+                .member(member)
                 .affiliation(createProfileDto.getAffiliation())
                 .studentId(createProfileDto.getStudentId())
                 .gitHubLink(createProfileDto.getGithubLink())
@@ -65,6 +73,9 @@ public class ProfileService {
     public void updateProfile(Long profileId, UpdateProfileDto updateProfileDto, MultipartFile multipartFile) {
         Profile profile = profileRepository.findById(profileId)
                 .orElseThrow(() -> new DankookException(DankookErrorCode.PROFILE_NOT_FOUND));
+        List<Tag> updateTags = tagRepository.findByProfileId(profileId);
+
+        updateTags.forEach(tagRepository::delete);
 
         profile.updateProfile(
                 updateProfileDto.getAffiliation(),
@@ -72,9 +83,13 @@ public class ProfileService {
                 updateProfileDto.getGithubLink(),
                 updateProfileDto.getBlogLink(),
                 updateProfileDto.getIntroduce(),
-                updateProfileDto.getDetailIntroduce(),
-                updateProfileDto.getTags()
+                updateProfileDto.getDetailIntroduce()
         );
+
+        updateProfileDto.getTags().forEach(t -> {
+            Tag tag = Tag.createTag(t, profile);
+            tagRepository.save(tag);
+        });
     }
 
     public List<ProfileDto> findAllProfiles() {
@@ -146,11 +161,11 @@ public class ProfileService {
                         .filter(c -> c.getParentComment() == null)
                         .map(c -> new ParentCommentDto(
                                 c.getId(),
-                                c.getProfile().getName(),
+                                c.getMember().getName(),
                                 c.getContent(),
                                 c.isSecret(),
                                 c.getReplies().stream()
-                                        .map(r -> new ReplyDto(r.getId(), r.getProfile().getName(), r.getContent()))
+                                        .map(r -> new ReplyDto(r.getId(), r.getMember().getName(), r.getContent()))
                                         .collect(Collectors.toList())
 
                         ))
