@@ -19,7 +19,6 @@ import javax.validation.Valid;
 @RequestMapping("/members")
 @RequiredArgsConstructor
 @Api(tags = {"회원 API Test"})
-@CrossOrigin(origins = "*")
 public class MemberController {
     private final MemberService memberService;
 

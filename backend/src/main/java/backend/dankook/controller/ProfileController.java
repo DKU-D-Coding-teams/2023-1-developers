@@ -24,7 +24,6 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/profiles")
-@CrossOrigin(origins = "*")
 public class ProfileController {
     private final ProfileService profileService;
     private final S3Service s3Service;
