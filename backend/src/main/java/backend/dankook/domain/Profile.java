@@ -22,6 +22,7 @@ public class Profile extends BaseEntity {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
     private String name;
     private String affiliation;
     private String studentId;
@@ -37,6 +38,7 @@ public class Profile extends BaseEntity {
     @Builder
     public Profile(
             Member member,
+            String name,
             String affiliation,
             String studentId,
             String gitHubLink,
@@ -46,6 +48,7 @@ public class Profile extends BaseEntity {
             List<String> tags
     ) {
         this.member = member;
+        this.name = name;
         this.affiliation = affiliation;
         this.studentId = studentId;
         this.gitHubLink = gitHubLink;

@@ -29,10 +29,6 @@ public class Member extends BaseEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     private GenderEnum gender;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "profile_id")
-    private Profile profile;
-
     @Enumerated(EnumType.STRING)
     private RoleEnum role;
 
@@ -50,10 +46,6 @@ public class Member extends BaseEntity implements UserDetails {
         this.memberType = memberType;
         this.gender = gender;
         this.role = RoleEnum.USER;
-    }
-
-    public void updateProfile(Profile profile){
-        this.profile = profile;
     }
 
     @Override
