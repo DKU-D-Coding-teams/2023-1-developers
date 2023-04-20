@@ -4,12 +4,14 @@ import backend.dankook.enums.TagEnum;
 import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class CreateProfileDto {
 
     @ApiParam(value = "회원 이름", required = true)

@@ -4,11 +4,13 @@ import backend.dankook.dtos.comment.ParentCommentDto;
 import backend.dankook.dtos.tag.TagDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class DetailsProfileDto {
     private Long id;
     private String name;

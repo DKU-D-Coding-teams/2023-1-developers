@@ -3,11 +3,13 @@ package backend.dankook.dtos.profile;
 import backend.dankook.dtos.tag.TagDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class ProfileDto {
     private Long id;
     private String name;
