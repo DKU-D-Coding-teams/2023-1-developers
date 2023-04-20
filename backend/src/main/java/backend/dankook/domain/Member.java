@@ -48,6 +48,10 @@ public class Member extends BaseEntity implements UserDetails {
         this.role = RoleEnum.USER;
     }
 
+    public void updateName(String name){
+        this.name = name;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> authorities = new ArrayList<>();

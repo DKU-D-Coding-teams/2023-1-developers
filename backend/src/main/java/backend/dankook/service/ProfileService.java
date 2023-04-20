@@ -43,6 +43,8 @@ public class ProfileService {
         Member member = memberRepository.findById(currentMemberId)
                 .orElseThrow(() -> new DankookException(DankookErrorCode.MEMBER_NOT_FOUND));
 
+        member.updateName(createProfileDto.getName());
+
         Profile profile = Profile.builder()
                 .member(member)
                 .name(createProfileDto.getName())
