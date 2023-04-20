@@ -12,6 +12,7 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 public class Tag {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "tag_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

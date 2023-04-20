@@ -59,6 +59,7 @@ public class Profile extends BaseEntity {
     }
 
     public void updateProfile(
+            String name,
             String affiliation,
             String studentId,
             String gitHubLink,
@@ -66,6 +67,7 @@ public class Profile extends BaseEntity {
             String introduce,
             String detailIntroduce
     ){
+        this.name = name;
         this.affiliation = affiliation;
         this.studentId = studentId;
         this.gitHubLink = gitHubLink;

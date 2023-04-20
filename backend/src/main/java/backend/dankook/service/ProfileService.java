@@ -45,6 +45,7 @@ public class ProfileService {
 
         Profile profile = Profile.builder()
                 .member(member)
+                .name(createProfileDto.getName())
                 .affiliation(createProfileDto.getAffiliation())
                 .studentId(createProfileDto.getStudentId())
                 .gitHubLink(createProfileDto.getGithubLink())
@@ -78,6 +79,7 @@ public class ProfileService {
         updateTags.forEach(tagRepository::delete);
 
         profile.updateProfile(
+                updateProfileDto.getName(),
                 updateProfileDto.getAffiliation(),
                 updateProfileDto.getStudentId(),
                 updateProfileDto.getGithubLink(),

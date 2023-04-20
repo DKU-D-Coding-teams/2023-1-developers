@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateProfileDto {
-
+    private String name;
     private String affiliation;
     private String studentId;
     private String githubLink;
