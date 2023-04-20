@@ -68,6 +68,8 @@ public class Profile extends BaseEntity {
             String detailIntroduce
     ){
         this.name = name;
+        member.updateName(name);
+
         this.affiliation = affiliation;
         this.studentId = studentId;
         this.gitHubLink = gitHubLink;
