@@ -12,6 +12,7 @@ import java.util.List;
 public class ParentCommentDto {
     private Long id;
     private String author;
+    private Long authorId;
     private String content;
     private boolean isSecret;
     private List<ReplyDto> replies;

@@ -11,4 +11,5 @@ public class CommentDto {
     private Long id;
     private String content;
     private boolean isSecret;
+    private Long authorId;
 }

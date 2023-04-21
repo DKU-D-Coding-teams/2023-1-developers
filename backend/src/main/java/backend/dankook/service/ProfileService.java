@@ -166,10 +166,11 @@ public class ProfileService {
                         .map(c -> new ParentCommentDto(
                                 c.getId(),
                                 c.getMember().getName(),
+                                c.getMember().getId(),
                                 c.getContent(),
                                 c.isSecret(),
                                 c.getReplies().stream()
-                                        .map(r -> new ReplyDto(r.getId(), r.getMember().getName(), r.getContent()))
+                                        .map(r -> new ReplyDto(r.getId(), r.getMember().getId(), r.getMember().getName(), r.getContent()))
                                         .collect(Collectors.toList())
 
                         ))

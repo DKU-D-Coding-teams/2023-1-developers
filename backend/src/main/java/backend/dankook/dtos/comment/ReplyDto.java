@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ReplyDto {
     private Long id;
+    private Long authorId;
     private String author;
     private String content;
 }
