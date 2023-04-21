@@ -46,12 +46,11 @@ public class MemberController {
             @ApiResponse(code = 200, message = "로그인 정상 작동"),
     })
     @PostMapping("/login")
-    public ResponseEntity<TokenInfo> login(@RequestBody MemberLoginDto memberLoginDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+    public ResponseEntity<TokenInfo> login(@RequestBody MemberLoginDto memberLoginDto){
         TokenInfo tokenInfo = memberService.login(
                 memberLoginDto.getEmail(),
                 memberLoginDto.getPassword()
         );
-        tokenInfo.setMemberId(userDetails.getMember().getId());
 
         return new ResponseEntity<>(tokenInfo, HttpStatus.OK);
 

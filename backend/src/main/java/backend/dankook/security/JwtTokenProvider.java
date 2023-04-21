@@ -60,6 +60,9 @@ public class JwtTokenProvider {
     }
 
     public TokenInfo generateToken(Authentication authentication) {
+        UserDetailsImpl principal = (UserDetailsImpl) authentication.getPrincipal();
+        log.info("authentication={}", authentication.getName());
+
         String authorities = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
@@ -87,6 +90,7 @@ public class JwtTokenProvider {
                 .grantType("Bearer")
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
+                .memberId(principal.getMember().getId())
                 .build();
     }
 
