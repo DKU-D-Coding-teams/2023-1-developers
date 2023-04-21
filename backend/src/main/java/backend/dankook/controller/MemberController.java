@@ -3,6 +3,7 @@ package backend.dankook.controller;
 import backend.dankook.dtos.member.MemberJoinDto;
 import backend.dankook.dtos.member.MemberLoginDto;
 import backend.dankook.dtos.TokenInfo;
+import backend.dankook.security.UserDetailsImpl;
 import backend.dankook.service.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -11,6 +12,7 @@ import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -44,11 +46,13 @@ public class MemberController {
             @ApiResponse(code = 200, message = "로그인 정상 작동"),
     })
     @PostMapping("/login")
-    public ResponseEntity<TokenInfo> login(@RequestBody MemberLoginDto memberLoginDto){
+    public ResponseEntity<TokenInfo> login(@RequestBody MemberLoginDto memberLoginDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
         TokenInfo tokenInfo = memberService.login(
                 memberLoginDto.getEmail(),
                 memberLoginDto.getPassword()
         );
+        tokenInfo.setMemberId(userDetails.getMember().getId());
+
         return new ResponseEntity<>(tokenInfo, HttpStatus.OK);
 
     }
