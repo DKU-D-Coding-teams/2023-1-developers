@@ -1,4 +1,4 @@
-import { Comment, LoginToken, postNewComment, postReplyComment } from 'api';
+import { Comment, LoginToken, postDeleteComment, postNewComment, postReplyComment } from 'api';
 import { useState } from 'react';
 import { loginTokenStorage } from 'storage';
 import styled from 'styled-components';
@@ -40,6 +40,11 @@ export default function Comments({ comments, profileId }: Props) {
     });
   };
 
+  const deleteComment = (commentId: number) => {
+    postDeleteComment(commentId, loginToken).then((res) => console.log(res));
+    window.location.reload();
+  };
+
   return (
     <>
       {comments.map((comment) => (
@@ -48,6 +53,9 @@ export default function Comments({ comments, profileId }: Props) {
             <Author>{comment.author}</Author>
             <div>{comment.content}</div>
             <ReplyButton onClick={() => handleReplyButton(comment.id)}>답글 작성...</ReplyButton>
+            {loginToken && loginToken.memberId === comment.authorId && (
+              <DeleteButton onClick={() => deleteComment(comment.id)}>삭제</DeleteButton>
+            )}
           </CommentBox>
           {isReplyMode && comment.id === replyTargetCommentId && (
             <CommentInputContainer>
@@ -61,11 +69,14 @@ export default function Comments({ comments, profileId }: Props) {
               <Author>{reply.author}</Author>
               <div>{reply.content}</div>
               <div></div>
+              {loginToken && loginToken.memberId === comment.authorId && (
+                <DeleteButton onClick={() => deleteComment(comment.id)}>삭제</DeleteButton>
+              )}
             </CommentBox>
           ))}
         </CommentWithReplies>
       ))}
-      {!isReplyMode && (
+      {!isReplyMode && loginToken && (
         <CommentInputContainer>
           <div>댓글 쓰기</div>
           <CommentInput placeholder="내용" onChange={(e) => setCommentInput(e.target.value)} />
@@ -75,6 +86,19 @@ export default function Comments({ comments, profileId }: Props) {
     </>
   );
 }
+
+const DeleteButton = styled.button`
+  position: absolute;
+  top: -10px;
+  right: 0;
+
+  width: 35px;
+  height: 35px;
+  line-height: 40px;
+  background-color: orange;
+  border-radius: 5px;
+  font-size: 0.9rem;
+`;
 
 const CommentInputContainer = styled.div`
   display: flex;
@@ -114,6 +138,7 @@ const CommentWithReplies = styled.div`
 `;
 
 const CommentBox = styled.div<{ bgcolor?: string; marginLeft?: string }>`
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;

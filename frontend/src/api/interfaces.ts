@@ -29,6 +29,7 @@ interface CommentWithoutReplies {
   author: string;
   content: string;
   id: number;
+  authorId: number;
 }
 
 export interface Comment extends CommentWithoutReplies {
