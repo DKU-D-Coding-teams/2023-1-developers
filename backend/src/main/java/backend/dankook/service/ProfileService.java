@@ -103,6 +103,7 @@ public class ProfileService {
         return allProfiles.stream()
                 .map((p) -> new ProfileDto(
                         p.getId(),
+                        p.getMember().getId(),
                         p.getName(),
                         p.getProfileImage() != null ? p.getProfileImage().getS3ImagePath() : "",
                         p.getAffiliation(),
@@ -124,6 +125,7 @@ public class ProfileService {
                 .orElseThrow(() -> new DankookException(DankookErrorCode.PROFILE_NOT_FOUND));
         return new ProfileDto(
                 profile.getId(),
+                profile.getMember().getId(),
                 profile.getName(),
                 profile.getProfileImage().getS3ImagePath(),
                 profile.getAffiliation(),
@@ -149,6 +151,7 @@ public class ProfileService {
 
         return new DetailsProfileDto(
                 searchProfile.getId(),
+                searchProfile.getMember().getId(),
                 searchProfile.getName(),
                 searchProfile.getProfileImage() != null ? searchProfile.getProfileImage().getS3ImagePath() : "",
                 searchProfile.getAffiliation(),

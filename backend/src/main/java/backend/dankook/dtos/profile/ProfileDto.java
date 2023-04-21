@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ProfileDto {
     private Long id;
+    private Long authorId;
     private String name;
     private String s3ImagePath;
     private String affiliation;
