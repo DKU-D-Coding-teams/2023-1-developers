@@ -16,7 +16,10 @@ export default function ProfileEdit() {
       <TopBar />
       <TopBackground />
       {loginToken ? (
-        <ProfileForm />
+        <>
+          <Title>프로필을 다시 입력하면 새로운 프로필로 수정됩니다.</Title>
+          <ProfileForm />
+        </>
       ) : (
         <Title>
           <>회원가입 또는 로그인해 주세요!</>

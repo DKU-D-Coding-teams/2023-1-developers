@@ -53,7 +53,16 @@ export const postNewComment = (profileId: number, content: string, loginToken: L
     }
   );
 
-export const postDeleteComment = (commentId: number) => axios.post(`/comments/delete/${commentId}`, { commentId });
+export const postDeleteComment = (commentId: number, loginToken: LoginToken) =>
+  axios.post(
+    `/comments/delete/${commentId}`,
+    { commentId },
+    {
+      headers: {
+        Authorization: `${loginToken.grantType} ${loginToken.accessToken}`,
+      },
+    }
+  );
 
 export const postReplyComment = (commentId: number, content: string, loginToken: LoginToken) =>
   axios.post(

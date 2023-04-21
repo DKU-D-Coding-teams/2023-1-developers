@@ -11,10 +11,10 @@ import { useNavigate } from 'react-router-dom';
 import { paths } from 'consts';
 
 interface Props {
-  exceptsDetailedIntroduce?: boolean;
+  isEdit?: boolean;
 }
 
-export default function ProfileForm({ exceptsDetailedIntroduce }: Props) {
+export default function ProfileForm({ isEdit }: Props) {
   const navigate = useNavigate();
   const loginToken = useReadLocalStorage<LoginToken>(loginTokenStorage.key);
   const [selectedImg, setSelectedImg] = useState('');
