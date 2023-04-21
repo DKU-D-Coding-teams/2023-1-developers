@@ -44,4 +44,5 @@ export interface LoginToken {
   accessToken: string;
   grantType: string;
   refreshToken: string;
+  memberId: number;
 }
