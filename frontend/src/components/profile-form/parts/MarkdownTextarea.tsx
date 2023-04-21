@@ -26,7 +26,7 @@ export default function MarkdownTextarea({ value, set }: Props) {
             <ReactMarkdown remarkPlugins={[remarkGfm]}>{value}</ReactMarkdown>
           </PreviewBox>
         )}
-        <PreviewButton isPreviewMode={isPreviewMode} onClick={() => setPreviewMode(!isPreviewMode)}>
+        <PreviewButton type="button" isPreviewMode={isPreviewMode} onClick={() => setPreviewMode(!isPreviewMode)}>
           미리보기
         </PreviewButton>
       </Wrapper>
@@ -53,6 +53,7 @@ const Title = styled.div`
   position: absolute;
   top: -25px;
   font-size: 1.1rem;
+  color: ${({ theme }) => theme.colors.defaultFont};
 `;
 
 const Wrapper = styled.div`

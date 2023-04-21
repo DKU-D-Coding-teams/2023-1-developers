@@ -1,53 +1,46 @@
-import styled from "styled-components";
-import { useEffect, useState } from "react";
-import wait from "waait";
-import { TagBox, LinkBox } from "components";
+import styled from 'styled-components';
+import { useEffect, useState } from 'react';
+import wait from 'waait';
+import { TagBox, LinkBox } from 'components';
+import { Profile } from 'api';
 
-interface Props {
-  profileImg: string;
-  name: string;
-  studentInfo: string;
-  singleIntroduce: string;
-  tags: string[];
-  links: string[];
-}
-
-export default function ProfileBox({ profileImg, name, studentInfo, singleIntroduce, tags, links }: Props) {
-  const [introduceText, setIntroduceText] = useState("");
+export default function ProfileBox({ profile }: { profile: Profile }) {
+  const [introduceText, setIntroduceText] = useState('');
 
   useEffect(() => {
     runTypingAnimation(1000);
   }, []);
 
   const runTypingAnimation = async (duration: number) => {
-    for (let i = 1; i <= singleIntroduce.length; i++) {
-      setIntroduceText(singleIntroduce.slice(0, i));
-      await wait(duration / singleIntroduce.length);
+    for (let i = 1; i <= profile.introduce.length; i++) {
+      setIntroduceText(profile.introduce.slice(0, i));
+      await wait(duration / profile.introduce.length);
     }
   };
 
   return (
     <Wrapper>
       <InfoContainer>
-        <ProfileImg src={profileImg} alt="프로필 이미지" />
-        <div>{name}</div>
-        <StudentInfo>{studentInfo}</StudentInfo>
+        <ProfileImg src={profile.s3ImagePath} alt="프로필 이미지" />
+        <div>{profile.name}</div>
+        <StudentInfo>{profile.studentId}</StudentInfo>
       </InfoContainer>
       <IntroduceBox>
         <div>{introduceText}</div>
       </IntroduceBox>
       <Footer>
         <TagBox>
-          {tags.map((tag, idx) => (
-            <div key={idx}>{tag}</div>
+          {profile.tags.map((tag, i) => (
+            <div key={i}>{tag}</div>
           ))}
         </TagBox>
         <LinkBox>
-          {links.map((link, idx) => (
-            <a href={link} target="_blank" key={idx}>
-              <img src="/icons/board.png" />
-            </a>
-          ))}
+          <a href={profile.githubLink} target="_blank">
+            <img src="/icons/github.png" />
+          </a>
+          <a href={profile.blogLink} target="_blank">
+            <img src="/icons/blog.png" />
+          </a>
         </LinkBox>
       </Footer>
     </Wrapper>

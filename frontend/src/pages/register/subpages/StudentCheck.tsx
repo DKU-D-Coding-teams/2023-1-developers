@@ -1,12 +1,12 @@
-import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { registerInfoStorage } from "storage";
-import { paths } from "consts";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import { waitAndDragUpFadeIn } from "styles";
-import { useLocalStorage } from "usehooks-ts";
-import Title from "../parts/Title";
+import { faCaretRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { registerInfoStorage } from 'storage';
+import { paths } from 'consts';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { waitAndDragUpFadeIn } from 'styles';
+import { useLocalStorage } from 'usehooks-ts';
+import Title from '../parts/Title';
 
 export default function StudentCheck() {
   const navigate = useNavigate();

@@ -16,7 +16,7 @@ export default function PostBox({ post }: { post: Post }) {
   );
 }
 
-// TODO ProfileBox랑 겹침
+// TODO ProfileBox랑 겹침 (근데 이건 좀 다르게 갈거니까 뭐)
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -34,9 +34,10 @@ const Wrapper = styled.div`
 `;
 
 const ImgContainer = styled.div`
+  display: flex;
   border: 1px solid gray;
-  column-width: 100px;
   padding: 20px;
+  gap: 10px;
 `;
 
 const Img = styled.img`

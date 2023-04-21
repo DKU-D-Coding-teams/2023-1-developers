@@ -4,13 +4,19 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { InputLabel, SubmitInput } from 'components';
 import { MarkdownTextarea, ProfileImgUploadModal, TagInputLabel } from './parts';
 import { useSetRecoilState } from 'recoil';
-import { isModalActiveState } from 'storage';
+import { isModalActiveState, loginTokenStorage } from 'storage';
+import { LoginToken, Profile, ProfileWithoutImg, getAllProfiles, postNewProfile, postUpdateProfile } from 'api';
+import { useReadLocalStorage } from 'usehooks-ts';
+import { useNavigate } from 'react-router-dom';
+import { paths } from 'consts';
 
 interface Props {
-  exceptsDetailedIntroduce?: boolean;
+  isEdit?: boolean;
 }
 
-export default function ProfileForm({ exceptsDetailedIntroduce: exceptDetailedIntroduce }: Props) {
+export default function ProfileForm({ isEdit }: Props) {
+  const navigate = useNavigate();
+  const loginToken = useReadLocalStorage<LoginToken>(loginTokenStorage.key);
   const [selectedImg, setSelectedImg] = useState('');
   const [inputState, setInputState] = useState({
     uploadedImg: '',
@@ -28,9 +34,39 @@ export default function ProfileForm({ exceptsDetailedIntroduce: exceptDetailedIn
     setInputState({ ...inputState, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLInputElement>) => {
     e.preventDefault();
-    console.log(inputState);
+
+    const profile: ProfileWithoutImg = {
+      name: inputState.name,
+      affiliation: inputState.affiliation,
+      studentId: '1', // TODO 이거 string 맞는거냐
+      githubLink: inputState.githubLink,
+      blogLink: inputState.otherLink,
+      introduce: inputState.singleIntroduce,
+      detailIntroduce: inputState.detailedIntroduce,
+      tags: inputState.tags,
+    };
+
+    if (isEdit) {
+      getAllProfiles(loginToken).then((res) => {
+        const profiles: Profile[] = res.data;
+        const [targetProfile] = profiles.filter((profile) => loginToken.memberId === profile.authorId);
+        console.log(targetProfile);
+        postUpdateProfile(targetProfile.id, inputState.uploadedImg, profile, loginToken).then((res) => {
+          navigate(paths.MAINPAGE);
+        });
+      });
+
+      return;
+    }
+
+    postNewProfile(inputState.uploadedImg, profile, loginToken)
+      .then((res) => {
+        console.log(res);
+        navigate(paths.MAINPAGE);
+      })
+      .catch((res) => console.log(res));
   };
 
   const runImgUploader = (e: ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +82,7 @@ export default function ProfileForm({ exceptsDetailedIntroduce: exceptDetailedIn
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <ProfileImgUploadModal
         selectedImg={selectedImg}
         uploadImg={(img: string) => setInputState({ ...inputState, uploadedImg: img })}
@@ -76,7 +112,7 @@ export default function ProfileForm({ exceptsDetailedIntroduce: exceptDetailedIn
         set={(detailedIntroduce: string) => setInputState({ ...inputState, detailedIntroduce })}
       />
 
-      <SubmitInput type="submit" value="제출" warning="" />
+      <SubmitInput value="제출" warning="" onClick={handleSubmit} />
     </form>
   );
 }
@@ -92,8 +128,9 @@ const FlexBox = styled.div`
 const ProfileImgLabel = styled.label`
   position: relative;
   width: 160px;
-  animation: ${waitAndDragUpFadeIn} 2.3s;
   cursor: pointer;
+
+  animation: ${waitAndDragUpFadeIn} 2.2s;
 
   input {
     display: none;

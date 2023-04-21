@@ -23,7 +23,7 @@ export const registerInfoStorage = {
   },
 };
 
-export const loginTokensStorage = {
+export const loginTokenStorage = {
   key: 'loginTokens',
   init: {
     accessToken: '',

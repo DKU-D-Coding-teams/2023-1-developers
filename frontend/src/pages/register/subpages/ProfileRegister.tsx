@@ -1,5 +1,5 @@
-import { ProfileForm } from "components";
-import Title from "../parts/Title";
+import { ProfileForm } from 'components';
+import Title from '../parts/Title';
 
 export default function ProfileRegister() {
   return (
@@ -10,7 +10,7 @@ export default function ProfileRegister() {
         당신은 어떤 사람인가요?
       </Title>
 
-      <ProfileForm exceptsDetailedIntroduce />
+      <ProfileForm />
     </>
   );
 }

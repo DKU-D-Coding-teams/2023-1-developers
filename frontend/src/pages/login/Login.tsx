@@ -1,9 +1,16 @@
 import { postMemberLogin } from 'api';
+import { AxiosError } from 'axios';
 import { InputLabel, NavbarSection, SubmitInput, TopBackground, TopBar } from 'components';
+import { paths } from 'consts';
 import { useState, FormEvent } from 'react';
 import { ChangeEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { loginTokenStorage } from 'storage';
+import { useLocalStorage } from 'usehooks-ts';
 
 export default function Login() {
+  const navigate = useNavigate();
+  const [loginToken, setLoginToken] = useLocalStorage(loginTokenStorage.key, loginTokenStorage.init);
   const [inputState, setInputState] = useState({
     email: '',
     password: '',
@@ -15,8 +22,10 @@ export default function Login() {
 
   const login = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const response = await postMemberLogin(inputState.email, inputState.password);
-    console.log(response);
+    postMemberLogin(inputState.email, inputState.password).then((res) => {
+      setLoginToken(res.data);
+      navigate(paths.MAINPAGE);
+    });
   };
 
   return (

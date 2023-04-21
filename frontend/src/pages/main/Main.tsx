@@ -1,22 +1,36 @@
-
-import { NavbarSection, TopBackground, TopBar } from 'components';
+import { NavbarSection, PinterestContainer, PinterestObject, TopBackground, TopBar } from 'components';
 import styled from 'styled-components';
 import { profilesMockData } from 'mocks';
-import { pinterestFadeIn } from 'styles';
 import { useNavigate } from 'react-router-dom';
 import { paths } from 'consts';
 import ProfileBox from './parts/ProfileBox';
-import { useEffect } from 'react';
-import { getAllProfiles } from 'api';
+import { useEffect, useState } from 'react';
+import { LoginToken, Profile, getAllProfiles } from 'api';
+import { useReadLocalStorage } from 'usehooks-ts';
+import { loginTokenStorage } from 'storage';
 
 export default function Main() {
+  const loginToken = useReadLocalStorage<LoginToken>(loginTokenStorage.key);
   const navigate = useNavigate();
-
+  const [profilesData, setProfilesData] = useState<Profile[]>();
 
   useEffect(() => {
-    getAllProfiles().then((response) => {
-      console.log(response.data);
-    });
+    getAllProfiles(loginToken)
+      .then((res) => {
+        // tags를 string[]으로 변경
+        let rawData = res.data;
+        rawData = rawData.map((profileObj) => {
+          profileObj.tags = profileObj.tags.map((tagObj) => tagObj.tagName);
+          return profileObj;
+        });
+
+        const refinedData: Profile[] = rawData;
+        setProfilesData(refinedData);
+      })
+      .catch((res) => {
+        console.log(res);
+        setProfilesData(profilesMockData);
+      });
   }, []);
 
   return (
@@ -25,12 +39,13 @@ export default function Main() {
       <TopBackground>
         <TitleBox>D-velopers</TitleBox>
       </TopBackground>
-      <PinterestContainer>
-        {profilesMockData.map((profile) => (
-          <PinterestObject key={profile.id} onClick={() => navigate(`${paths.PROFILE_DETAIL}/${profile.id}`)}>
-            <ProfileBox {...profile} />
-          </PinterestObject>
-        ))}
+      <PinterestContainer isOnMain>
+        {profilesData &&
+          profilesData.map((profile) => (
+            <PinterestObject key={profile.id} onClick={() => navigate(`${paths.PROFILE_DETAIL}/${profile.id}`)}>
+              <ProfileBox profile={profile} />
+            </PinterestObject>
+          ))}
       </PinterestContainer>
     </NavbarSection>
   );
@@ -50,32 +65,4 @@ const TitleBox = styled.div`
   font-weight: 100;
 
   transition: color 1s;
-`;
-
-const PinterestContainer = styled.div`
-  position: relative;
-  left: 50%;
-  transform: translate(-50%, 0);
-  margin-top: 100px;
-
-  max-width: 1100px;
-  column-width: 300px;
-  column-gap: 40px;
-  padding: 0 20px;
-
-  background-color: ${({ theme }) => theme.colors.mainPinterestContainer};
-  transition: background-color 1s;
-`;
-
-const PinterestObject = styled.div`
-  display: inline-block;
-
-  position: relative;
-  left: 50%;
-  transform: translate(-50%, 0);
-
-  margin: 20px 0;
-  cursor: pointer;
-
-  animation: ${pinterestFadeIn} 1s ease-in-out;
 `;
