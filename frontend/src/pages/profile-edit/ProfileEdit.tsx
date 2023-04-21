@@ -5,11 +5,17 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router';
 import { paths } from 'consts';
 import { waitAndDragUpFadeIn } from 'styles';
-import { LoginToken } from 'api';
+import { LoginToken, postMemberLogout } from 'api';
 
 export default function ProfileEdit() {
   const navigate = useNavigate();
   const loginToken = useReadLocalStorage<LoginToken>(loginTokenStorage.key);
+
+  const logout = () => {
+    window.localStorage.removeItem(loginTokenStorage.key);
+    postMemberLogout(loginToken).then((res) => console.log(res));
+    window.location.reload();
+  };
 
   return (
     <NavbarSection>
@@ -17,6 +23,7 @@ export default function ProfileEdit() {
       <TopBackground />
       {loginToken ? (
         <>
+          <LogoutButton onClick={logout}>로그아웃</LogoutButton>
           <Title>프로필을 다시 입력하면 새로운 프로필로 수정됩니다.</Title>
           <ProfileForm isEdit />
         </>
@@ -32,6 +39,20 @@ export default function ProfileEdit() {
     </NavbarSection>
   );
 }
+
+const LogoutButton = styled.button`
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  margin: 0 auto;
+  width: 80px;
+  height: 50px;
+  background-color: lightgray;
+  text-align: center;
+  color: gray;
+  border: 1px solid gray;
+  border-radius: 20px;
+`;
 
 const Title = styled.div`
   position: relative;

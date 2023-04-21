@@ -12,6 +12,13 @@ export const postMemberRegister = (data: RegisterInfo) => axios.post('/members/j
 
 export const postMemberLogin = (email: string, password: string) => axios.post('/members/login', { email, password });
 
+export const postMemberLogout = (loginToken: LoginToken) =>
+  axios.post('/members/logout', null, {
+    headers: {
+      Authorization: `${loginToken.grantType} ${loginToken.accessToken}`,
+    },
+  });
+
 export const postNewProfile = (img: string, profile: ProfileWithoutImg, loginToken: LoginToken) => {
   const formData = new FormData();
 
