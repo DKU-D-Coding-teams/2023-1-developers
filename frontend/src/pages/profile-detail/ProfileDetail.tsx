@@ -78,7 +78,7 @@ export default function ProfileDetail() {
 
         <Hr width="80%" />
 
-        <Comments comments={profileData.comments} />
+        <Comments profileId={Number(profileId)} comments={profileData.comments} />
       </NavbarSection>
     )
   );

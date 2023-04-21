@@ -1,10 +1,10 @@
 import { InputLabel, SubmitInput } from 'components';
 import { useState, ChangeEvent, FormEvent, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { RegisterInfo, postMemberRegister } from 'api';
+import { RegisterInfo, postMemberLogin, postMemberRegister } from 'api';
 import { paths } from 'consts';
 import { useLocalStorage } from 'usehooks-ts';
-import { registerInfoStorage } from 'storage';
+import { loginTokenStorage, registerInfoStorage } from 'storage';
 import Title from '../parts/Title';
 
 export default function PwRegister() {
@@ -16,6 +16,7 @@ export default function PwRegister() {
   });
   const [warning, setWarning] = useState('');
   const [registerInfo, setRegisterInfo] = useLocalStorage(registerInfoStorage.key, registerInfoStorage.init); // TODO : registerInfoStorage에다가 그냥 data(RegisterParams)를 통째로 넣으면 차라리 더 편할 듯?
+  const [loginToken, setLoginToken] = useLocalStorage(loginTokenStorage.key, loginTokenStorage.init);
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     setInputState({ ...inputState, [e.target.name]: e.target.value });
@@ -32,7 +33,10 @@ export default function PwRegister() {
         password: inputState.pw,
       };
       postMemberRegister(data).then(() => {
-        navigate(paths.register.PROFILE_REGISTER);
+        postMemberLogin(registerInfo.email, inputState.pw).then((res) => {
+          setLoginToken(res.data);
+          navigate(paths.register.PROFILE_REGISTER);
+        });
       });
     });
   };

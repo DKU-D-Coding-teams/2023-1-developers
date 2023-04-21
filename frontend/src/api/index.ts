@@ -1,10 +1,8 @@
 import axios from 'axios';
-import { DetailedProfile, LoginToken, Profile, ProfileWithoutImg, RegisterInfo } from './interfaces';
-import { profilesMockData } from 'mocks';
-import { useLocalStorage } from 'usehooks-ts';
+import { LoginToken, ProfileWithoutImg, RegisterInfo } from './interfaces';
 import { dataURLtoBlob } from 'utils';
 
-// axios.defaults.baseURL = "http://3.39.41.33:8080";
+axios.defaults.baseURL = 'http://13.209.229.205:8080';
 
 export * from './interfaces';
 
@@ -44,11 +42,29 @@ export const postUpdateProfile = (profileId: number, img: string, profile: Profi
   });
 };
 
-export const postNewComment = (profileId: number) => axios.post(`/comments/new/${profileId}`, { profileId });
+export const postNewComment = (profileId: number, content: string, loginToken: LoginToken) =>
+  axios.post(
+    `/comments/new/${profileId}`,
+    { content },
+    {
+      headers: {
+        Authorization: `${loginToken.grantType} ${loginToken.accessToken}`,
+      },
+    }
+  );
 
 export const postDeleteComment = (commentId: number) => axios.post(`/comments/delete/${commentId}`, { commentId });
 
-export const postReplyComment = (commentId: number) => axios.post(`/comments/reply/new/${commentId}`, { commentId });
+export const postReplyComment = (commentId: number, content: string, loginToken: LoginToken) =>
+  axios.post(
+    `/comments/reply/new/${commentId}`,
+    { content },
+    {
+      headers: {
+        Authorization: `${loginToken.grantType} ${loginToken.accessToken}`,
+      },
+    }
+  );
 
 export const postUpdateComment = (commentId: number) => axios.post(`/comments/update/${commentId}`, { commentId });
 
