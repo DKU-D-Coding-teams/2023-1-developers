@@ -18,7 +18,7 @@ export default function ProfileEdit() {
       {loginToken ? (
         <>
           <Title>프로필을 다시 입력하면 새로운 프로필로 수정됩니다.</Title>
-          <ProfileForm />
+          <ProfileForm isEdit />
         </>
       ) : (
         <Title>

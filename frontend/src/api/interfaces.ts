@@ -22,6 +22,7 @@ export interface Profile extends ProfileWithoutImg {
   hits: number;
   id: number;
   s3ImagePath: string;
+  authorId?: number;
 }
 
 interface CommentWithoutReplies {

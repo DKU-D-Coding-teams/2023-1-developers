@@ -30,14 +30,24 @@ export const postNewProfile = (img: string, profile: ProfileWithoutImg, loginTok
 };
 
 // TODO 이거 profileId parameters 보내야 함
-export const postUpdateProfile = (profileId: number, img: string, profile: ProfileWithoutImg) => {
+export const postUpdateProfile = (
+  profileId: number,
+  img: string,
+  profile: ProfileWithoutImg,
+  loginToken: LoginToken
+) => {
   const formData = new FormData();
-  formData.append('images', img);
-  formData.append('profile', JSON.stringify(profile));
+
+  const imgBlob = new Blob([dataURLtoBlob(img)], { type: 'multipart/form-data' });
+  formData.append('images', imgBlob);
+
+  const profileBlob = new Blob([JSON.stringify(profile)], { type: 'application/json' });
+  formData.append('profile', profileBlob);
 
   return axios.post(`/profiles/update/${profileId}`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
+      Authorization: `${loginToken.grantType} ${loginToken.accessToken}`,
     },
   });
 };

@@ -5,7 +5,7 @@ import { InputLabel, SubmitInput } from 'components';
 import { MarkdownTextarea, ProfileImgUploadModal, TagInputLabel } from './parts';
 import { useSetRecoilState } from 'recoil';
 import { isModalActiveState, loginTokenStorage } from 'storage';
-import { LoginToken, ProfileWithoutImg, postNewProfile } from 'api';
+import { LoginToken, Profile, ProfileWithoutImg, getAllProfiles, postNewProfile, postUpdateProfile } from 'api';
 import { useReadLocalStorage } from 'usehooks-ts';
 import { useNavigate } from 'react-router-dom';
 import { paths } from 'consts';
@@ -47,6 +47,19 @@ export default function ProfileForm({ isEdit }: Props) {
       detailIntroduce: inputState.detailedIntroduce,
       tags: inputState.tags,
     };
+
+    if (isEdit) {
+      getAllProfiles(loginToken).then((res) => {
+        const profiles: Profile[] = res.data;
+        const [targetProfile] = profiles.filter((profile) => loginToken.memberId === profile.authorId);
+        console.log(targetProfile);
+        postUpdateProfile(targetProfile.id, inputState.uploadedImg, profile, loginToken).then((res) => {
+          navigate(paths.MAINPAGE);
+        });
+      });
+
+      return;
+    }
 
     postNewProfile(inputState.uploadedImg, profile, loginToken)
       .then((res) => {
