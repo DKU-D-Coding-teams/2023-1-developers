@@ -49,6 +49,8 @@ Front-end
 | Category  | Tech.                |
 |-----------|----------------------|
 | Framework | React |
+| CSS | Styled-Components |
+| Language | Typescript |
 
 Back-end
 | Category  | Tech.                |
