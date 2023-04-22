@@ -7,8 +7,7 @@
 |                          [이기윤](https://github.com/bubbletea03)                         |                          [서지현](https://github.com/ji-hyeon97)                          |                            [이동현](https://github.com/dongsuu)                           |
 
 
-
-![dd](https://user-images.githubusercontent.com/99546167/231175053-c46b3cbb-e41d-4946-97b3-b485ec6529de.gif)
+![녹화_2023_04_22_15_47_44_371](https://user-images.githubusercontent.com/99546167/233768060-005aeaf7-51f7-46e6-b776-43e6758f935d.gif)
 
 
 ## :scroll: 프로젝트 개요
